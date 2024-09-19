@@ -4,14 +4,37 @@ info:
   version: '1.0'
 servers:
   - url: https://localhost:3000/v1
+
+tags:
+  - name: login
+    description: Login api
+  - name: user
+    description: Get and modify user account
+  - name: reminders
+    description: Used in "medications" screen. Get reminders and check taken medicines
+  - name: therapy
+    description: Used in "therapies" screen. Manage therapies and prescriptions
+  - name: medicines
+    description: Access medicine's informations
+  - name: contacts
+    description: Used in "contacts" section. Manage doctors
+
 paths:
   /login:
     post:
       tags:
         - login
+      requestBody:
+        description: Perform login
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Login"
       responses:
         '200':
           description: OK
+        '401':
+          description: Unauthrorized
   /user:
     get:
       tags:
@@ -20,114 +43,188 @@ paths:
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
     put:
       tags:
         - user
       description: 'Modify user profile'
-      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
 
   /doses:
     get:
       tags:
         - reminders
       description: 'Returns the list of today reminders (related to PrescriptionTime)'
-      parameters: []
       responses:
         '200':
           description: OK
+          $ref: "#/components/responses/doses"
   /doses/{id}:
     put:
       tags:
         - reminders
       description: 'Allows to save a new therapy'
-      parameters: []
+      parameters:
+        - $ref: "#/components/parameters/uuid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Dose"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dose"
   /therapies:
     get:
       tags:
         - therapy
       description: 'Returns therapies of current user'
-      parameters: []
       responses:
         '200':
           description: OK
+          $ref: "#/components/responses/therapies"
     post:
       tags:
         - therapy
       description: 'Save a new therapy'
-      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Therapy"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Therapy"
   /therapies/{id}:
     get:
       tags:
         - therapy
       description: 'Returns a therapy and its prescriptions'
-      parameters: []
+      parameters:
+        - $ref: "#/components/parameters/uuid"     
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Therapy"
     put:
       tags:
         - therapy
       description: 'Change a therapy'
-      parameters: []
+      parameters:
+        - $ref: "#/components/parameters/uuid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Therapy"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Therapy"
     delete:
       tags:
         - therapy
       description: 'Remove a therapy'
-      parameters: []
+      parameters:
+        - $ref: "#/components/parameters/uuid" 
       responses:
         '200':
           description: OK
-  /therapies/{therapyId}/prescriptions:
+  /therapies/{id}/prescriptions:
     get:
       tags:
         - therapy
       description: 'Return prescriptions associated to a therapy'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
       responses:
         '200':
           description: OK
+          $ref: "#/components/responses/prescriptions"
     post:
       tags:
         - therapy
       description: 'Save a new prescription related to a therapy'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Prescription"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Prescription"
   /prescriptions/{id}:
     get:
       tags:
         - therapy
       description: ''
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Prescription"
     put:
       tags:
         - therapy
       description: 'Modify a prescription'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Prescription"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Prescription"
     delete:
       tags:
         - therapy
       description: 'Remove a prescription'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
       responses:
         '200':
           description: OK
@@ -136,7 +233,8 @@ paths:
       tags:
         - therapy
       description: 'Return prescriotion times of a prescription'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
       responses:
         '200':
           description: OK
@@ -144,7 +242,13 @@ paths:
       tags:
         - therapy
       description: 'Save a new prescription time related to a prescription'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PrescriptionTime"
       responses:
         '200':
           description: OK
@@ -153,78 +257,322 @@ paths:
       tags:
         - therapy
       description: 'Modify a prescription time'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PrescriptionTime"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrescriptionTime"
     delete:
       tags:
         - therapy
       description: 'Remove a prescription time'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
       responses:
         '200':
           description: OK
   /medicines:
     get:
       tags:
-        - medicine
+        - medicines
       description: 'Return a list of all medicines'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/medicines"  
   /medicines/{id}:
     get:
       tags:
-        - medicine
+        - medicines
       description: 'Return leaflet of a medicine'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Medicine"
   /contacts:
     get:
       tags:
         - contacts
       description: 'Returns list of doctors'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/responses/contacts" 
     post:
       tags:
         - contacts
       description: 'Add a new doctor'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Contact"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
   /contacts/{id}:
     get:
       tags:
         - contacts
       description: Return doctor's details
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
     put:
       tags:
         - contacts
       description: 'Modify a doctor'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Contact"
       responses:
         '200':
           description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Contact"
     delete:
       tags:
         - contacts
       description: 'Remove a doctor'
-      parameters: []
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
       responses:
         '200':
           description: OK
 
-          
-  
+components:
+  schemas:
+    Login:
+      type: object
+      required:
+        - user
+        - password
+      properties:
+        user:
+          type: string
+        password:
+          type: string
+    User:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        lastName:
+          type: string
+        image:
+          type: string
+          example: http://host/path/file.png
+        medicalId:
+          type: string
+        allergies:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        address:
+          type: string
+    Dose:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        therapyName:
+          type: string
+        time:
+          type: string
+          format: time
+          example: "12:00PM"
+        date:
+          type: string
+          format: date
+          example: "2024-09-19"
+        taken:
+          type: boolean
+        therapy:
+          $ref: "#/components/schemas/Therapy"
+        prescriptionTime:
+          $ref: "#/components/schemas/PrescriptionTime" 
+    Therapy:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          description: related user
+        name:
+          type: string
+        contact:
+          $ref: "#/components/schemas/Contact"
+        notes:
+          type: string
+    Prescription:
+      type: object
+      properties:
+        id:
+          type: string
+        therapy:
+          $ref: "#/components/schemas/Therapy"
+        medicine:
+          $ref: "#/components/schemas/Medicine"
+        dateFrom:
+          type: string
+          format: date
+          example: "2024-09-19"
+        dateTo:
+          type: string
+          format: date
+          example: "2024-09-19"
+    PrescriptionTime:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        time:
+          type: string
+          example: "12:00PM"
+        prescription:
+          $ref: "#/components/schemas/Prescription"
+    Medicine:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        leaflet:
+          type: string
+    Contact:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        qualification:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        address:
+          type: string
+        notes:
+          type: string
+  responses:  
+    doses:
+      description: 'list of doses'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Dose"
+    therapies:
+      description: 'list of therapies'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Therapy"
+    prescriptions:
+      description: 'list of prescriptions'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Prescription"
+    prescriptionTimes:
+      description: 'list of prescriptionTimes'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/PrescriptionTime"
+    medicines:
+      description: 'list of medicines'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Medicine"
+    contacts:
+      description: 'list of contacts:'
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: "#/components/schemas/Contact"
+  parameters:
+    uuid:
+      name: id
+      in: path
+      required: true
+      description: generic id in uuid format
+      schema:
+        type: string
+        
+        
+        
+        
