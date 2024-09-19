@@ -121,12 +121,12 @@ This use case describes the first access as a new user
 - `PUT /therapies/:id`: allows to change a therapy
 - `DELETE /therapies/:id`: removes a therapy
 - `GET /therapies/:therapyId/prescriptions`: returns prescriptions associated to a therapy
-- `POST /prescriptions`: saves a new prescription, related to a therapy
+- `POST /therapies/:therapyId/prescriptions`: saves a new prescription, related to a therapy
 - `GET /prescriptions/:id`: returns a prescription and associated prescription times
 - `PUT /prescriptions/:id`: changes a prescription
 - `DELETE /prescriptions/:id`: removes a prescription
 - `GET /prescriptions/:id/prescription-times`: returns prescription times of a prescription
-- `POST /prescription-times`: saves a new prescription time, related to a prescription
+- `POST /prescriptions/:id/prescription-times`: saves a new prescription time, related to a prescription
 - `PUT /prescription-times/:id`: changes a prescription time
 - `DELETE /prescription-times/:id`: removes a prescription time
 
