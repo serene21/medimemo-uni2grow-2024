@@ -142,3 +142,5 @@ This use case describes the first access as a new user
 - `GET /contacts/:id`: returns a doctor
 - `PUT /contacts/:id`: modifies doctor's info
 - `DELETE /contacts/:id`: removes a doctor
+
+Full API spec is available [in doc folder](./doc/api.yaml)
