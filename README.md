@@ -12,6 +12,18 @@ Run development:
 
 `npm run dev`
 
+## Visual design reference
+
+Some screenshots of the application:
+
+![](./doc/screens/Medications-1.png)
+![](./doc/screens/My%20therapies-1.png)
+![](./doc/screens/Laura%20thompson.png)
+
+You can view other screenshots [in the documentation directory on this repository](./doc/screens/).
+
+Visual design and prototype is also available on [Figma](https://www.figma.com/proto/u3QbbGOEuDUcnEZSngo9EG/Oh---MediMemo-UI?node-id=2-2&node-type=canvas&t=GVyTDEfgoRT1MYiI-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=2%3A2).
+
 ## Glossary
 
 - **User**: app user, logged into MediMemo
