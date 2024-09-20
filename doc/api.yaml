@@ -252,6 +252,17 @@ paths:
       responses:
         '200':
           description: OK
+  /prescriptions/{id}/doses:
+    get:
+      tags:
+        - therapy
+      description: Return a list of doses related to a prescription, used for generating the progress bar
+      parameters: 
+        - $ref: "#/components/parameters/uuid"
+      responses:
+        '200':
+          description: OK
+          $ref: "#/components/responses/doses"
   /prescription-times/{id}:
     put:
       tags:

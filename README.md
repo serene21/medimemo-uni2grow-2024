@@ -129,6 +129,7 @@ This use case describes the first access as a new user
 - `POST /prescriptions/:id/prescription-times`: saves a new prescription time, related to a prescription
 - `PUT /prescription-times/:id`: changes a prescription time
 - `DELETE /prescription-times/:id`: removes a prescription time
+- `GET /prescriptions/:id/doses`: returns a list of doses related to a prescription, used for generating the progress bar
 
 ### Medicines
 
