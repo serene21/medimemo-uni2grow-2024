@@ -1,5 +1,13 @@
 # Medimemo - developer manual
 
+> ## Daily routine during bootcamp
+>
+> ![](./doc/assets/daily-routine.png)
+>
+>**Every day, before you start**, pull the master branch from https://github.com/intesys/medimemo-uni2grow-2024, then create a new branch for the day's exercise.
+>
+>Send a pull request to https://github.com/intesys/medimemo-uni2grow-2024 **every day before you close**. The instructor will merge one of the pull requests you submitted, so that the next day you can all start aligning.
+
 ## Install
 
 This is a React applcation scaffolded using Vite, please read the original [README here](./doc/Vite-README.md).
