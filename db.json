@@ -14,7 +14,13 @@
     {
       "id": 2,
       "name": "guest",
-      "password": "guest"
+      "password": "guest",
+      "lastName": "",
+      "image": "",
+      "allergies": "",
+      "phone": "",
+      "email": "",
+      "address": ""
     }
   ],
   "therapies": [
