@@ -2,8 +2,14 @@
   "users": [
     {
       "id": 1,
-      "username": "admin",
-      "password": "admin"
+      "name": "admin",
+      "password": "admin",
+      "lastName": "",
+      "image": "",
+      "allergies": "",
+      "phone": "",
+      "email": "",
+      "address": ""
     },
     {
       "id": 2,
