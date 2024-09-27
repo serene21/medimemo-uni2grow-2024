@@ -1,0 +1,55 @@
+
+
+.ContainProfile{
+    background-color: #f8f4f4; 
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+  
+}
+
+.profileHead{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 215px;
+    
+}
+
+.profilePannel{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    height: 100%;
+    /* margin-top: 45px; */
+    padding: 2em;
+    background-color: white;
+    border-radius: 8px;
+
+}
+
+.allProfile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 500px;
+    height: 100%;  
+}
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+    width: 500px;
+    height: 100%;
+    /* margin-top: 45px; */
+    padding-bottom: 4em;
+    background-color: white;
+    border-radius: 8px;
+}
