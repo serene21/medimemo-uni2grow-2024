@@ -15,16 +15,12 @@ import oh from "../../assets/images/login/Group (4).png";
 import f from "../../assets/images/login/icons8-facebook-nouveau-48.png";
 import medimo from "../../assets/images/login/MEDIMEMO.png";
 import {
+  formError,
   formValues,
   validateForm,
   validationField,
 } from "../../utils/Validation";
 import "./Login.css";
-
-interface Errors {
-  username?: string;
-  password?: string;
-}
 
 function Login() {
   const navigate = useNavigate();
@@ -34,10 +30,14 @@ function Login() {
     password: "",
   });
 
-  const [errors, setErrors] = useState<Errors>({
+  const [errors, setErrors] = useState<formError>({
     username: "",
     password: "",
   });
+  interface Users {
+    username: "";
+    password: "";
+  }
 
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
   const [snackbarMessage, setSnackbarMessage] = useState<string>("");
@@ -67,7 +67,7 @@ function Login() {
         const datas = await result.json();
 
         const isValidUser = datas.some(
-          (item: { username: string; password: string }) =>
+          (item: Users) =>
             item.username === credentials.username &&
             item.password === credentials.password
         );

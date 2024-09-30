@@ -14,7 +14,7 @@ export const validationSchema: Record<string, validationType> = {
   password: isNoEmpty,
 };
 
- interface formError{
+export interface formError{
   [key: string]: string;
 }
 
