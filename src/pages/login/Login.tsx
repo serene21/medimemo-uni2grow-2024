@@ -140,9 +140,7 @@ function Login() {
               </div>
             </div>
             <div className="divforgot">
-              <Typography>
-                <Link sx={{ color: "black" }}>Forgot Password</Link>
-              </Typography>
+              <Link sx={{ color: "black", cursor: "pointer" }}>Forgot Password</Link>
             </div>
             <div className="divbutton">
               <Button
@@ -160,14 +158,12 @@ function Login() {
             </div>
 
             <div>
-              <Typography sx={{ display: "flex", justifyContent: "center" }}>
-                Don't have an account?
+              <span className="sign-up-container">
+                Don't have an account? &nbsp;
                 <span>
-                  <Typography>
-                    <Link sx={{ color: "red" }}>Sign up!</Link>
-                  </Typography>
+                  <Link sx={{ color: "red", cursor: "pointer" }}>Sign up!</Link>
                 </span>
-              </Typography>
+              </span>
             </div>
             <div className="divor">
               <span>
@@ -187,6 +183,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
+                  cursor: "pointer"
                 }}
               >
                 <img width={30} height={30} alt="apple" src={a} />
@@ -199,6 +196,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
+                  cursor: "pointer"
                 }}
               >
                 <img width={30} height={30} alt="google" src={g} />
@@ -210,6 +208,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
+                  cursor: "pointer"
                 }}
               >
                 <img width={30} height={30} alt="facebook" src={f} />
