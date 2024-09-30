@@ -1,4 +1,8 @@
-import { React, useState } from "react";
+// 
+
+
+
+import { useState, ChangeEvent, FormEvent } from "react";
 import "./Login.css";
 import {
   Button,
@@ -7,11 +11,10 @@ import {
   Typography,
   Divider,
   Alert,
-  CircularProgress
+  // CircularProgress
 } from "@mui/material";
 
-import { ValidateForm, ValidateField } from "../../utils/ValidationForm.jsx";
-
+import { ValidateForm, ValidateField } from "../../utils/ValidationForm";
 import AppleIcon from "@mui/icons-material/Apple";
 import GoogleIcon from "@mui/icons-material/Google";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
@@ -20,18 +23,51 @@ import oH from "../../assets/images/Group.png";
 import memo from "../../assets/images/MEDIMEMO.png";
 
 import { useNavigate } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+
+// interface Credentials,ErrorState and User for all objects of the type credentials, 
+interface Credentials {
+  userName: string;
+  passWord: string;
+}
+
+interface ErrorState {
+  userName?: string;
+  passWord?: string;
+}
+
+interface User{
+  
+    id : number;
+    name : string;
+    password : string;
+    lastName : string;
+    image: string;
+    allergies : string;
+    phone : number;
+    email : string;
+    address : String;
+  
+}
 
 export function Login() {
   const navigate = useNavigate();
-  const [credentials, setCredentials] = useState({
+  const [credentials, setCredentials] = useState<Credentials>({
     userName: "",
     passWord: ""
   });
-  const handleChange = (e) => {
-    const fieldName = e.target.name;
+
+  const [error, setError] = useState<ErrorState>({
+    userName: "",
+    passWord: ""
+  });
+
+  const [login, setLogin] = useState<string>("");
+  // const [circularProgress, setCircularProgress] = useState<boolean>(false);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const fieldName = e.target.name as keyof Credentials;
     const fieldValue = e.target.value;
-    // validate field
+    
     const errMessage = ValidateField(fieldName, fieldValue);
 
     if (!errMessage) {
@@ -45,59 +81,47 @@ export function Login() {
     }
 
     setCredentials((prevState) => {
-      setlogin("");
+      setLogin("");
       return { ...prevState, [fieldName]: fieldValue };
     });
   };
 
-  const [error, setError] = useState({
-    userName: "",
-    passWord: ""
-  });
-  const [login, setlogin] = useState("");
-  const [circularProgress, setCircularProgress] = useState("");
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
 
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      const error = ValidateForm(credentials);
+    const error = ValidateForm(credentials);
 
-
-      if (Object.keys(error).length === 0) {
-        // when you fetch a URL in JS the fetch  will return a promise which is an object with method " then "
-
+    if (Object.keys(error).length === 0) {
+      try {
         const result = await fetch("http://localhost:3000/users");
         const data = await result.json();
-        console.log(data);
-        const isThere = data.some((item) => {
+
+        const isThere = data.some((item: User) => {
           return (
-            item.name === credentials.userName &&
-            item.password === credentials.passWord
+            (item.name === credentials.userName) &&
+            (item.password === credentials.passWord)
           );
         });
-        if (isThere) {
-          navigate("/logged");
-          //   setlogin("login");
-        } else {
-          //   navigate("/logged");
-          setlogin("login");
-        }
-      } else {
-        setError(error);
-      }
-    } catch (er) {
-      // console.error(er)
-    }
 
-    // console.log(error);
+        if (isThere) {
+          navigate("/therapy");
+        } else {
+          setLogin("login");
+        }
+      } catch (er) {
+        
+      }
+    } else {
+      setError(error);
+    }
   };
 
   return (
     <>
       <div className="background">
         <div className="logo_container">
-          <img className="logo" src={oH} alt={oH} />
-          <img className="appName" src={memo} alt={memo} />
+          <img className="logo" src={oH} alt="Logo" />
+          <img className="appName" src={memo} alt="App Name" />
         </div>
 
         <div className="panel">
@@ -105,17 +129,15 @@ export function Login() {
             Let's Sign You in!
           </Typography>
 
-          {login ? (
-              <Alert
-                style={{ marginTop: "5px" }}
-                variant="outlined"
-                severity="error"
-              >
-                Email or password incorect!!
-              </Alert>
-            ) : (
-              ""
-            )}
+          {login && (
+            <Alert
+              style={{ marginTop: "5px" }}
+              variant="outlined"
+              severity="error"
+            >
+              Email or password incorrect!
+            </Alert>
+          )}
 
           <form onSubmit={handleSubmit}>
             <TextField
@@ -133,7 +155,6 @@ export function Login() {
               onChange={handleChange}
               name="passWord"
               margin="normal"
-              padding="10px"
               fullWidth
               id="outlined-basic"
               label="Password"
@@ -144,16 +165,11 @@ export function Login() {
               helperText={error.passWord}
             />
             <Typography marginBottom={5} textAlign="right">
-              <Link
-                marginBottom={7}
-                style={{ color: "black" }}
-                href="#"
-                underline="always"
-              >
-                {"Forget Password"}
+              <Link style={{ color: "black" }} href="#" underline="always">
+                Forget Password
               </Link>
             </Typography>
-           
+
             <Button
               type="submit"
               style={{ backgroundColor: "#f00" }}
@@ -162,25 +178,19 @@ export function Login() {
             >
               Login
             </Button>
-
-           
           </form>
-          <Typography
-            textAlign="center"
-            margin={7}
-            paddingBottom={7}
-            fontWeight={500}
-            fontSize={15}
-          >
-            Don't have an account ?
+
+          <Typography textAlign="center" margin={7} fontWeight={500} fontSize={15}>
+            Don't have an account? 
             <Link style={{ color: "#f00" }} href="#" underline="always">
-              {"Sign up!"}
+              Sign up!
             </Link>
           </Typography>
 
           <Divider>Or</Divider>
+
           <div className="foot">
-            <div className="icons" border-color="aliceblue">
+            <div className="icons">
               <AppleIcon style={{ color: "black" }} />
             </div>
             <div className="icons">

@@ -1,7 +1,7 @@
 import { Login } from "./Page/login/Login.tsx";
-import {Logged} from "./Page/logged/Logged.tsx"
-// import {Therapy} from "./Therapy"
-// import {AddTherapy} from "./AddTherapy"
+import {Profile} from "./Page/profile/Profile.tsx"
+import {Therapy} from "./Page/therapy/Therapy.tsx"
+import {AddTherapy} from "./Page/addTherapy/AddTherapy.tsx"
 
 import {
   createBrowserRouter,
@@ -15,17 +15,17 @@ const Router = createBrowserRouter([
     element: <Login />
   },
   {
-    path: "/logged",
-    element: <Logged />
+    path: "/profile",
+    element: <Profile />
   },
-  // {
-  //   path: "/therapy",
-  //   element: <Therapy />
-  // },
-  // {
-  //   path: "/addTherapy",
-  //   element: <AddTherapy />
-  // },
+  {
+    path: "/therapy",
+    element: <Therapy />
+  },
+  {
+    path: "/addTherapy",
+    element: <AddTherapy />
+  },
   {
     path: "/",
     loader: () => redirect("/login")

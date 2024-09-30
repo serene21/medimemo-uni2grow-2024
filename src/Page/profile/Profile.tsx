@@ -10,8 +10,8 @@ import {
 
 import monAvatar from "../../assets/images/Avatar/3d_avatar_12.png";
 
-import "./Logged.css";
-import {Head} from "../../component/head/Head.jsx";
+import "./Profile.css";
+import {Head} from "../../component/head/Head";
 
 import allergies from "../../assets/icons/logged/allergies.svg";
 import universal_currency from "../../assets/icons/logged/universal_currency.svg";
@@ -19,7 +19,7 @@ import call from "../../assets/icons/logged/call.svg";
 import home from "../../assets/icons/logged/home.svg";
 import mail from "../../assets/icons/logged/mail.svg";
 
-export function Logged() {
+export function Profile() {
   return (
     <div className="ContainProfile">
       <Head arrow={true} title="My profile" create={true} />

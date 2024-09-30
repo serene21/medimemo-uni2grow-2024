@@ -4,10 +4,18 @@ import { Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 
-export function Head({ arrow, title, create }) {
+
+interface HeadProps{
+   arrow: boolean;
+   title: string;
+   create: boolean;
+}
+
+
+export function Head({ arrow= false, title, create=false } : HeadProps) {
   return (
     <div className="Head">
-      {!!arrow ? <ArrowBackIcon /> : ""}
+      {arrow ? <ArrowBackIcon /> : ""}
       <Typography
         textAlign="center"
         fontSize="20"
@@ -16,7 +24,7 @@ export function Head({ arrow, title, create }) {
       >
         {title}
       </Typography>
-      {!!create ? <CreateOutlinedIcon /> : ""}
+      {create ? <CreateOutlinedIcon /> : ""}
     </div>
   );
 }
