@@ -1,6 +1,6 @@
 const ERROR_MESSAGE = "this field is required";
 
-const isNoEmpty = (value) => {
+const isNoEmpty = (value: string): string => {
   if (value != "") {
     return "";
   } else {
@@ -8,13 +8,24 @@ const isNoEmpty = (value) => {
   }
 };
 
-export const validationSchema = {
+
+export const validationSchema: Record<string, validationType> = {
   username: isNoEmpty,
   password: isNoEmpty,
 };
 
-export function validateForm(values) {
-  const errors = {};
+ interface formError{
+  [key: string]: string;
+}
+
+export interface formValues{
+  [key: string]: string;
+}
+
+type validationType =  (value: string)=> string;
+
+export function validateForm(values: formValues): formError {
+  const errors:  formError = {};
   Object.keys(validationSchema).forEach((fieldName) => {
     const value = values[fieldName];
     const error = validationSchema[fieldName](value);
@@ -23,7 +34,8 @@ export function validateForm(values) {
   return errors;
 }
 
-export function validationField(fieldName, value) {
+export function validationField(fieldName: string, value: string): string {
   const error = validationSchema[fieldName](value);
   return error;
 }
+

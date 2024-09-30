@@ -7,77 +7,86 @@ import {
   Typography,
 } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
-import { useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import a from "../../assets/images/login/apple-logo.png";
 import g from "../../assets/images/login/google.png";
 import oh from "../../assets/images/login/Group (4).png";
 import f from "../../assets/images/login/icons8-facebook-nouveau-48.png";
 import medimo from "../../assets/images/login/MEDIMEMO.png";
-import { validateForm, validationField } from "../../utils/Validation";
+import {
+  formValues,
+  validateForm,
+  validationField,
+} from "../../utils/Validation";
 import "./Login.css";
+
+interface Errors {
+  username?: string;
+  password?: string;
+}
 
 function Login() {
   const navigate = useNavigate();
 
-  const [credentials, setCredentials] = useState({
+  const [credentials, setCredentials] = useState<formValues>({
     username: "",
     password: "",
   });
 
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<Errors>({
     username: "",
     password: "",
   });
 
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
+  const [snackbarMessage, setSnackbarMessage] = useState<string>("");
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const fieldName = e.target.name;
     const value = e.target.value;
     const error = validationField(fieldName, value);
-    if (!error) {
-      setErrors((prevState) => ({ ...prevState, [fieldName]: "" }));
-    } else {
-      setErrors((prevState) => ({ ...prevState, [fieldName]: error }));
-    }
 
-    setCredentials((prevState) => {
-      return { ...prevState, [fieldName]: value };
-    });
+    setErrors((prevState) => ({
+      ...prevState,
+      [fieldName]: error || "",
+    }));
+
+    setCredentials((prevState) => ({
+      ...prevState,
+      [fieldName]: value,
+    }));
   };
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     try {
-      const errors = validateForm(credentials);
-      if (Object.keys(errors).length === 0) {
+      const validationErrors = validateForm(credentials);
+      if (Object.keys(validationErrors).length === 0) {
         const result = await fetch("http://localhost:3000/users");
         const datas = await result.json();
 
-        const test = datas.some(
-          (item) =>
+        const isValidUser = datas.some(
+          (item: { username: string; password: string }) =>
             item.username === credentials.username &&
             item.password === credentials.password
         );
-        if (test) {
+        if (isValidUser) {
           setCredentials({ username: "", password: "" });
           navigate("/dashboard");
         } else {
           setSnackbarMessage("Email or password incorrect");
-          setCredentials({ username: "", password: "" });
           setOpenSnackbar(true);
         }
       } else {
-        setErrors(errors);
+        setErrors(validationErrors);
       }
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.error(error);
     }
   };
 
-  const handleSnackbarClose = () => {
+  const handleSnackbarClose = (): void => {
     setOpenSnackbar(false);
   };
 
@@ -95,7 +104,7 @@ function Login() {
           <div className="container2">
             <div className="divTitle">
               <Typography fontWeight={700} fontSize={20}>
-                Lets Sign You In
+                Let's Sign You In
               </Typography>
             </div>
             <div className="container3">
@@ -152,7 +161,7 @@ function Login() {
 
             <div>
               <Typography sx={{ display: "flex", justifyContent: "center" }}>
-                Dont have an account?
+                Don't have an account?
                 <span>
                   <Typography>
                     <Link sx={{ color: "red" }}>Sign up!</Link>
