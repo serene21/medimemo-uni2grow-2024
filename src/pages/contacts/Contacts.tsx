@@ -6,7 +6,7 @@ import search from "../../assets/images/contact/Icon.svg";
 import add from "../../assets/images/contact/add_circle.svg";
 import arrowBack from "../../assets/images/contact/arrow_forward_ios.svg";
 import stethoscope from "../../assets/images/contact/stethoscope.svg";
-import { IContacts } from "../../models/Contact";
+import { IContact } from "../../models/Contact";
 
 function Contacts() {
   const [contacts, setContacts] = useState<IContacts[]>([]);
