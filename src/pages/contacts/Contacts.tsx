@@ -79,7 +79,7 @@ function Contacts() {
               ) : emptyContacts(contacts) ? (
                 <Typography>No contact available</Typography>
               ) : (
-                filteredContacts.map((contact: IContacts) => (
+                filteredContacts.map((contact: IContact) => (
                   <Paper
                     key={contact.id}
                     component="form"
