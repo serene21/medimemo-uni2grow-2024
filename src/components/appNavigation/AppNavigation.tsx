@@ -12,7 +12,7 @@ export function AppNavigation() {
     return null;
   }
 
-  const [activepage, setActivePage] = useState(location.pathname);
+  const [activepage, setActivePage] = useState<string>(location.pathname);
 
   useEffect(() => {
     setActivePage(location.pathname);
