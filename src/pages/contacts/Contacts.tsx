@@ -16,7 +16,7 @@ function Contacts() {
   const getContacts = async (): Promise<void> => {
     try {
       const result = await fetch("http://localhost:3000/contacts");
-      const datas: IContacts[] = await result.json();
+      const datas: IContact[] = await result.json();
       setContacts(datas);
     } catch (error) {
       setError("failed to load contacts");
