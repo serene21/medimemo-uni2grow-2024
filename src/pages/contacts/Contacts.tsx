@@ -48,7 +48,7 @@ function Contacts() {
         <Typography className="typography">Contacts</Typography>
         <div className="searchContainer">
           <Paper
-            component="form"
+            component="div"
             sx={{
               p: "2px 4px",
               display: "flex",
@@ -56,6 +56,8 @@ function Contacts() {
               width: "90%",
               borderRadius: 20,
               backgroundColor: "#FFEFEF",
+              maxHeight: 300,
+              overflowY: "auto",
             }}
           >
             <InputBase

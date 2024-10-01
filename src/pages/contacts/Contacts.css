@@ -21,7 +21,8 @@ padding: 20px;
     justify-content: center;
     align-items: center;
     gap: 60px;
-
+    
+    margin-bottom: 20px;
     border-radius: var(--Radius-sm, 8px);
     background: var(--Colours-White, #FFF);
 }
@@ -33,6 +34,9 @@ padding: 20px;
     align-items: center;
     gap: 15px;
     align-self: stretch;
+    height: 250px;
+    overflow-y: auto;
+    
 
 }
 
@@ -65,7 +69,7 @@ padding: 20px;
 .typography2{
     color: var(--Primary-text, #444);
     font-family: "Open Sans";
-    line-height: 140%; 
+    line-height: 140%;
     text-transform: uppercase;
 }
 
