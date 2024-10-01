@@ -46,6 +46,7 @@
       "id": 1,
       "name": "Sarah Davis",
       "qualification": "Dr",
+      "profession" : "ophtalmologe",
       "phone": "+237 656585542",
       "email": "davis@gmail.com",
       "address": "Dschang, Cameroun",
@@ -55,6 +56,7 @@
       "id": 2,
       "name": "Laura Thompson",
       "qualification": "Dr",
+      "profession" : "ophtalmologe",
       "phone": "+237 674772917",
       "email": "laura@gmail.com",
       "address": "Douala, Cameroun",
@@ -64,8 +66,69 @@
       "id": 3,
       "name": "John Smith",
       "qualification": "Dr",
+      "profession" : "dentist",
       "phone": "+237 677345741",
       "email": "john@gmail.com",
+      "address": "Yaounde, Cameroun",
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "name": "Sarah Davis",
+      "qualification": "Dr",
+      "profession" : "ophtalmologe",
+      "phone": "+237 656585542",
+      "email": "davis@gmail.com",
+      "address": "Dschang, Cameroun",
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "name": "TFJ Thompson",
+      "qualification": "Dr",
+      "profession" : "ophtalmologe",
+      "phone": "+237 674772917",
+      "email": "laura@gmail.com",
+      "address": "Douala, Cameroun",
+      "notes": ""
+    },
+    {
+      "id": 6,
+      "name": "ELLA Smith",
+      "qualification": "Dr",
+      "profession" : "dentist",
+      "phone": "+237 677345741",
+      "email": "john@gmail.com",
+      "address": "Yaounde, Cameroun",
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "name": "Sarah Davis",
+      "qualification": "Dr",
+      "profession" : "gynachologist",
+      "phone": "+237 656585542",
+      "email": "davis@gmail.com",
+      "address": "Dschang, Cameroun",
+      "notes": ""
+    },
+    {
+      "id": 8,
+      "name": "Laura Thompson",
+      "qualification": "Dr",
+      "profession" : "Psychiatre",
+      "phone": "+237 674772917",
+      "email": "ura@gmail.com",
+      "address": "Douala, Cameroun",
+      "notes": ""
+    },
+    {
+      "id": 9,
+      "name": "John Smith",
+      "qualification": "Dr",
+      "profession" : "dentist",
+      "phone": "+237 677345741",
+      "email": "jo@gmail.com",
       "address": "Yaounde, Cameroun",
       "notes": ""
     }

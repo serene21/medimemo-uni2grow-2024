@@ -1,25 +1,25 @@
 import {
   createBrowserRouter,
   redirect,
-  RouterProvider,
+  RouterProvider
 } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+import { Contact } from "./pages/contact/Contact";
 import Login from "./pages/login/Login";
 
 const router = createBrowserRouter([
   {
     path: "/login",
-    element: <Login />,
+    element: <Login />
   },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
+    path: "/contact",
+    element: <Contact />
   },
 
   {
     path: "/",
-    loader: () => redirect("/login"),
-  },
+    loader: () => redirect("/login")
+  }
 ]);
 
 function App() {
