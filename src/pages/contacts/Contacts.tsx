@@ -9,7 +9,7 @@ import stethoscope from "../../assets/images/contact/stethoscope.svg";
 import { IContact } from "../../models/Contact";
 
 function Contacts() {
-  const [contacts, setContacts] = useState<IContacts[]>([]);
+  const [contacts, setContacts] = useState<IContact[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [error, setError] = useState<string>("");
 
