@@ -20,6 +20,7 @@ interface IContacts {
 
 function Contacts() {
   const [contacts, setContacts] = useState<IContacts[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
 
   const getContacts = async (): Promise<void> => {
     const result = await fetch("http://localhost:3000/contacts");
@@ -30,6 +31,12 @@ function Contacts() {
   useEffect(() => {
     getContacts();
   }, []);
+
+  const filteredContacts = contacts?.filter(
+    (contact) =>
+      contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      contact.profession.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   function emptyContacts(contacts: IContacts[]): boolean {
     return contacts.length === 0;
@@ -55,6 +62,8 @@ function Contacts() {
               sx={{ ml: 1, flex: 1 }}
               placeholder="Search doctor"
               inputProps={{ "aria-label": "search doctor" }}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
             <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
               <img src={search} alt="search icon" />
@@ -65,7 +74,7 @@ function Contacts() {
             {emptyContacts(contacts) ? (
               <Typography>No contact available</Typography>
             ) : (
-              contacts.map((contact) => (
+              filteredContacts.map((contact) => (
                 <Paper
                   key={contact.id}
                   component="form"
