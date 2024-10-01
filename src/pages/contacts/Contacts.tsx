@@ -28,7 +28,7 @@ function Contacts() {
   }, []);
 
   const filteredContacts = contacts?.filter(
-    (contact) =>
+    (contact: IContact) =>
       contact.name.includes(searchQuery) ||
       contact.profession.includes(searchQuery)
   );
