@@ -3,7 +3,8 @@ import {
   redirect,
   RouterProvider,
 } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+//import Dashboard from "./pages/Dashboard";
+import Contacts from "./pages/contacts/Contacts";
 import Login from "./pages/login/Login";
 
 const router = createBrowserRouter([
@@ -12,8 +13,8 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
+    path: "/contacts",
+    element: <Contacts />,
   },
 
   {
