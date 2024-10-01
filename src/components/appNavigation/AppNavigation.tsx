@@ -3,33 +3,7 @@ import "./AppNavigation.css";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { IconButton, Link, Typography } from "@mui/material";
-import contacts from "../../assets/images/appNavigation/contacts.png";
-import contactsRed from "../../assets/images/appNavigation/contactsRed.png";
-import homeHealth from "../../assets/images/appNavigation/home_health.png";
-import homeHealthRed from "../../assets/images/appNavigation/home_healthred.png";
-import prescription from "../../assets/images/appNavigation/prescriptions.png";
-import prescriptionRed from "../../assets/images/appNavigation/prescriptionsRed.png";
-
-const navItems = [
-  {
-    path: "/medications",
-    name: "Medications",
-    icon: homeHealth,
-    activeIcon: homeHealthRed,
-  },
-  {
-    path: "/therapies",
-    name: "Therapies",
-    icon: prescription,
-    activeIcon: prescriptionRed,
-  },
-  {
-    path: "/contacts",
-    name: "Contacts",
-    icon: contacts,
-    activeIcon: contactsRed,
-  },
-];
+import { ItemNavigation, dataItem } from "../../utils/navigationData";
 
 export function AppNavigation() {
   const location = useLocation();
@@ -47,28 +21,32 @@ export function AppNavigation() {
   return (
     <div className="mytherapie">
       <div className="menuBot">
-        {navItems.map(({ path, name, icon, activeIcon }) => (
-          <div key={path} className="menuBottomItem">
+        {dataItem.map((item: ItemNavigation) => (
+          <div key={item.path} className="menuBottomItem">
             <div
-              className={activepage === path ? "iconClickMiddle" : "iconClick"}
+              className={
+                activepage === item.path ? "iconClickMiddle" : "iconClick"
+              }
             >
               <IconButton
                 component={Link}
-                href={path}
-                onClick={() => setActivePage(path)}
+                href={item.path}
+                onClick={() => setActivePage(item.path)}
               >
                 <img
-                  src={activepage === path ? activeIcon : icon}
+                  src={activepage === item.path ? item.activeIcon : item.icon}
                   alt="Home Health"
                 />
               </IconButton>
             </div>
             <Typography
               className={
-                activepage === path ? "menuBotIconName-over" : "menuBotIconName"
+                activepage === item.path
+                  ? "menuBotIconName-over"
+                  : "menuBotIconName"
               }
             >
-              {name}
+              {item.name}
             </Typography>
           </div>
         ))}
