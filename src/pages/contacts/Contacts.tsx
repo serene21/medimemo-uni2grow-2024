@@ -29,8 +29,8 @@ function Contacts() {
 
   const filteredContacts = contacts?.filter(
     (contact: IContact) =>
-      contact.name.includes(searchQuery) ||
-      contact.profession.includes(searchQuery)
+      contact.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      contact.profession.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   function emptyContacts(contacts: IContact[]): boolean {
