@@ -33,7 +33,7 @@ function Contacts() {
       contact.profession.includes(searchQuery)
   );
 
-  function emptyContacts(contacts: IContacts[]): boolean {
+  function emptyContacts(contacts: IContact[]): boolean {
     return contacts.length === 0;
   }
   function isNull(error: string): boolean {
