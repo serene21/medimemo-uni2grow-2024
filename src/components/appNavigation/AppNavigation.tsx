@@ -22,17 +22,17 @@ export function AppNavigation() {
     <div className="mytherapie">
       <div className="menuBot">
         {dataItem.map((item: ItemNavigation) => (
-          <div key={item.path} className="menuBottomItem">
+          <div
+            key={item.path}
+            className="menuBottomItem"
+            onClick={() => setActivePage(item.path)}
+          >
             <div
               className={
                 activepage === item.path ? "iconClickMiddle" : "iconClick"
               }
             >
-              <IconButton
-                component={Link}
-                href={item.path}
-                onClick={() => setActivePage(item.path)}
-              >
+              <IconButton component={Link} href={item.path}>
                 <img
                   src={activepage === item.path ? item.activeIcon : item.icon}
                   alt="Home Health"
