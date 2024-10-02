@@ -4,7 +4,7 @@ import {
   Card,
   Link,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -18,7 +18,7 @@ import {
   formError,
   formValues,
   validateForm,
-  validationField,
+  validationField
 } from "../../utils/Validation";
 import "./Login.css";
 
@@ -27,12 +27,12 @@ function Login() {
 
   const [credentials, setCredentials] = useState<formValues>({
     username: "",
-    password: "",
+    password: ""
   });
 
   const [errors, setErrors] = useState<formError>({
     username: "",
-    password: "",
+    password: ""
   });
   interface Users {
     username: "";
@@ -49,12 +49,12 @@ function Login() {
 
     setErrors((prevState) => ({
       ...prevState,
-      [fieldName]: error || "",
+      [fieldName]: error || ""
     }));
 
     setCredentials((prevState) => ({
       ...prevState,
-      [fieldName]: value,
+      [fieldName]: value
     }));
   };
 
@@ -140,7 +140,9 @@ function Login() {
               </div>
             </div>
             <div className="divforgot">
-              <Link sx={{ color: "black", cursor: "pointer" }}>Forgot Password</Link>
+              <Link sx={{ color: "black", cursor: "pointer" }}>
+                Forgot Password
+              </Link>
             </div>
             <div className="divbutton">
               <Button
@@ -149,7 +151,7 @@ function Login() {
                   backgroundColor: "red",
                   color: "white",
                   fontWeight: "bold",
-                  width: "80%",
+                  width: "80%"
                 }}
                 type="submit"
               >

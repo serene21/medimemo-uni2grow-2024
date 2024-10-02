@@ -8,7 +8,7 @@ import Contacts from "./pages/contacts/Contacts.tsx";
 import Login from "./pages/login/Login";
 import { Medications } from "./pages/medications/Medications.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
-import { addEditContact } from "./pages/contacts/actions/AddEditContact.tsx";
+import AddEditContact from "./pages/contacts/actions/AddEditContact.tsx";
 
 const router = createBrowserRouter([
   {
