@@ -4,6 +4,7 @@ import {
   RouterProvider
 } from "react-router-dom";
 import { Contact } from "./pages/contact/Contact";
+import { ViewContact } from "./pages/viewContact/ViewContact";
 import Login from "./pages/login/Login";
 
 const router = createBrowserRouter([
@@ -15,7 +16,10 @@ const router = createBrowserRouter([
     path: "/contact",
     element: <Contact />
   },
-
+  {
+    path: "/viewContact/:id",
+    element: <ViewContact />
+  },
   {
     path: "/",
     loader: () => redirect("/login")

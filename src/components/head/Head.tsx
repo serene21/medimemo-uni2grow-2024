@@ -22,7 +22,19 @@ export function Head({
   return (
     <div className="containHead">
       {arrow ? <ArrowBackIcon /> : null}
-      {<Typography>{title}</Typography>}
+      {
+        <Typography
+          sx={{
+            fontFamily: "open Sans",
+            fontSize: 20,
+            fontWeight: 700,
+            minWidth: 200,
+            textAlign: "center"
+          }}
+        >
+          {title}
+        </Typography>
+      }
       {more ? <img src={moreI} alt=" more" /> : null}
     </div>
   );

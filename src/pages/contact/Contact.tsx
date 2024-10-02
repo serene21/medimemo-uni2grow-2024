@@ -1,5 +1,5 @@
 // import React from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import "./Contact.css";
 import { Head } from "../../components/head/Head";
@@ -11,9 +11,10 @@ import { IconButton, Typography, InputBase, colors } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 
 export function Contact(): JSX.Element {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   interface Contact {
     id: string;
@@ -44,6 +45,9 @@ export function Contact(): JSX.Element {
       contact.name?.toLowerCase().includes(searchQuery.toLowerCase()) || // Safe check for name
       contact.profession?.toLowerCase().includes(searchQuery.toLowerCase()) // Safe check for profession
   );
+
+ 
+
   return (
     <div className="contactContainer">
       <div className="containerHead">
@@ -86,7 +90,10 @@ export function Contact(): JSX.Element {
                     </Typography>
                   </div>
                 </div>
-                <IconButton>
+                <IconButton onClick={() => {
+                    navigate(`/viewContact/${item.id}`);
+                  }}
+                 >
                   <ArrowForwardIosIcon />
                 </IconButton>
               </div>

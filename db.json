@@ -43,87 +43,87 @@
   ],
   "contacts": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Sarah Davis",
       "qualification": "Dr",
       "profession" : "ophtalmologe",
       "phone": "+237 656585542",
       "email": "davis@gmail.com",
       "address": "Dschang, Cameroun",
-      "notes": ""
+      "notes": "Specializes in refractive and cataract surgery. Over 15 years of experience in the field. Available for patients Monday through Friday, from 9:00 AM to 5:00 PM. Fluent in English and Spanish. Member of the American Academy of Ophthalmology."
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Laura Thompson",
       "qualification": "Dr",
       "profession" : "ophtalmologe",
       "phone": "+237 674772917",
       "email": "laura@gmail.com",
       "address": "Douala, Cameroun",
-      "notes": ""
+      "notes": "Specializes in refractive and cataract surgery. Over 15 years of experience in the field. Available for patients Monday through Friday, from 9:00 AM to 5:00 PM. Fluent in English and Spanish. Member of the American Academy of Ophthalmology."
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "John Smith",
       "qualification": "Dr",
       "profession" : "dentist",
       "phone": "+237 677345741",
       "email": "john@gmail.com",
       "address": "Yaounde, Cameroun",
-      "notes": ""
+      "notes": " Specializes in refractive and cataract surgery. Over 15 years of experience in the field. Available for patients Monday through Friday, from 9:00 AM to 5:00 PM. Fluent in English and Spanish. Member of the American Academy of Ophthalmology."
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Sarah Davis",
       "qualification": "Dr",
       "profession" : "ophtalmologe",
       "phone": "+237 656585542",
       "email": "davis@gmail.com",
       "address": "Dschang, Cameroun",
-      "notes": ""
+      "notes": "Specializes in refractive and cataract surgery. Over 15 years of experience in the field. Available for patients Monday through Friday, from 9:00 AM to 5:00 PM. Fluent in English and Spanish. Member of the American Academy of Ophthalmology."
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "TFJ Thompson",
       "qualification": "Dr",
       "profession" : "ophtalmologe",
       "phone": "+237 674772917",
       "email": "laura@gmail.com",
       "address": "Douala, Cameroun",
-      "notes": ""
+      "notes": "Specializes in refractive and cataract surgery. Over 15 years of experience in the field. Available for patients Monday through Friday, from 9:00 AM to 5:00 PM. Fluent in English and Spanish. Member of the American Academy of Ophthalmology."
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "ELLA Smith",
       "qualification": "Dr",
       "profession" : "dentist",
       "phone": "+237 677345741",
       "email": "john@gmail.com",
       "address": "Yaounde, Cameroun",
-      "notes": ""
+      "notes": "Specializes in refractive and cataract surgery. Over 15 years of experience in the field. Available for patients Monday through Friday, from 9:00 AM to 5:00 PM. Fluent in English and Spanish. Member of the American Academy of Ophthalmology."
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Sarah Davis",
       "qualification": "Dr",
       "profession" : "gynachologist",
       "phone": "+237 656585542",
       "email": "davis@gmail.com",
       "address": "Dschang, Cameroun",
-      "notes": ""
+      "notes": "Specializes in refractive and cataract surgery. Over 15 years of experience in the field. Available for patients Monday through Friday, from 9:00 AM to 5:00 PM. Fluent in English and Spanish. Member of the American Academy of Ophthalmology."
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "Laura Thompson",
       "qualification": "Dr",
       "profession" : "Psychiatre",
       "phone": "+237 674772917",
       "email": "ura@gmail.com",
       "address": "Douala, Cameroun",
-      "notes": ""
+      "notes": "Specializes in refractive and cataract surgery. Over 15 years of experience in the field. Available for patients Monday through Friday, from 9:00 AM to 5:00 PM. Fluent in English and Spanish. Member of the American Academy of Ophthalmology."
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "John Smith",
       "qualification": "Dr",
       "profession" : "dentist",
