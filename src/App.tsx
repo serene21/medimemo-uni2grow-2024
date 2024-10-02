@@ -8,6 +8,7 @@ import Contacts from "./pages/contacts/Contacts.tsx";
 import Login from "./pages/login/Login";
 import { Medications } from "./pages/medications/Medications.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
+import { ViewContact } from "./pages/viewContact/ViewContact.tsx";
 
 const router = createBrowserRouter([
   {
@@ -16,25 +17,29 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
-    loader: () => redirect("/login"),
+    loader: () => redirect("/login")
   },
   {
     element: <Layout />,
     children: [
       {
         path: "/medications",
-        element: <Medications />,
+        element: <Medications />
       },
       {
         path: "/contacts",
-        element: <Contacts />,
+        element: <Contacts />
+      },
+      {
+        path: "/viewcontact",
+        element: <ViewContact />
       },
       {
         path: "/Therapies",
-        element: <Therapies />,
-      },
-    ],
-  },
+        element: <Therapies />
+      }
+    ]
+  }
 ]);
 
 function App() {

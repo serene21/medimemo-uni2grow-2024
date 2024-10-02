@@ -7,7 +7,7 @@ import { Head } from "../../components/head/Head";
 import addButton from "../../assets/images/contact/add_circle.svg";
 import stetoscope from "../../assets/images/contact/stethoscope.svg";
 
-import { IconButton, Typography, InputBase, colors } from "@mui/material";
+import { IconButton, Typography, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useEffect, useState } from "react";
