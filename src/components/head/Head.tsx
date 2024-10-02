@@ -1,4 +1,4 @@
-import React from "react";
+
 
 import "../../components/head/Head.css";
 

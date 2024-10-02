@@ -18,7 +18,6 @@ const router = createBrowserRouter([
     path: "/",
     loader: () => redirect("/login"),
   },
-
   {
     element: <Layout />,
     children: [
