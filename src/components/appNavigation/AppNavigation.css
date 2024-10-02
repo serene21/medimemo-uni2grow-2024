@@ -1,0 +1,71 @@
+body {
+  background-color: #f8f4f4;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+
+
+.menuBot {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 378px;
+  height: 80px;
+  padding: var(--Radius-sm, 8px) 16px;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  background: var(--Background-dark, #444);
+  position: absolute;
+  bottom: 0;
+}
+
+.menuBotIconName {
+  color: var(--Colours-Grey-4, #b3b3b3);
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; 
+  align-self: stretch;
+}
+.menuBotIconName-over {
+  color: var(--Colours-White, #fff);
+  text-align: center;
+  font-family: "Open Sans";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; 
+}
+.menuBottomItem {
+  display: flex;
+  padding: var(--Radius-xs, 4px) 0px;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--Radius-xs, 4px);
+  /* flex: 0,0 0; */
+  border-radius: 20px;
+}
+
+.iconClick {
+  display: flex;
+  padding: var(--Radius-xs, 4px) 20px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px;
+}
+
+.iconClickMiddle {
+  display: flex;
+  padding: var(--Radius-xs, 4px) 20px;
+  align-items: center;
+  gap: 10px;
+  border-radius: 16px;
+  background-color: white;
+}
