@@ -27,6 +27,16 @@
     gap: 20px;
 }
 
+.empty-doses {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+
+    border: 2px dashed #555;
+}
 
 .all-list {
     display: flex;
