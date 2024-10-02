@@ -73,7 +73,7 @@ function Login() {
         );
         if (isValidUser) {
           setCredentials({ username: "", password: "" });
-          navigate("/dashboard");
+          navigate("/medications");
         } else {
           setSnackbarMessage("Email or password incorrect");
           setOpenSnackbar(true);
@@ -140,7 +140,9 @@ function Login() {
               </div>
             </div>
             <div className="divforgot">
-              <Link sx={{ color: "black", cursor: "pointer" }}>Forgot Password</Link>
+              <Link sx={{ color: "black", cursor: "pointer" }}>
+                Forgot Password
+              </Link>
             </div>
             <div className="divbutton">
               <Button
@@ -183,7 +185,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 <img width={30} height={30} alt="apple" src={a} />
@@ -196,7 +198,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 <img width={30} height={30} alt="google" src={g} />
@@ -208,7 +210,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 <img width={30} height={30} alt="facebook" src={f} />
