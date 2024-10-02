@@ -83,7 +83,7 @@ function Medication() {
   }
 
   return (
-    <div className="background">
+    <>
       <div className="head-container">
         <Avatar src={logo} alt="Avatar" sx={{ width: 75, height: 75 }} />
         <div className="title">
@@ -91,23 +91,24 @@ function Medication() {
           <Typography variant="subtitle1">Your Medicines Reminders for today!</Typography>
         </div>
       </div>
-      <div className="panel">
-        <Typography variant="h6">{printDate()}</Typography>
+      <div className="seond-container">
+        <Typography variant="h6" sx={{ mx: "20px", mt: "20px" }}>{printDate()}</Typography>
 
         <div className="all-list">
           {!isNull(error) ? (
             <Typography sx={{ color: "red" }}>{error}</Typography>
           ) : emptyDoses(medications) ? (
             <div className="empty-doses">
-              <Typography>No Doses available</Typography>
+              <Typography sx={{ margin: "20px" }}>No Doses available</Typography>
             </div>
           ) : (
             <List
+
               disablePadding
               dense
               sx={{
-                width: "100%",
-                maxWidth: 360,
+                mx: "20px",
+                mb: "20px",
                 display: "flex",
                 flexDirection: "column",
                 gap: "15px",
@@ -164,7 +165,7 @@ function Medication() {
             </List>)}
         </div>
       </div>
-    </div >
+    </ >
   );
 }
 
