@@ -25,6 +25,11 @@ const router = createBrowserRouter([
       {
         path: "/medications",
         element: <Medications />,
+        children: [
+          {
+            
+          },
+        ]
       },
       {
         path: "/contacts",
