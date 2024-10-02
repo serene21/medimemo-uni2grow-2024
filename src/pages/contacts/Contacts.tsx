@@ -15,7 +15,7 @@ function Contacts() {
 
   const getContacts = async (): Promise<void> => {
     try {
-      const result = await fetch("http://localhost:80/contacts");
+      const result = await fetch("http://localhost:3000/contacts");
       const datas: IContact[] = await result.json();
       setContacts(datas);
     } catch (error) {
