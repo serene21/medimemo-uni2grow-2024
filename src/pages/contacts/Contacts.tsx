@@ -40,7 +40,6 @@ function Contacts() {
     return error === "";
   }
 
-  console.log(error);
 
   return (
     <>
