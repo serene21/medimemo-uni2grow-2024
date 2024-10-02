@@ -19,7 +19,6 @@ export function AppNavigation() {
   }, [location.pathname]);
 
   return (
-    <div className="mytherapie">
       <div className="menuBot">
         {dataItem.map((item: ItemNavigation) => (
           <div
@@ -51,6 +50,5 @@ export function AppNavigation() {
           </div>
         ))}
       </div>
-    </div>
   );
 }

@@ -3,13 +3,11 @@ import {
   redirect,
   RouterProvider,
 } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+import { Layout } from "./components/layout/Layout.tsx";
+import Contacts from "./pages/contacts/Contacts.tsx";
 import Login from "./pages/login/Login";
-import { AppNavigation } from "./components/appNavigation/AppNavigation.tsx";
-import { Contacts } from "./pages/contacts/Contacts.tsx";
 import { Medications } from "./pages/medications/Medications.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
-import { Layout } from "./components/layout/Layout.tsx";
 
 const router = createBrowserRouter([
   {

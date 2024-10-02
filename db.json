@@ -49,6 +49,7 @@
       "phone": "+237 656585542",
       "email": "davis@gmail.com",
       "address": "Dschang, Cameroun",
+      "profession": "Pediatrician",
       "notes": ""
     },
     {
@@ -58,6 +59,7 @@
       "phone": "+237 674772917",
       "email": "laura@gmail.com",
       "address": "Douala, Cameroun",
+      "profession": "Ophthalmologist",
       "notes": ""
     },
     {
@@ -67,6 +69,27 @@
       "phone": "+237 677345741",
       "email": "john@gmail.com",
       "address": "Yaounde, Cameroun",
+      "profession": "Cardiologist",
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "name": "John Smith",
+      "qualification": "Dr",
+      "phone": "+237 677345741",
+      "email": "john@gmail.com",
+      "address": "Yaounde, Cameroun",
+      "profession": "Cardiologist",
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "name": "John Smith",
+      "qualification": "Dr",
+      "phone": "+237 677345741",
+      "email": "john@gmail.com",
+      "address": "Yaounde, Cameroun",
+      "profession": "Cardiologist",
       "notes": ""
     }
   ],

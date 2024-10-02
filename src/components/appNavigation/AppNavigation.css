@@ -4,28 +4,23 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  
 }
 
-.mytherapie {
-  width: 400px;
-  height: 844px;
-  background-color: #f8f4f4;
-  position: relative;
- 
-}
+
 
 .menuBot {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  width: 370px;
+  width: 378px;
   height: 80px;
   padding: var(--Radius-sm, 8px) 16px;
   align-items: center;
   gap: 10px;
   flex-shrink: 0;
   background: var(--Background-dark, #444);
-  position: fixed;
+  position: absolute;
   bottom: 0;
 }
 
