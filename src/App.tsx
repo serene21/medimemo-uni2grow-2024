@@ -8,6 +8,7 @@ import Contacts from "./pages/contacts/Contacts.tsx";
 import Login from "./pages/login/Login";
 import { Medications } from "./pages/medications/Medications.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
+import MedicationDetails from "./pages/medicationDetails/MedicationDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +19,6 @@ const router = createBrowserRouter([
     path: "/",
     loader: () => redirect("/login"),
   },
-
   {
     element: <Layout />,
     children: [
@@ -27,16 +27,17 @@ const router = createBrowserRouter([
         element: <Medications />,
         children: [
           {
-            
+            path: "details",
+            element: <MedicationDetails />,
           },
         ]
       },
       {
-        path: "/contacts",
+        path: "/layout/contacts",
         element: <Contacts />,
       },
       {
-        path: "/Therapies",
+        path: "/layout/Therapies",
         element: <Therapies />,
       },
     ],

@@ -10,7 +10,7 @@ export function Layout() {
       <div className="panel">
         <Outlet />
       </div>
-      {location.pathname!=="/" && <AppNavigation />}
+      {location.pathname!=="/layout/medications/details" && <AppNavigation />}
     </div>
   );
 }
