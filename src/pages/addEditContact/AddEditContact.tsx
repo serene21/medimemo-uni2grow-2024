@@ -1,6 +1,6 @@
 function AddEditContact(){
     return (
-        <div>Add  and Edit therapy</div>
+        <div>Add  and Edit Contact</div>
     );
 }
 

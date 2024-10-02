@@ -1,6 +1,5 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
 import { Layout } from "./components/layout/Layout.tsx";
-import { SubLayout } from "./components/layout/SubLayout.tsx";
 import Login from "./pages/login/Login";
 import Medications from "./pages/medications/Medications.tsx";
 import MedicationDetails from "./pages/medicationDetails/MedicationDetails.tsx";
@@ -14,16 +13,20 @@ import Program from "./pages/program/Program.tsx";
 
 const router = createBrowserRouter([
   {
+      path: "",
+      loader: ()=> redirect("/login"),
+  },
+  {
+      path: "/login",
+      element: <Login />,
+    
+  },
+  {
     path: "/",
     element: <Layout />,
     children: [
       {
-        path: "login",
-        element: <Login />,
-      },
-      {
         path: "medications",
-        element: <SubLayout />,
         children: [
           {
             path: "",
@@ -37,7 +40,6 @@ const router = createBrowserRouter([
       },
       {
         path: "therapies",
-        element: <SubLayout />,
         children: [
           {
             path: "",
@@ -77,7 +79,6 @@ const router = createBrowserRouter([
       },
       {
         path: "contacts",
-        element: <SubLayout />,
         children: [
           {
             path: "",

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import "./AppNavigation.css";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -8,15 +8,13 @@ import { ItemNavigation, dataItem } from "../../utils/navigationData";
 export function AppNavigation() {
   const location = useLocation();
 
-  if (location.pathname === "/login") {
-    return null;
-  }
+  const partsPath = location.pathname.split("/");
 
-  const [activepage, setActivePage] = useState<string>(location.pathname);
+  const [activepage, setActivePage] = useState<string>(`/${partsPath[1]}`);
 
   useEffect(() => {
-    setActivePage(location.pathname);
-  }, [location.pathname]);
+    setActivePage(`/${partsPath[1]}`);
+  }, [`/${partsPath[1]}`]);
 
   return (
       <div className="menuBot">
