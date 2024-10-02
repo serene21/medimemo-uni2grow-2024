@@ -3,9 +3,12 @@ import {
   redirect,
   RouterProvider,
 } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
+import { Layout } from "./components/layout/Layout.tsx";
+import Contacts from "./pages/contacts/Contacts.tsx";
 import Login from "./pages/login/Login";
+import { Therapies } from "./pages/therapies/Therapies.tsx";
 import Medication from "./pages/medications/Medication";
+import Dashboard from "./pages/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +27,20 @@ const router = createBrowserRouter([
   {
     path: "/",
     loader: () => redirect("/login"),
+  },
+
+  {
+    element: <Layout />,
+    children: [
+      {
+        path: "/contacts",
+        element: <Contacts />,
+      },
+      {
+        path: "/Therapies",
+        element: <Therapies />,
+      },
+    ],
   },
 ]);
 
