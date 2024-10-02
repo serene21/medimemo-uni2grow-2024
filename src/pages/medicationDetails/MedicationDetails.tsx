@@ -1,13 +1,10 @@
-import React from "react";
-import  "./MedicationDetails.css";
-
-function MedicationDetails(){
-    return (
-        <div className="test">
-            <h1>Medication détails</h1>
-            
-        </div>
-    );
+function MedicationDetails() {
+  return (
+    <div>
+      <h2>Medication Details</h2>
+      <p>Here you can see detailed information about medications.</p>
+    </div>
+  );
 }
 
 export default MedicationDetails;
