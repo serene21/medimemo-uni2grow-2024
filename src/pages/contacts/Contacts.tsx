@@ -15,7 +15,7 @@ function Contacts() {
 
   const getContacts = async (): Promise<void> => {
     try {
-      const result = await fetch("http://localhost:3000/contacts");
+      const result = await fetch("http://localhost:80/contacts");
       const datas: IContact[] = await result.json();
       setContacts(datas);
     } catch (error) {
@@ -44,96 +44,94 @@ function Contacts() {
 
   return (
     <>
-      <div className="container">
-        <div>
-          <Typography className="typography">Contacts</Typography>
-          <div className="searchContainer">
-            <Paper
-              component="div"
-              sx={{
-                p: "2px 4px",
-                display: "flex",
-                alignItems: "center",
-                width: "90%",
-                borderRadius: 20,
-                backgroundColor: "#FFEFEF",
-                maxHeight: 300,
-                overflowY: "auto",
-              }}
-            >
-              <InputBase
-                sx={{ ml: 1, flex: 1 }}
-                placeholder="Search doctor"
-                inputProps={{ "aria-label": "search doctor" }}
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-                <img src={search} alt="search icon" />
-              </IconButton>
-            </Paper>
+      
+        <Typography className="typography">Contacts</Typography>
+        <div className="searchContainer">
+          <Paper
+            component="div"
+            sx={{
+              p: "2px 4px",
+              display: "flex",
+              alignItems: "center",
+              width: "90%",
+              borderRadius: 20,
+              backgroundColor: "#FFEFEF",
+              maxHeight: 300,
+              overflowY: "auto",
+            }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search doctor"
+              inputProps={{ "aria-label": "search doctor" }}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+              <img src={search} alt="search icon" />
+            </IconButton>
+          </Paper>
 
-            <div className="listContact">
-              {!isNull(error) ? (
-                <Typography sx={{ color: "red" }}>{error}</Typography>
-              ) : emptyContacts(contacts) ? (
-                <Typography>No contact available</Typography>
-              ) : (
-                filteredContacts.map((contact: IContact) => (
-                  <Paper
-                    key={contact.id}
-                    component="form"
-                    sx={{
-                      p: "2px 4px",
-                      display: "flex",
-                      width: "90%",
-                      justifyContent: "space-between",
-                      backgroundColor: "#F4F4F4",
-                      paddingTop: 1.5,
-                      paddingBottom: 1.5,
-                    }}
+          <div className="listContact">
+            {!isNull(error) ? (
+              <Typography sx={{ color: "red" }}>{error}</Typography>
+            ) : emptyContacts(contacts) ? (
+              <Typography>No contact available</Typography>
+            ) : (
+              filteredContacts.map((contact: IContact) => (
+                <Paper
+                  key={contact.id}
+                  component="form"
+                  sx={{
+                    p: "2px 4px",
+                    display: "flex",
+                    width: "90%",
+                    justifyContent: "space-between",
+                    backgroundColor: "#F4F4F4",
+                    paddingTop: 1.5,
+                    paddingBottom: 1.5,
+                  }}
+                >
+                  <IconButton
+                    type="button"
+                    sx={{ p: "10px" }}
+                    aria-label="stethoscope"
                   >
-                    <IconButton
-                      type="button"
-                      sx={{ p: "10px" }}
-                      aria-label="stethoscope"
+                    <img src={stethoscope} alt="stethoscope icon" />
+                  </IconButton>
+
+                  <div className="contactName">
+                    <Typography
+                      sx={{ fontSize: 17, fontWeight: 700 }}
+                      className="typography1"
                     >
-                      <img src={stethoscope} alt="stethoscope icon" />
-                    </IconButton>
+                      {contact.qualification}. {contact.name}
+                    </Typography>
 
-                    <div className="contactName">
-                      <Typography
-                        sx={{ fontSize: 17, fontWeight: 700 }}
-                        className="typography1"
-                      >
-                        {contact.qualification}. {contact.name}
-                      </Typography>
-
-                      <Typography
-                        sx={{ fontSize: 10, fontWeight: 400 }}
-                        className="typography2"
-                      >
-                        {contact.profession}
-                      </Typography>
-                    </div>
-
-                    <IconButton
-                      type="button"
-                      sx={{ p: "10px" }}
-                      aria-label="arrowBack"
+                    <Typography
+                      sx={{ fontSize: 10, fontWeight: 400 }}
+                      className="typography2"
                     >
-                      <img src={arrowBack} alt="arrowBack icon" />
-                    </IconButton>
-                  </Paper>
-                ))
-              )}
-            </div>
+                      {contact.profession}
+                    </Typography>
+                  </div>
+
+                  <IconButton
+                    type="button"
+                    sx={{ p: "10px" }}
+                    aria-label="arrowBack"
+                  >
+                    <img src={arrowBack} alt="arrowBack icon" />
+                  </IconButton>
+                </Paper>
+              ))
+            )}
           </div>
         </div>
+      
 
-        <div className="addContainer">
-          <img src={add} alt="add icon" />
-        </div>
+      <div className="addContainer">
+        <img src={add} alt="add icon" />
       </div>
     </>
   );
