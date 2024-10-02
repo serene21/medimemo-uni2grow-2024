@@ -17,7 +17,7 @@ body {
   height: 80px;
   padding: var(--Radius-sm, 8px) 16px;
   align-items: center;
-  gap: 10px; 
+  gap: 10px;
   flex-shrink: 0;
   background: var(--Background-dark, #444);
   position: absolute;
