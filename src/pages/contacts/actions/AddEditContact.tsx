@@ -98,13 +98,14 @@ function AddEditContact() {
     }
 
     try {
+      const titre : string = "Dr"
       const newContact: IContact = {
         name: contact.name,
         notes: contact.notes,
-        qualification: "Dr",
+        qualification: titre,
         profession: contact.profession,
         phone: contact.phone,
-        email: contact.mail,
+        email: contact.email,
         address: contact.address
       };
 
@@ -126,7 +127,9 @@ function AddEditContact() {
           email: "",
           address: ""
         });
-        navigate("/dashboard");
+
+        const savedContact = await response.json(); // Get the saved contact with the ID
+        navigate("/contacts", { state: { newContact: savedContact } }); // Pass the new contact
       } else {
         alertError = true;
       }

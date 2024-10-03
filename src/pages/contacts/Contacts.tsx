@@ -1,10 +1,4 @@
-import {
-  Button,
-  IconButton,
-  InputBase,
-  Paper,
-  Typography
-} from "@mui/material";
+import { IconButton, InputBase, Paper, Typography, Fab } from "@mui/material";
 import "./Contacts.css";
 
 import { useEffect, useState } from "react";
@@ -13,7 +7,7 @@ import add from "../../assets/images/contact/add_circle.svg";
 import arrowBack from "../../assets/images/contact/arrow_forward_ios.svg";
 import stethoscope from "../../assets/images/contact/stethoscope.svg";
 import { IContact } from "../../models/Contact";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Contacts() {
   const [contacts, setContacts] = useState<IContact[]>([]);
@@ -22,15 +16,28 @@ function Contacts() {
 
   const navigate = useNavigate();
 
+
+
+  const location = useLocation();
+
+  // Function to fetch contacts
   const getContacts = async (): Promise<void> => {
     try {
       const result = await fetch("http://localhost:3000/contacts");
       const datas: IContact[] = await result.json();
-      setContacts(datas);
+
+      // Check if there's a new contact passed from the Add/Edit form
+      if (location.state?.newContact) {
+        setContacts([location.state.newContact, ...datas]); // Place the new contact at the top
+      } else {
+        setContacts(datas);
+      }
     } catch (error) {
-      setError("failed to load contacts");
+      setError("Failed to load contacts");
     }
   };
+
+
 
   useEffect(() => {
     getContacts();
@@ -143,9 +150,9 @@ function Contacts() {
           navigate("/addEditContact");
         }}
       >
-        <Button>
+        <Fab aria-label="add" >
           <img src={add} alt="add icon" />
-        </Button>
+        </Fab>
       </div>
     </>
   );
