@@ -41,4 +41,11 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    max-height: 325px;
+    overflow-y: scroll;
+}
+.sub-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;  
 }

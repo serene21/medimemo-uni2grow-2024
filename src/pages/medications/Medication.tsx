@@ -103,7 +103,6 @@ function Medication() {
             </div>
           ) : (
             <List
-
               disablePadding
               dense
               sx={{
@@ -111,57 +110,108 @@ function Medication() {
                 mb: "20px",
                 display: "flex",
                 flexDirection: "column",
-                gap: "15px",
+                gap: "25px",
               }}
             >
               {errorUpdate && <Typography color="error">{errorUpdate}</Typography>}
-              {medications.map((item) => {
-                const labelId = `checkbox-list-secondary-label-${item.id}`;
-                return (
-                  <ListItem
-                    key={item.id}
-                    disablePadding
-                    sx={{ bgcolor: "#F4F4F4" }}
-                  >
-                    <ListItemButton
-                      sx={{
-                        backgroundColor: item.taken ? alpha("#4DD8A7", 0.1) : "transparent",
-                      }}
-                      role={undefined}
-                      onClick={() => handleToggle(item)}
-                      dense
+              <div className="sub-list">
+                {medications.filter((item) => item.taken).map((item) => {
+                  const labelId = `checkbox-list-primary-label-${item.id}`;
+                  return (
+                    <ListItem
+                      key={item.id}
+                      disablePadding
+                      sx={{ bgcolor: "#F4F4F4" }}
                     >
-                      <ListItemAvatar>
-                        <Avatar alt="pill" src={pill} />
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={<Typography variant="body2">{item.therapyName}</Typography>}
-                        secondary={"conjunctivis"}
-                      />
-                      <div>
-                        <Typography
-                          variant="caption"
-                          sx={{
-                            p: "5px",
-                            bgcolor: "white",
-                            borderRadius: "15px",
-                            cursor: "pointer"
-                          }}
-                        >{item.time}</Typography>
-                        <Checkbox
-                          icon={<CircleOutlined sx={{ color: "#4DD8A7" }} />}
-                          checkedIcon={<CheckCircle sx={{ color: "#4DD8A7" }} />}
-                          edge="end"
-                          checked={item.taken}
-                          tabIndex={-1}
-                          disableRipple
-                          inputProps={{ 'aria-labelledby': labelId }}
+                      <ListItemButton
+                        sx={{
+                          backgroundColor: item.taken ? alpha("#4DD8A7", 0.1) : "transparent",
+                        }}
+                        role={undefined}
+                        onClick={() => handleToggle(item)}
+                        dense
+                      >
+                        <ListItemAvatar>
+                          <Avatar alt="pill" src={pill} />
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={<Typography variant="body2">{item.therapyName}</Typography>}
+                          secondary={"conjunctivis"}
                         />
-                      </div>
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })}
+                        <div>
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              p: "5px",
+                              bgcolor: "white",
+                              borderRadius: "15px",
+                              cursor: "pointer"
+                            }}
+                          >{item.time}</Typography>
+                          <Checkbox
+                            icon={<CircleOutlined sx={{ color: "#4DD8A7" }} />}
+                            checkedIcon={<CheckCircle sx={{ color: "#4DD8A7" }} />}
+                            edge="end"
+                            checked={item.taken}
+                            tabIndex={-1}
+                            disableRipple
+                            inputProps={{ 'aria-labelledby': labelId }}
+                          />
+                        </div>
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                })}
+              </div>
+              <div className="sub-list">
+                {medications.filter((item) => !item.taken).map((item) => {
+                  const labelId = `checkbox-list-secondary-label-${item.id}`;
+                  return (
+                    <ListItem
+                      key={item.id}
+                      disablePadding
+                      sx={{ bgcolor: "#F4F4F4" }}
+                    >
+                      <ListItemButton
+                        sx={{
+                          backgroundColor: item.taken ? alpha("#4DD8A7", 0.1) : "transparent",
+                        }}
+                        role={undefined}
+                        onClick={() => handleToggle(item)}
+                        dense
+                      >
+                        <ListItemAvatar>
+                          <Avatar alt="pill" src={pill} />
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={<Typography variant="body2">{item.therapyName}</Typography>}
+                          secondary={"conjunctivis"}
+                        />
+                        <div>
+                          <Typography
+                            variant="caption"
+                            sx={{
+                              p: "5px",
+                              bgcolor: "white",
+                              borderRadius: "15px",
+                              cursor: "pointer"
+                            }}
+                          >{item.time}</Typography>
+                          <Checkbox
+                            icon={<CircleOutlined sx={{ color: "#4DD8A7" }} />}
+                            checkedIcon={<CheckCircle sx={{ color: "#4DD8A7" }} />}
+                            edge="end"
+                            checked={item.taken}
+                            tabIndex={-1}
+                            disableRipple
+                            inputProps={{ 'aria-labelledby': labelId }}
+                          />
+                        </div>
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                })}
+              </div>
             </List>)}
         </div>
       </div>
