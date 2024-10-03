@@ -1,6 +1,12 @@
 #root {
-  margin: auto;
-  padding: 80;
-  width: 400px;
-  
+  margin: 0px;
+  padding: 0px;
+  max-width: 400px;
+  height: 102vh;
+  position: relative;
+}
+
+body{
+  height: 102vh;
+  margin: 0px;
 }
