@@ -10,7 +10,13 @@ import {
 
 import { useState } from "react";
 
-import { TextField, InputAdornment, Button } from "@mui/material";
+import {
+  TextField,
+  Typography,
+  InputAdornment,
+  Button,
+  IconButton
+} from "@mui/material";
 
 import stetoscope from "../../../assets/images/contact/stethoscope.svg";
 import clinicalNote from "../../../assets/images/contact/editContact/clinical_notes.svg";
@@ -242,11 +248,11 @@ function AddEditContact() {
             <Button
               type="submit"
               fullWidth
-              sx={{ background: "#f00", alignItems: "flex-end", margin:"50px" }}
+              sx={{ background: "#f00", margin: "50px" }}
               variant="contained"
-              startIcon={<img src={save} />}
             >
-              Save
+              <img src={save} />
+              <Typography paddingLeft={1} paddingTop={0.5} >Save</Typography>
             </Button>
           </div>
         </div>
