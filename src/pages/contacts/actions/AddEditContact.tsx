@@ -15,7 +15,7 @@ import {
   Typography,
   InputAdornment,
   Button,
-  IconButton
+  Alert
 } from "@mui/material";
 
 import stetoscope from "../../../assets/images/contact/stethoscope.svg";
@@ -27,8 +27,10 @@ import sticyNote from "../../../assets/images/contact/editContact/sticky_note_2.
 import save from "../../../assets/images/contact/editContact/save.svg";
 import { IContact } from "../../../models/Contact";
 import { formValues } from "../../../utils/Validation";
+import { useNavigate } from "react-router-dom";
 
 function AddEditContact() {
+  const navigate = useNavigate();
   const [contact, setContact] = useState<formValues>({
     name: "",
     notes: "",
@@ -47,8 +49,19 @@ function AddEditContact() {
     address: ""
   });
 
+  const [labelsEnable, setLabelsEnable] = useState({
+    name: false,
+    notes: false,
+    profession: false,
+    phone: false,
+    email: false,
+    address: false
+  });
+
+  let alertError: boolean = false;
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fieldName = e.target.name;
+    const fieldName: string = e.target.name;
     const value = e.target.value;
     const error = validationContactField(fieldName, value);
 
@@ -61,6 +74,13 @@ function AddEditContact() {
       ...contact,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleFocus = (field: keyof IContact) => {
+    setLabelsEnable((prev) => ({
+      ...prev,
+      [field]: true
+    }));
   };
 
   const handleSubmit = async (
@@ -106,9 +126,9 @@ function AddEditContact() {
           email: "",
           address: ""
         });
-        alert("Contact added successfully!");
+        navigate("/dashboard");
       } else {
-        alert("Error adding contact.");
+        alertError = true;
       }
     } catch (error) {
       console.error("Error:", error);
@@ -122,6 +142,11 @@ function AddEditContact() {
         <div className="containPanel">
           <div className="panelContact">
             <div className="addPanel">
+              {alertError ? (
+                <Alert severity="error">Contact was not added</Alert>
+              ) : (
+                ""
+              )}
               <TextField
                 fullWidth
                 type="text"
@@ -131,12 +156,14 @@ function AddEditContact() {
                 onChange={handleChange}
                 error={!!errors.name}
                 helperText={errors.name}
-                label="Name"
-                placeholder="Dr. "
+                onFocus={() => handleFocus("name")}
+                label={labelsEnable.name ? "Name" : ""}
+                placeholder=" "
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
                       <img src={stetoscope} alt="Allergies" />
+                      <Typography paddingLeft={2}>Dr. </Typography>
                     </InputAdornment>
                   )
                 }}
@@ -151,7 +178,8 @@ function AddEditContact() {
                 onChange={handleChange}
                 error={!!errors.profession}
                 helperText={errors.profession}
-                label="profession"
+                onFocus={() => handleFocus("profession")}
+                label={labelsEnable.profession ? "Profession" : ""}
                 placeholder="Specialty"
                 InputProps={{
                   startAdornment: (
@@ -171,7 +199,8 @@ function AddEditContact() {
                 onChange={handleChange}
                 error={!!errors.phone}
                 helperText={errors.phone}
-                label="contact"
+                onFocus={() => handleFocus("phone")}
+                label={labelsEnable.phone ? "Phone Number" : ""}
                 placeholder="Phone Number"
                 InputProps={{
                   startAdornment: (
@@ -191,7 +220,8 @@ function AddEditContact() {
                 onChange={handleChange}
                 error={!!errors.email}
                 helperText={errors.email}
-                label="E-mail"
+                onFocus={() => handleFocus("name")}
+                label={labelsEnable.name ? "Name" : ""}
                 placeholder="E-mail"
                 InputProps={{
                   startAdornment: (
@@ -211,7 +241,8 @@ function AddEditContact() {
                 onChange={handleChange}
                 error={!!errors.address}
                 helperText={errors.address}
-                label="Address"
+                onFocus={() => handleFocus("address")}
+                label={labelsEnable.address ? "Address" : ""}
                 placeholder="Address"
                 InputProps={{
                   startAdornment: (
@@ -231,7 +262,8 @@ function AddEditContact() {
                 onChange={handleChange}
                 error={!!errors.notes}
                 helperText={errors.notes}
-                label="notes"
+                onFocus={() => handleFocus("notes")}
+                label={labelsEnable.notes ? "Notes" : ""}
                 placeholder="Notes"
                 InputProps={{
                   startAdornment: (
@@ -248,11 +280,13 @@ function AddEditContact() {
             <Button
               type="submit"
               fullWidth
-              sx={{ background: "#f00", margin: "50px" }}
+              sx={{ background: "#f00" }}
               variant="contained"
             >
               <img src={save} />
-              <Typography paddingLeft={1} paddingTop={0.5} >Save</Typography>
+              <Typography paddingLeft={1} paddingTop={0.5}>
+                Save
+              </Typography>
             </Button>
           </div>
         </div>

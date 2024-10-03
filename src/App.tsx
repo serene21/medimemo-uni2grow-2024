@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import { Layout } from "./components/layout/Layout.tsx";
 import Contacts from "./pages/contacts/Contacts.tsx";
+import Dashboard from "./pages/Dashboard.tsx";
 import Login from "./pages/login/Login";
 import { Medications } from "./pages/medications/Medications.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/addEditContact",
         element: <AddEditContact />
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />
       },
       {
         path: "/Therapies",
