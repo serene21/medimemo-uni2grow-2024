@@ -104,7 +104,7 @@ function AddEditContact() {
         qualification: "Dr",
         profession: contact.profession,
         phone: contact.phone,
-        email: contact.mail,
+        email: contact.email,
         address: contact.address
       };
 
@@ -118,6 +118,8 @@ function AddEditContact() {
       });
 
       if (response.ok) {
+
+        // clear the form
         setContact({
           name: "",
           notes: "",
@@ -126,7 +128,8 @@ function AddEditContact() {
           email: "",
           address: ""
         });
-        navigate("/dashboard");
+        console.log(newContact.id);
+        navigate(`/dashboard`);
       } else {
         alertError = true;
       }
@@ -167,13 +170,12 @@ function AddEditContact() {
                         sx={{
                           fontSize: 14,
                           fontWeight: 400,
-                          fontFamily: "open Sans",
                           fontStyle: "normal",
                           color: "#444"
                         }}
                         paddingLeft={2}
                       >
-                        Dr.{" "}
+                        Dr.
                       </Typography>
                     </InputAdornment>
                   )

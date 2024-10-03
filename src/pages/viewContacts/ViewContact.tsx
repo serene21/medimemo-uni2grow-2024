@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./ViewContact.css";
-import Head  from "../../components/head/Head";
+import Head from "../../components/head/Head";
 
 import wPhone from "../../assets/images/viewContact/wcall.svg";
 import wMail from "../../assets/images/viewContact/wmail.svg";
@@ -12,25 +12,15 @@ import location from "../../assets/images/contact/editContact/location_on.svg";
 import notes from "../../assets/images/viewContact/demography.svg";
 
 import { Typography } from "@mui/material";
+import {IContact} from "../../models/Contact"
 
-interface Contact {
-  id: string;
-  name: string;
-  qualification: string;
-  profession: string;
-  phone: number;
-  email: string;
-  address: string;
-  notes: string;
-}
+
 
 export function ViewContact(): JSX.Element {
-  // recupper l'id du contact de l'URL
+  // recupper l'id du contact de l'URLs
   const { id } = useParams<{ id: string }>();
 
-  console.log(id);
-
-  const [contact, setContact] = useState<Contact | null>(null);
+  const [contact, setContact] = useState<IContact | null>(null);
   const [load, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -67,25 +57,29 @@ export function ViewContact(): JSX.Element {
 
   //   const doctor = contact.find(({id}) => {id} === contact.id); // Search by ID
 
-  console.log(contact);
 
-  const doctorName= `${contact.qualification}. ${contact.name}`
+
+  const doctorName: string = `${contact.qualification}. ${contact.name}`;
+
   return (
     <div className="contaierView">
-     
-        <Head arrow={true} title= {doctorName } more={true} />
-        <Typography
-        
-          sx={{
-            fontFamily: "open Sans",
-            fontSize: 16,
-            fontWeight: 400,
-            textAlign : "center"
-          }}
-        >
-          {contact.profession}
-        </Typography>
-      
+     <div className="headTitle" >
+     <Head arrow={true} title={doctorName} more={true} />
+      <Typography
+        height={22}
+        sx={{
+          fontSize: 11,
+          fontWeight: 400,
+          textAlign: "center",
+          paddingBottom: 2,
+          color: "#444",
+         
+        }}
+      >
+        {contact.profession}
+      </Typography>
+     </div>
+
       <div className="viewContactPanel">
         <div className="boxDiv">
           <div className="boxInfos">
@@ -168,4 +162,3 @@ export function ViewContact(): JSX.Element {
     </div>
   );
 }
-

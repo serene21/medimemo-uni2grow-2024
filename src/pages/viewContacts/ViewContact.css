@@ -2,18 +2,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f8f8f8;
-  padding-top: 50px;
-  gap: 10px;
+  background-color: #f8f4f4;
+  gap: 5px;
+}
+
+.headTitle{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .viewContactPanel {
   display: flex;
-  padding: 20px;
+  padding: 10px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  /* gap: 10px; */
   align-self: stretch;
   border-radius: var(--Radius-sm, 8px);
   background: var(--Colours-White, #fff);
@@ -23,7 +28,8 @@
   display: flex;
   flex-direction: row;
   /* justify-content: center; */
-  gap: 10px;
+  gap: 15px;
+  margin-bottom: 10px;
   height: 80px;
 }
 
@@ -62,6 +68,6 @@
   border: 1px solid black;
   border-radius: var(--Radius-xs, 4px);
   border: 1px solid var(--Colours-Grey-2, #e6e6e6);
-  min-height: 40px;
-  padding: 10px;
+
+
 }

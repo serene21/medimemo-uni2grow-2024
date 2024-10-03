@@ -21,11 +21,11 @@ function Head({ arrow = false, title, more = false }: HeadProps): JSX.Element {
         <Typography
           sx={{
             textAlign: "center",
-            // fontFamily: "Open Sans",
-            fontSize: 20,
+            fontSize: 14,
             fontStyle: "normal",
             fontWeight: 700,
-            lineHeight: 14
+            lineHeight: 14,
+           
           }}
         >
           {title}

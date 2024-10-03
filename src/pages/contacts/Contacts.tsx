@@ -3,7 +3,8 @@ import {
   IconButton,
   InputBase,
   Paper,
-  Typography
+  Typography,
+  Fab
 } from "@mui/material";
 import "./Contacts.css";
 
@@ -146,9 +147,12 @@ function Contacts() {
           navigate("/addEditContact");
         }}
       >
-        <Button>
+        <Fab  aria-label="add">
           <img src={add} alt="add icon" />
-        </Button>
+        </Fab>
+        {/* <Button>
+          <img src={add} alt="add icon" />
+        </Button>*/}
       </div>
     </>
   );
