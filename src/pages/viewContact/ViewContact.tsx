@@ -28,8 +28,6 @@ export function ViewContact(): JSX.Element {
   // recupper l'id du contact de l'URL
   const { id } = useParams<{ id: string }>();
 
-  console.log(id);
-
   const [contact, setContact] = useState<Contact | null>(null);
   const [load, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -67,25 +65,21 @@ export function ViewContact(): JSX.Element {
 
   //   const doctor = contact.find(({id}) => {id} === contact.id); // Search by ID
 
-  console.log(contact);
-
-  const doctorName= `${contact.qualification}. ${contact.name}`
+  const doctorName = `${contact.qualification}. ${contact.name}`;
   return (
     <div className="contaierView">
-     
-        <Head arrow={true} title= {doctorName } more={true} />
-        <Typography
-        
-          sx={{
-            fontFamily: "open Sans",
-            fontSize: 16,
-            fontWeight: 400,
-            textAlign : "center"
-          }}
-        >
-          {contact.profession}
-        </Typography>
-      
+      <Head arrow={true} title={doctorName} more={true} />
+      <Typography
+        sx={{
+          fontFamily: "open Sans",
+          fontSize: 16,
+          fontWeight: 400,
+          textAlign: "center"
+        }}
+      >
+        {contact.profession}
+      </Typography>
+
       <div className="viewContactPanel">
         <div className="boxDiv">
           <div className="boxInfos">

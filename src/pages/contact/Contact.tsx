@@ -11,7 +11,6 @@ import { IconButton, Typography, InputBase } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
 
 export function Contact(): JSX.Element {
   const navigate = useNavigate();
@@ -45,8 +44,6 @@ export function Contact(): JSX.Element {
       contact.name?.toLowerCase().includes(searchQuery.toLowerCase()) || // Safe check for name
       contact.profession?.toLowerCase().includes(searchQuery.toLowerCase()) // Safe check for profession
   );
-
- 
 
   return (
     <div className="contactContainer">
@@ -90,10 +87,11 @@ export function Contact(): JSX.Element {
                     </Typography>
                   </div>
                 </div>
-                <IconButton onClick={() => {
+                <IconButton
+                  onClick={() => {
                     navigate(`/viewContact/${item.id}`);
                   }}
-                 >
+                >
                   <ArrowForwardIosIcon />
                 </IconButton>
               </div>

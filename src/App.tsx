@@ -4,7 +4,7 @@ import {
   RouterProvider
 } from "react-router-dom";
 import { Layout } from "./components/layout/Layout.tsx";
-import Contacts from "./pages/contacts/Contacts.tsx";
+import {Contact} from "./pages/contact/Contact.tsx";
 import Login from "./pages/login/Login";
 import { Medications } from "./pages/medications/Medications.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
@@ -27,11 +27,11 @@ const router = createBrowserRouter([
         element: <Medications />
       },
       {
-        path: "/contacts",
-        element: <Contacts />
+        path: "/contact",
+        element: <Contact />
       },
       {
-        path: "/viewcontact",
+        path: "/viewContact/:id",
         element: <ViewContact />
       },
       {
