@@ -21,7 +21,7 @@ function Head({ arrow = false, title, more = false }: HeadProps): JSX.Element {
         <Typography
           sx={{
             textAlign: "center",
-            fontFamily: "open Sans",
+            // fontFamily: "Open Sans",
             fontSize: 20,
             fontStyle: "normal",
             fontWeight: 700,

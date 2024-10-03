@@ -73,7 +73,7 @@ function Login() {
         );
         if (isValidUser) {
           setCredentials({ username: "", password: "" });
-          navigate("/contacts");
+          navigate("/dashboard");
         } else {
           setSnackbarMessage("Email or password incorrect");
           setOpenSnackbar(true);
@@ -92,7 +92,7 @@ function Login() {
 
   return (
     <>
-      <div className="container">
+      <div className="login-container">
         <div className="img">
           <img alt="title" src={oh} />
         </div>
@@ -185,7 +185,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 <img width={30} height={30} alt="apple" src={a} />
@@ -198,7 +198,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 <img width={30} height={30} alt="google" src={g} />
@@ -210,7 +210,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
-                  cursor: "pointer"
+                  cursor: "pointer",
                 }}
               >
                 <img width={30} height={30} alt="facebook" src={f} />

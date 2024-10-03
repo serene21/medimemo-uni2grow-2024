@@ -7,6 +7,9 @@
 .panel{
     width: 100%;
     height: calc(100vh - 105px);
-    padding: 10px;
     position: relative;
+}
+
+.sub-panel {
+  margin: 10px;
 }

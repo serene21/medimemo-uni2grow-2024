@@ -163,7 +163,18 @@ function AddEditContact() {
                   startAdornment: (
                     <InputAdornment position="start">
                       <img src={stetoscope} alt="Allergies" />
-                      <Typography paddingLeft={2}>Dr. </Typography>
+                      <Typography
+                        sx={{
+                          fontSize: 14,
+                          fontWeight: 400,
+                          fontFamily: "open Sans",
+                          fontStyle: "normal",
+                          color: "#444"
+                        }}
+                        paddingLeft={2}
+                      >
+                        Dr.{" "}
+                      </Typography>
                     </InputAdornment>
                   )
                 }}

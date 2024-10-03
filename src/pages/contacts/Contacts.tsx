@@ -51,7 +51,9 @@ function Contacts() {
 
   return (
     <>
-      <Typography className="typography">Contacts</Typography>
+      <Typography fontWeight={700} fontSize={20} className="typography">
+        Contacts
+      </Typography>
       <div className="searchContainer">
         <Paper
           component="div"
