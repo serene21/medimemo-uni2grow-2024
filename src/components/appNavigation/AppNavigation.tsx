@@ -20,6 +20,7 @@ export function AppNavigation() {
 
   return (
       <div className="menuBot">
+        <div className="sub-menuBot">
         {dataItem.map((item: ItemNavigation) => (
           <div
             key={item.path}
@@ -49,6 +50,7 @@ export function AppNavigation() {
             </Typography>
           </div>
         ))}
+        </div>
       </div>
   );
 }

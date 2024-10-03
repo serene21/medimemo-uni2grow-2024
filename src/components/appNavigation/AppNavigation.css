@@ -13,15 +13,23 @@ body {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  width: 378px;
+  width: 100%;
   height: 80px;
-  padding: var(--Radius-sm, 8px) 16px;
   align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
   background: var(--Background-dark, #444);
   position: absolute;
   bottom: 0;
+}
+
+.sub-menuBot{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  margin: 10px 20px;
+  align-items: center;
+  gap: 10px;
 }
 
 .menuBotIconName {
@@ -45,7 +53,6 @@ body {
 }
 .menuBottomItem {
   display: flex;
-  padding: var(--Radius-xs, 4px) 0px;
   flex-direction: column;
   align-items: center;
   gap: var(--Radius-xs, 4px);
@@ -55,7 +62,6 @@ body {
 
 .iconClick {
   display: flex;
-  padding: var(--Radius-xs, 4px) 20px;
   align-items: center;
   gap: 10px;
   border-radius: 16px;
@@ -63,7 +69,6 @@ body {
 
 .iconClickMiddle {
   display: flex;
-  padding: var(--Radius-xs, 4px) 20px;
   align-items: center;
   gap: 10px;
   border-radius: 16px;
