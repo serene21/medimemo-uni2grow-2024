@@ -1,30 +1,15 @@
 import "./Medication.css";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
-import ListItem from "@mui/material/ListItem";
-import Checkbox from "@mui/material/Checkbox";
 import List from "@mui/material/List";
 import logo from "../../assets/images/avatar.svg";
 import Avatar from "@mui/material/Avatar";
-import pill from "../../assets/images/medications/pill.svg";
-import { alpha, Typography } from "@mui/material";
-import { CheckCircle, CircleOutlined } from "@mui/icons-material";
+import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-
-interface Dose {
-  id: number;
-  therapyName: string;
-  time: string;
-  date: string;
-  taken: boolean;
-  therapy: number;
-  prescriptionTime: number;
-}
+import { IDose } from "../../models/Dose";
+import ShowDose from "../../components/dose/ShowDose";
 
 function Medication() {
-  const [medications, setMedications] = useState<Dose[]>([]);
-  const [checked, setChecked] = useState<Dose[]>(medications);
+  const [medications, setMedications] = useState<IDose[]>([]);
+  const [checked, setChecked] = useState<IDose[]>(medications);
   const [error, setError] = useState<string>("");
   const [errorUpdate, setErrorUpdate] = useState<string>("");
 
@@ -43,9 +28,9 @@ function Medication() {
     getMedication();
   }, []);
 
-  const handleToggle = async (medication: Dose) => {
+  const handleToggle = async (medication: IDose) => {
     try {
-      const dose: Dose = { ...medication };
+      const dose: IDose = { ...medication };
       dose.taken = !dose.taken
       const requestOptions = {
         method: 'PUT',
@@ -70,7 +55,7 @@ function Medication() {
     }
   }
 
-  function emptyDoses(doses: Dose[]): boolean {
+  function emptyDoses(doses: IDose[]): boolean {
     return doses.length === 0;
   }
   function isNull(error: string): boolean {
@@ -114,104 +99,21 @@ function Medication() {
               }}
             >
               {errorUpdate && <Typography color="error">{errorUpdate}</Typography>}
-              <div className="sub-list">
+              {medications.filter((item) => item.taken).length != 0 && <div className="sub-list">
                 {medications.filter((item) => item.taken).map((item) => {
-                  const labelId = `checkbox-list-primary-label-${item.id}`;
                   return (
-                    <ListItem
-                      key={item.id}
-                      disablePadding
-                      sx={{ bgcolor: "#F4F4F4" }}
-                    >
-                      <ListItemButton
-                        sx={{
-                          backgroundColor: item.taken ? alpha("#4DD8A7", 0.1) : "transparent",
-                        }}
-                        role={undefined}
-                        onClick={() => handleToggle(item)}
-                        dense
-                      >
-                        <ListItemAvatar>
-                          <Avatar alt="pill" src={pill} />
-                        </ListItemAvatar>
-                        <ListItemText
-                          primary={<Typography variant="body2">{item.therapyName}</Typography>}
-                          secondary={"conjunctivis"}
-                        />
-                        <div>
-                          <Typography
-                            variant="caption"
-                            sx={{
-                              p: "5px",
-                              bgcolor: "white",
-                              borderRadius: "15px",
-                              cursor: "pointer"
-                            }}
-                          >{item.time}</Typography>
-                          <Checkbox
-                            icon={<CircleOutlined sx={{ color: "#4DD8A7" }} />}
-                            checkedIcon={<CheckCircle sx={{ color: "#4DD8A7" }} />}
-                            edge="end"
-                            checked={item.taken}
-                            tabIndex={-1}
-                            disableRipple
-                            inputProps={{ 'aria-labelledby': labelId }}
-                          />
-                        </div>
-                      </ListItemButton>
-                    </ListItem>
-                  );
+                    <ShowDose handleToggle={handleToggle} item={item} key={item.id} />
+                  )
                 })}
-              </div>
-              <div className="sub-list">
+              </div>}
+              {medications.filter((item) => !item.taken).length != 0 && <div className="sub-list">
                 {medications.filter((item) => !item.taken).map((item) => {
-                  const labelId = `checkbox-list-secondary-label-${item.id}`;
                   return (
-                    <ListItem
-                      key={item.id}
-                      disablePadding
-                      sx={{ bgcolor: "#F4F4F4" }}
-                    >
-                      <ListItemButton
-                        sx={{
-                          backgroundColor: item.taken ? alpha("#4DD8A7", 0.1) : "transparent",
-                        }}
-                        role={undefined}
-                        onClick={() => handleToggle(item)}
-                        dense
-                      >
-                        <ListItemAvatar>
-                          <Avatar alt="pill" src={pill} />
-                        </ListItemAvatar>
-                        <ListItemText
-                          primary={<Typography variant="body2">{item.therapyName}</Typography>}
-                          secondary={"conjunctivis"}
-                        />
-                        <div>
-                          <Typography
-                            variant="caption"
-                            sx={{
-                              p: "5px",
-                              bgcolor: "white",
-                              borderRadius: "15px",
-                              cursor: "pointer"
-                            }}
-                          >{item.time}</Typography>
-                          <Checkbox
-                            icon={<CircleOutlined sx={{ color: "#4DD8A7" }} />}
-                            checkedIcon={<CheckCircle sx={{ color: "#4DD8A7" }} />}
-                            edge="end"
-                            checked={item.taken}
-                            tabIndex={-1}
-                            disableRipple
-                            inputProps={{ 'aria-labelledby': labelId }}
-                          />
-                        </div>
-                      </ListItemButton>
-                    </ListItem>
+                    <ShowDose handleToggle={handleToggle} item={item} key={item.id} />
                   );
                 })}
               </div>
+              }
             </List>)}
         </div>
       </div>

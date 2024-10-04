@@ -42,7 +42,7 @@
     flex-direction: column;
     gap: 20px;
     max-height: 325px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .sub-list {
     display: flex;
