@@ -165,7 +165,7 @@ function AddEditContact() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <img src={stetoscope} alt="Allergies" />
+                      <img src={stetoscope} alt="stetoscope" />
                       <Typography
                         sx={{
                           fontSize: 14,
@@ -219,7 +219,7 @@ function AddEditContact() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <img src={call} alt="Allergies" />
+                      <img src={call} alt="phone" />
                     </InputAdornment>
                   )
                 }}
@@ -234,8 +234,8 @@ function AddEditContact() {
                 onChange={handleChange}
                 error={!!errors.email}
                 helperText={errors.email}
-                onFocus={() => handleFocus("name")}
-                label={labelsEnable.name ? "Name" : ""}
+                onFocus={() => handleFocus("email")}
+                label={labelsEnable.name ? "E-mail" : ""}
                 placeholder="E-mail"
                 InputProps={{
                   startAdornment: (
@@ -261,7 +261,7 @@ function AddEditContact() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <img src={location} alt="Allergies" />
+                      <img src={location} alt="location" />
                     </InputAdornment>
                   )
                 }}
@@ -282,7 +282,7 @@ function AddEditContact() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <img src={sticyNote} alt="Allergies" />
+                      <img src={sticyNote} alt="notes" />
                     </InputAdornment>
                   )
                 }}
@@ -290,7 +290,9 @@ function AddEditContact() {
             </div>
           </div>
 
-          <div className="button">
+          
+        </div>
+        <div className="button">
             <Button
               type="submit"
               fullWidth
@@ -303,7 +305,6 @@ function AddEditContact() {
               </Typography>
             </Button>
           </div>
-        </div>
       </form>
     </>
   );

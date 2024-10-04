@@ -30,7 +30,7 @@
   align-items: center;
   gap: 15px;
   align-self: stretch;
-  height: 250px;
+  max-height: 500px;
   overflow-y: auto;
 }
 
@@ -46,7 +46,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  position: absolute;
+  
   flex: 1 0 0;
   margin-left: 15px;
 }
