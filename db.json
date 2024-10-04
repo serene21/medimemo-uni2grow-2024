@@ -27,15 +27,43 @@
   ],
   "therapies": [
     {
-      "id": "1",
-      "name": "Therapy 1",
+      "id": 1,
+      "name": "Cunjunctivitis",
       "userId": 1,
       "contact": 2,
       "notes": "this is the notes"
     },
     {
-      "id": "2",
-      "name": "Therapy 2",
+      "id": 2,
+      "name": "Muscle pain",
+      "userId": 1,
+      "contact": 2,
+      "notes": "this is the notes"
+    },
+    {
+      "id": 3,
+      "name": "headache",
+      "userId": 1,
+      "contact": 2,
+      "notes": "this is the notes"
+    },
+    {
+      "id": 4,
+      "name": "Foot pains",
+      "userId": 1,
+      "contact": 2,
+      "notes": "this is the notes"
+    },
+    {
+      "id": 5,
+      "name": "Stomach pain",
+      "userId": 1,
+      "contact": 2,
+      "notes": "this is the notes"
+    },
+    {
+      "id": 6,
+      "name": "Backs pains",
       "userId": 1,
       "contact": 2,
       "notes": "this is the notes"
