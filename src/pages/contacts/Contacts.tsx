@@ -8,6 +8,7 @@ import arrowBack from "../../assets/images/contact/arrow_forward_ios.svg";
 import stethoscope from "../../assets/images/contact/stethoscope.svg";
 import { IContact } from "../../models/Contact";
 import { useNavigate, useLocation } from "react-router-dom";
+import { FabButton } from "../../components/fabButton/FabButton";
 
 function Contacts() {
   const [contacts, setContacts] = useState<IContact[]>([]);
@@ -144,16 +145,8 @@ function Contacts() {
         </div>
       </div>
 
-      <div
-        className="addContainer"
-        onClick={() => {
-          navigate("/addEditContact");
-        }}
-      >
-        <Fab aria-label="add" >
-          <img src={add} alt="add icon" />
-        </Fab>
-      </div>
+      <FabButton path= "/addEditContact" />
+
     </>
   );
 }

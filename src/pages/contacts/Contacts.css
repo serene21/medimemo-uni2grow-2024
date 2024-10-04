@@ -30,24 +30,17 @@
   align-items: center;
   gap: 15px;
   align-self: stretch;
-  max-height: 500px;
+  height: 250px;
   overflow-y: auto;
 }
 
-.addContainer {
-  display: flex;
-  margin-top: 25px;
-  justify-content: flex-end;
-  margin-bottom: 15px;
-  flex-shrink: 0;
-}
+
 
 .contactName {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: absolute;
-  
+  align-items: flex-start;
   flex: 1 0 0;
   margin-left: 15px;
 }
