@@ -6,6 +6,7 @@ import pill from "../../assets/images/medications/pill.svg";
 interface DoseProps {
     item: IDose
     handleToggle: (dose: IDose) => void;
+    handleClick: (dose: IDose) => void;
 }
 
 
@@ -24,7 +25,7 @@ function ShowDose(props: DoseProps) {
                     backgroundColor: props.item.taken ? alpha("#4DD8A7", 0.1) : "transparent",
                 }}
                 role={undefined}
-                onClick={() => props.handleToggle(props.item)}
+                onClick={() => props.handleClick(props.item)}
                 dense
             >
                 <ListItemAvatar>

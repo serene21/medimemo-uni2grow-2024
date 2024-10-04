@@ -28,6 +28,10 @@ function Medication() {
     getMedication();
   }, []);
 
+  const handleClick = (medication: IDose) => {
+    handleToggle(medication);
+  };
+
   const handleToggle = async (medication: IDose) => {
     try {
       const dose: IDose = { ...medication };
@@ -102,14 +106,14 @@ function Medication() {
               {medications.filter((item) => item.taken).length != 0 && <div className="sub-list">
                 {medications.filter((item) => item.taken).map((item) => {
                   return (
-                    <ShowDose handleToggle={handleToggle} item={item} key={item.id} />
+                    <ShowDose handleToggle={handleToggle} item={item} key={item.id} handleClick={handleClick} />
                   )
                 })}
               </div>}
               {medications.filter((item) => !item.taken).length != 0 && <div className="sub-list">
                 {medications.filter((item) => !item.taken).map((item) => {
                   return (
-                    <ShowDose handleToggle={handleToggle} item={item} key={item.id} />
+                    <ShowDose handleToggle={handleToggle} item={item} key={item.id} handleClick={handleClick} />
                   );
                 })}
               </div>
