@@ -59,16 +59,29 @@ export function ViewContact(): JSX.Element {
 
 
 
-  const doctorName: string = `${contact.qualification}. ${contact.name}`;
+  const doctorName: string = ``;
 
   return (
     <div className="contaierView">
      <div className="headTitle" >
-     <Head arrow={true} title={doctorName} more={true} />
+     <Head backButton={true} title={doctorName} showRightButton={true} />
+     <Typography
+        height={22}
+        sx={{
+          fontSize: 20,
+          fontWeight: 700,
+          textAlign: "center",
+          paddingBottom: 2,
+          color: "#444",
+         
+        }}
+      >
+        {contact.qualification}. {contact.name}
+      </Typography>
       <Typography
         height={22}
         sx={{
-          fontSize: 11,
+          fontSize: 14,
           fontWeight: 400,
           textAlign: "center",
           paddingBottom: 2,

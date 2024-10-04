@@ -2,36 +2,55 @@ import React from "react";
 
 import "../../components/head/Head.css";
 
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 import moreI from "../../assets/images/head/more_vert.svg";
 
 interface HeadProps {
-  arrow?: boolean;
+  backButton?: boolean;
   title?: string;
-  more?: boolean;
+  showRightButton?: boolean;
+  RightButton?: React.ReactNode;
+  handleBack?: () => void;
+  handleRightClick?: () => void;
 }
 
-function Head({ arrow = false, title, more = false }: HeadProps): JSX.Element {
+function Head(props: HeadProps): JSX.Element {
   return (
     <div className="containHead">
-      {arrow ? <ArrowBackIcon /> : null}
+      <Button
+        sx={{ width: "24px", height: "24px" }}
+        variant="text"
+        onClick={props.handleBack}
+        disabled={!props.backButton}
+      >
+        {props.backButton && <ArrowBackIcon sx={{ color: "black" }} />}
+      </Button>
       {
         <Typography
           sx={{
             textAlign: "center",
-            fontSize: 14,
+            // fontFamily: "Open Sans",
+            fontSize: 20,
             fontStyle: "normal",
             fontWeight: 700,
-            lineHeight: 14,
-           
+            lineHeight: 14
           }}
         >
-          {title}
+          {props.title}
         </Typography>
       }
-      {more ? <img src={moreI} alt=" more" /> : null}
+      <Button
+        sx={{ width: "24px", height: "24px" }}
+        variant="text"
+        onClick={props.handleRightClick}
+        disabled={!props.showRightButton}
+      >
+        {(props.showRightButton && props.RightButton) || (
+          <img src={moreI} alt=" more" />
+        )}
+      </Button>
     </div>
   );
 }

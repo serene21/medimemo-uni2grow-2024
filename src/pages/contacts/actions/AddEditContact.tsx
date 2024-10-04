@@ -140,7 +140,7 @@ function AddEditContact() {
 
   return (
     <>
-      <Head arrow={true} title="New Doctor" />
+      <Head backButton={true} title="New Doctor" />
       <form onSubmit={handleSubmit}>
         <div className="containPanel">
           <div className="panelContact">
