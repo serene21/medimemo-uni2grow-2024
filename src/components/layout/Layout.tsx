@@ -14,7 +14,9 @@ export function Layout() {
   return (
     <div className="container">
       <div className="panel">
-        <Outlet />
+        <div className="sub-panel">
+          <Outlet />
+        </div>
       </div>
       {showAppNav && <AppNavigation /> }
     </div>
