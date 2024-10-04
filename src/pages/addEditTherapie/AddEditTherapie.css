@@ -1,0 +1,52 @@
+.therapy-page {
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    /* gap:20px; */
+    /* position: relative; */
+    margin-bottom: 20px;
+  }
+  
+  .therapy-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 350px;
+  }
+  
+  .therapy-title {
+    margin-bottom: 20px;
+    font-size: 18px;
+    
+    color: #333;
+  }
+  
+  .input-field {
+    margin-bottom: 20px;
+  }
+  
+  .save-button {
+    background-color: #f28b82;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-transform: uppercase;
+  }
+  
+  .back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+  
