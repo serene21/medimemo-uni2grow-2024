@@ -1,3 +1,5 @@
+
+
 import Head from "../../../components/head/Head";
 
 import "./AddEditContact.css";
@@ -98,10 +100,11 @@ function AddEditContact() {
     }
 
     try {
+      const titre: string = "Dr";
       const newContact: IContact = {
         name: contact.name,
         notes: contact.notes,
-        qualification: "Dr",
+        qualification: titre,
         profession: contact.profession,
         phone: contact.phone,
         email: contact.email,
@@ -118,7 +121,6 @@ function AddEditContact() {
       });
 
       if (response.ok) {
-
         // clear the form
         setContact({
           name: "",
@@ -128,8 +130,9 @@ function AddEditContact() {
           email: "",
           address: ""
         });
-        console.log(newContact.id);
-        navigate(`/dashboard`);
+
+        const savedContact = await response.json(); // Get the saved contact with the ID
+        navigate("/contacts", { state: { newContact: savedContact } }); // Pass the new contact
       } else {
         alertError = true;
       }
@@ -138,13 +141,18 @@ function AddEditContact() {
     }
   };
 
-   const handleOnClickBackButton = () => {
-    navigate("/contacts")
-   } 
+  const handleOnClickBackButton = () => {
+    navigate("/contacts");
+  };
 
   return (
     <>
-      <Head backButton={true} title="New Doctor" handleBack={handleOnClickBackButton} showRightButton={false} />
+      <Head
+        backButton={true}
+        title="New Doctor"
+        handleBack={handleOnClickBackButton}
+        showRightButton={false}
+      />
       <form onSubmit={handleSubmit}>
         <div className="containPanel">
           <div className="panelContact">
@@ -169,7 +177,7 @@ function AddEditContact() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <img src={stetoscope} alt="Allergies" />
+                      <img src={stetoscope} alt="stetoscope" />
                       <Typography
                         sx={{
                           fontSize: 14,
@@ -222,7 +230,7 @@ function AddEditContact() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <img src={call} alt="Allergies" />
+                      <img src={call} alt="phone" />
                     </InputAdornment>
                   )
                 }}
@@ -237,8 +245,8 @@ function AddEditContact() {
                 onChange={handleChange}
                 error={!!errors.email}
                 helperText={errors.email}
-                onFocus={() => handleFocus("name")}
-                label={labelsEnable.name ? "Name" : ""}
+                onFocus={() => handleFocus("email")}
+                label={labelsEnable.name ? "E-mail" : ""}
                 placeholder="E-mail"
                 InputProps={{
                   startAdornment: (
@@ -264,7 +272,7 @@ function AddEditContact() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <img src={location} alt="Allergies" />
+                      <img src={location} alt="location" />
                     </InputAdornment>
                   )
                 }}
@@ -285,27 +293,26 @@ function AddEditContact() {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <img src={sticyNote} alt="Allergies" />
+                      <img src={sticyNote} alt="notes" />
                     </InputAdornment>
                   )
                 }}
               />
             </div>
           </div>
-
-          <div className="button">
-            <Button
-              type="submit"
-              fullWidth
-              sx={{ background: "#f00" }}
-              variant="contained"
-            >
-              <img src={save} />
-              <Typography paddingLeft={1} paddingTop={0.5}>
-                Save
-              </Typography>
-            </Button>
-          </div>
+        </div>
+        <div className="button">
+          <Button
+            type="submit"
+            fullWidth
+            sx={{ background: "#f00" }}
+            variant="contained"
+          >
+            <img src={save} />
+            <Typography paddingLeft={1} paddingTop={0.5}>
+              Save
+            </Typography>
+          </Button>
         </div>
       </form>
     </>

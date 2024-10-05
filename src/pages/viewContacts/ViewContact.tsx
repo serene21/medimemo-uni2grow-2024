@@ -15,7 +15,6 @@ import { Typography } from "@mui/material";
 import {IContact} from "../../models/Contact"
 
 
-
 export function ViewContact(): JSX.Element {
   // recupper l'id du contact de l'URLs
   const { id } = useParams<{ id: string }>();
@@ -67,7 +66,7 @@ export function ViewContact(): JSX.Element {
   return (
     <div className="contaierView">
      <div className="headTitle" >
-     <Head backButton={true}  showRightButton={true}  handleBack={handleOnClickBackButtong}/>
+     <Head backButton={true}  showRightButton={true}  handleBack={handleOnClickBackButton}/>
      <Typography
         height={22}
         sx={{
