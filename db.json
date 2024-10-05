@@ -28,14 +28,42 @@
   "therapies": [
     {
       "id": "1",
-      "name": "Therapy 1",
+      "name": "Cunjunctivitis",
       "userId": 1,
       "contact": 2,
       "notes": "this is the notes"
     },
     {
       "id": "2",
-      "name": "Therapy 2",
+      "name": "Muscle pain",
+      "userId": 1,
+      "contact": 2,
+      "notes": "this is the notes"
+    },
+    {
+      "id": "3",
+      "name": "headache",
+      "userId": 1,
+      "contact": 2,
+      "notes": "this is the notes"
+    },
+    {
+      "id": "4",
+      "name": "Foot pains",
+      "userId": 1,
+      "contact": 2,
+      "notes": "this is the notes"
+    },
+    {
+      "id": "5",
+      "name": "Stomach pain",
+      "userId": 1,
+      "contact": 2,
+      "notes": "this is the notes"
+    },
+    {
+      "id": "6",
+      "name": "Backs pains",
       "userId": 1,
       "contact": 2,
       "notes": "this is the notes"
@@ -283,6 +311,16 @@
       "phone": "83774932",
       "email": "fofou12@gmail.com",
       "address": "Italy"
+    },
+    {
+      "id": "e3a8",
+      "name": "Yvan Laminsi",
+      "notes": "kheizuhf zhfoizf jfz zkzfzfzoi zrsjjpj fzfhj zuujfvzb   zéoifc oez fif zfpo zfofz qho fhqof zoiff oifjz uof oijfzef zfzpioifzefzujero ujvrez hoezuejfb ofb  oluezof ",
+      "qualification": "Dr",
+      "profession": "cardiologue",
+      "phone": "13545",
+      "email": "ivanlam@gmail.com",
+      "address": "Russsie"
     }
   ],
   "prescriptions": [

@@ -8,12 +8,12 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import moreI from "../../assets/images/head/more_vert.svg";
 
 interface HeadProps {
-  backButton?: boolean;
-  title?: string;
-  showRightButton?: boolean;
-  RightButton?: React.ReactNode;
-  handleBack?: () => void;
-  handleRightClick?: () => void;
+  backButton ?: boolean;
+  title ?: string;
+  showRightButton ?: boolean;
+  RightButton ?: React.ReactNode;
+  handleBack ?: () => void;
+  handleRightClick ?: () => void;
 }
 
 function Head(props: HeadProps): JSX.Element {
@@ -47,7 +47,7 @@ function Head(props: HeadProps): JSX.Element {
         onClick={props.handleRightClick}
         disabled={!props.showRightButton}
       >
-        {(props.showRightButton && props.RightButton) || (
+        {(props.showRightButton || props.RightButton) && (
           <img src={moreI} alt=" more" />
         )}
       </Button>

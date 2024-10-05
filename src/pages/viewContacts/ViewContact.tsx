@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./ViewContact.css";
 import Head from "../../components/head/Head";
 
@@ -19,6 +19,7 @@ import {IContact} from "../../models/Contact"
 export function ViewContact(): JSX.Element {
   // recupper l'id du contact de l'URLs
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
   const [contact, setContact] = useState<IContact | null>(null);
   const [load, setLoading] = useState<boolean>(true);
@@ -59,12 +60,14 @@ export function ViewContact(): JSX.Element {
 
 
 
-  const doctorName: string = ``;
+  const handleOnClickBackButton = () => {
+    navigate ("/contacts");
+  }
 
   return (
     <div className="contaierView">
      <div className="headTitle" >
-     <Head backButton={true} title={doctorName} showRightButton={true} />
+     <Head backButton={true}  showRightButton={true}  handleBack={handleOnClickBackButtong}/>
      <Typography
         height={22}
         sx={{

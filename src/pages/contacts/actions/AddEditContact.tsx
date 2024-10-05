@@ -138,9 +138,13 @@ function AddEditContact() {
     }
   };
 
+   const handleOnClickBackButton = () => {
+    navigate("/contacts")
+   } 
+
   return (
     <>
-      <Head backButton={true} title="New Doctor" />
+      <Head backButton={true} title="New Doctor" handleBack={handleOnClickBackButton} showRightButton={false} />
       <form onSubmit={handleSubmit}>
         <div className="containPanel">
           <div className="panelContact">
