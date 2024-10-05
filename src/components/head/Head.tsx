@@ -35,7 +35,8 @@ function Head(props: HeadProps): JSX.Element {
             fontSize: 20,
             fontStyle: "normal",
             fontWeight: 700,
-            lineHeight: 14
+            lineHeight: 14,
+            width: "300px"
           }}
         >
           {props.title}

@@ -1,3 +1,8 @@
+
+
+
+
+
 .typography {
   color: var(--Primary-text, #444);
   text-align: center;
@@ -28,7 +33,7 @@
   align-items: center;
   gap: 15px;
   align-self: stretch;
-  max-height: 250px;
+  height: 250px;
   overflow-y: auto;
 }
 
@@ -44,8 +49,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: absolute;
-
+  align-items: flex-start;
   flex: 1 0 0;
   margin-left: 15px;
 }

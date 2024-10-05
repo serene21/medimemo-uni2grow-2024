@@ -12,8 +12,7 @@ import location from "../../assets/images/contact/editContact/location_on.svg";
 import notes from "../../assets/images/viewContact/demography.svg";
 
 import { Typography } from "@mui/material";
-import {IContact} from "../../models/Contact"
-
+import { IContact } from "../../models/Contact";
 
 export function ViewContact(): JSX.Element {
   // recupper l'id du contact de l'URLs
@@ -57,43 +56,48 @@ export function ViewContact(): JSX.Element {
 
   //   const doctor = contact.find(({id}) => {id} === contact.id); // Search by ID
 
-
-
   const handleOnClickBackButton = () => {
-    navigate ("/contacts");
-  }
+    navigate("/contacts");
+  };
+
+  const editContact = () => {
+    navigate(`/addEditContact/${id} `); // Pass the new contact
+  };
 
   return (
     <div className="contaierView">
-     <div className="headTitle" >
-     <Head backButton={true}  showRightButton={true}  handleBack={handleOnClickBackButton}/>
-     <Typography
-        height={22}
-        sx={{
-          fontSize: 20,
-          fontWeight: 700,
-          textAlign: "center",
-          paddingBottom: 2,
-          color: "#444",
-         
-        }}
-      >
-        {contact.qualification}. {contact.name}
-      </Typography>
-      <Typography
-        height={22}
-        sx={{
-          fontSize: 14,
-          fontWeight: 400,
-          textAlign: "center",
-          paddingBottom: 2,
-          color: "#444",
-         
-        }}
-      >
-        {contact.profession}
-      </Typography>
-     </div>
+      <div className="headTitle">
+        <Head
+          backButton={true}
+          showRightButton={true}
+          handleBack={handleOnClickBackButton}
+          handleRightClick={editContact}
+        />
+        <Typography
+          height={22}
+          sx={{
+            fontSize: 20,
+            fontWeight: 700,
+            textAlign: "center",
+            paddingBottom: 2,
+            color: "#444"
+          }}
+        >
+          {contact.qualification}. {contact.name}
+        </Typography>
+        <Typography
+          height={22}
+          sx={{
+            fontSize: 14,
+            fontWeight: 400,
+            textAlign: "center",
+            paddingBottom: 2,
+            color: "#444"
+          }}
+        >
+          {contact.profession}
+        </Typography>
+      </div>
 
       <div className="viewContactPanel">
         <div className="boxDiv">
@@ -117,7 +121,7 @@ export function ViewContact(): JSX.Element {
             <Typography
               sx={{
                 paddingTop: 0.1,
-                fontFamily: "Open Sans",
+                // fontFamily: "Open Sans",
                 fontSize: 14,
                 fontWeight: 400,
                 lineHeight: 2
@@ -131,7 +135,7 @@ export function ViewContact(): JSX.Element {
             <Typography
               sx={{
                 paddingTop: 0.1,
-                fontFamily: "Open Sans",
+                color: "#444444",
                 fontSize: 14,
                 fontWeight: 400,
                 lineHeight: 2
@@ -146,7 +150,7 @@ export function ViewContact(): JSX.Element {
             <Typography
               sx={{
                 paddingTop: 0.1,
-                fontFamily: "Open Sans",
+                color: "#444444",
                 fontSize: 14,
                 fontWeight: 400,
                 lineHeight: 2
@@ -161,7 +165,7 @@ export function ViewContact(): JSX.Element {
             <Typography
               sx={{
                 paddingTop: 0.1,
-                fontFamily: "Open Sans",
+                color: "#444444",
                 fontSize: 14,
                 fontWeight: 400,
                 lineHeight: 2

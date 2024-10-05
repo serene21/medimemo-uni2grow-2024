@@ -4,18 +4,16 @@
   justify-content: center;
   align-items: center;
   gap: 20px;
- width: 100%;
-
+  width: 100%;
 }
-form{
+form {
   height: 100%;
 }
 
 .containPanel {
   background: #f8f4f4;
   height: 633px;
-
-
+  overflow-y: auto;
 }
 
 .panelContact {
@@ -26,12 +24,9 @@ form{
   justify-content: center;
   align-items: center;
   border-radius: var(--Radius-sm, 8px);
- 
 }
 
-
 .button {
-  
   display: flex;
   align-items: flex-end;
   width: 370px;

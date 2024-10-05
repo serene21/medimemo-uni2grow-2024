@@ -1,5 +1,3 @@
-
-
 import Head from "../../../components/head/Head";
 
 import "./AddEditContact.css";
@@ -10,7 +8,7 @@ import {
   validationContactField
 } from "../../../utils/ValidateContact";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import {
   TextField,
@@ -29,10 +27,17 @@ import sticyNote from "../../../assets/images/contact/editContact/sticky_note_2.
 import save from "../../../assets/images/contact/editContact/save.svg";
 import { IContact } from "../../../models/Contact";
 import { formValues } from "../../../utils/Validation";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function AddEditContact() {
   const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
+  const isEditing = !!id;
+
+  const handleOnClickBackButton = () => {
+    navigate("/contacts");
+  };
+
   const [contact, setContact] = useState<formValues>({
     name: "",
     notes: "",
@@ -60,23 +65,45 @@ function AddEditContact() {
     address: false
   });
 
-  let alertError: boolean = false;
+  useEffect(() => {
+    if (isEditing) {
+      const fetchContactById = async (contactId: string) => {
+        try {
+          const response = await fetch(
+            `http://localhost:3000/contacts/${contactId}`
+          );
+          const data: IContact = await response.json();
+          setContact({
+            name: data.name,
+            notes: data.notes || "",
+            profession: data.profession || "",
+            phone: data.phone || "",
+            email: data.email || "",
+            address: data.address || ""
+          });
+        } catch (error) {}
+      };
+      fetchContactById(id);
+    }
+  }, [id, isEditing]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fieldName: string = e.target.name;
-    const value = e.target.value;
-    const error = validationContactField(fieldName, value);
+  // Handle input change for each field
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const error = validationContactField(name, value);
 
     setErrors((prevState) => ({
       ...prevState,
-      [fieldName]: error || ""
+      [name]: error || ""
     }));
 
     setContact({
       ...contact,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
+
+  let alertError: boolean = false;
 
   const handleFocus = (field: keyof IContact) => {
     setLabelsEnable((prev) => ({
@@ -141,10 +168,6 @@ function AddEditContact() {
     }
   };
 
-  const handleOnClickBackButton = () => {
-    navigate("/contacts");
-  };
-
   return (
     <>
       <Head
@@ -168,7 +191,7 @@ function AddEditContact() {
                 name="name"
                 style={{ color: "#B3B3B3" }}
                 value={contact.name}
-                onChange={handleChange}
+                onChange={handleInputChange}
                 error={!!errors.name}
                 helperText={errors.name}
                 onFocus={() => handleFocus("name")}
@@ -200,7 +223,7 @@ function AddEditContact() {
                 name="profession"
                 style={{ color: "#B3B3B3" }}
                 value={contact.profession}
-                onChange={handleChange}
+                onChange={handleInputChange}
                 error={!!errors.profession}
                 helperText={errors.profession}
                 onFocus={() => handleFocus("profession")}
@@ -221,7 +244,7 @@ function AddEditContact() {
                 name="phone"
                 style={{ color: "#B3B3B3" }}
                 value={contact.phone}
-                onChange={handleChange}
+                onChange={handleInputChange}
                 error={!!errors.phone}
                 helperText={errors.phone}
                 onFocus={() => handleFocus("phone")}
@@ -242,7 +265,7 @@ function AddEditContact() {
                 name="email"
                 value={contact.email}
                 style={{ color: "#B3B3B3" }}
-                onChange={handleChange}
+                onChange={handleInputChange}
                 error={!!errors.email}
                 helperText={errors.email}
                 onFocus={() => handleFocus("email")}
@@ -263,7 +286,7 @@ function AddEditContact() {
                 name="address"
                 style={{ color: "#B3B3B3" }}
                 value={contact.address}
-                onChange={handleChange}
+                onChange={handleInputChange}
                 error={!!errors.address}
                 helperText={errors.address}
                 onFocus={() => handleFocus("address")}
@@ -280,11 +303,13 @@ function AddEditContact() {
 
               <TextField
                 fullWidth
+                multiline
+                maxRows={5}
                 type="text"
                 name="notes"
                 value={contact.notes}
                 sx={{ color: "#B3B3B3" }}
-                onChange={handleChange}
+                onChange={handleInputChange}
                 error={!!errors.notes}
                 helperText={errors.notes}
                 onFocus={() => handleFocus("notes")}
