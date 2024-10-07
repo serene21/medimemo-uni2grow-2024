@@ -3,6 +3,16 @@
     background-color: #F8F4F4;
 }
 
+.medications-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: auto;
+    overflow-y: auto;
+}
+
 .head-container {
     width: 100%;
     display: flex;
@@ -16,7 +26,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
 }
 
 .seond-container {
@@ -44,8 +53,9 @@
     max-height: 325px;
     overflow-y: auto;
 }
+
 .sub-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;  
+    gap: 10px;
 }
