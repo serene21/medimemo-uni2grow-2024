@@ -20,6 +20,7 @@ import {
   validationTherapy,
   ITherapy
 } from "../../utils/Validation";
+import Header from "../../components/header/Header";
 
 function AddEditTherapie() {
   const [therapy, setTherapy] = useState<ITherapy>({
@@ -59,9 +60,8 @@ function AddEditTherapie() {
   return (
     <>
       <div className="therapy-page">
-        <IconButton onClick={handleBack}>
-          <WestIcon />
-        </IconButton>
+        <Header title="" showBackButton onBackButtonClick={handleBack}/>
+    
         <div className="therapyContent">
           <Box className="element" sx={{ gap: "20" }}>
             <Box
