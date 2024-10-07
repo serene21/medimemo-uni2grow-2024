@@ -1,15 +1,19 @@
 .container {
-  width: 390px;
-  height: 844px;
-  
+  height: 100vh;
+  position: relative;
+  flex: 1;
 }
 
-.panel {
-  width: 100%;
-  height: 80px;
- 
+.panel{
+    width: 100%;
+    height: calc(100vh - 105px);
+    position: relative;
 }
 
 .sub-panel {
+  display: flex;
+  flex-direction: column;
   margin: 10px;
+  flex: 1;
+  overflow: hidden;
 }

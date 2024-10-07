@@ -1,5 +1,3 @@
-import React from "react";
-// import { FabButton } from "../fabButton/FabButton";
 import "./Layout.css";
 import { Outlet } from "react-router-dom";
 import { AppNavigation } from "../appNavigation/AppNavigation";

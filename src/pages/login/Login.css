@@ -8,6 +8,7 @@ body {
 
 .login-container {
   background-color: #F8F4F4;
+  flex: 1;
 }
 
 .img {
@@ -22,7 +23,8 @@ body {
   border-radius: 5px;
   align-items: center;
   justify-content: center;
-  margin: 10px;
+  margin: 10px 20px;
+  padding: 0px 20px;
 }
 
 .divTitle {
@@ -43,11 +45,9 @@ body {
 }
 
 .divforgot {
-  margin-bottom: 20px;
+  margin: 20px;
   display: flex;
   justify-content: end;
-  margin-right: 40px;
-  margin-top: 20px;
 }
 
 .divbutton {
@@ -68,15 +68,16 @@ span {
 .divor {
   display: flex;
   flex: 1;
-  flex-direction: row;
-  justify-content: space-around;
-  padding-bottom: 20px;
+  justify-content: center;
+  margin-bottom: 20px;
   align-items: center;
+  gap: 20px;
 }
 
-hr {
-  width: 100px;
-  height: inherit;
+.divider {
+  width: 100%;
+  height: 2px;
+  background-color: #555;
 }
 
 .divimage {

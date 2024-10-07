@@ -7,16 +7,21 @@ import { Layout } from "./components/layout/Layout.tsx";
 import Contacts from "./pages/contacts/Contacts.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import Login from "./pages/login/Login";
-import { Medications } from "./pages/medications/Medications.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
 import AddEditContact from "./pages/addContact/AddEditContact.tsx";
 import { ViewContact } from "./pages/viewContacts/ViewContact.tsx";
+import Medication from "./pages/medications/Medication.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />
   },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
+
   {
     path: "/",
     loader: () => redirect("/login")
@@ -26,8 +31,8 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/medications",
-        element: <Medications />
+        path: "/medication",
+        element: <Medication />
       },
       {
         path: "/contacts",
@@ -48,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />
+      },
+      {
+        path: "/medications",
+        element: <Medication />,
       },
       {
         path: "/Therapies",
