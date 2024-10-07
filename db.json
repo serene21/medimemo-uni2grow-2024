@@ -27,14 +27,14 @@
   ],
   "therapies": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Therapy 1",
       "userId": 1,
       "contact": 2,
       "notes": "this is the notes"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Therapy 2",
       "userId": 1,
       "contact": 2,
@@ -247,6 +247,16 @@
       "phone": "213324245325",
       "email": "hemenyi@gmail.com",
       "address": "seoul"
+    },
+    {
+      "id": "9e1b",
+      "name": ",;csqdnqkl",
+      "notes": "dza,jdhza",
+      "qualification": "Dr",
+      "profession": "!vl;e",
+      "phone": "2313425",
+      "email": "hjkkl@gmail.com",
+      "address": "France"
     }
   ],
   "prescriptions": [
@@ -285,6 +295,15 @@
     {
       "id": "1",
       "therapyName": "Therapy 1",
+      "time": "12h30PM",
+      "date": "2024-09-20",
+      "taken": false,
+      "therapy": 1,
+      "prescriptionTime": 1
+    },
+    {
+      "id": "2",
+      "therapyName": "Therapy 2",
       "time": "12h30PM",
       "date": "2024-09-20",
       "taken": true,
