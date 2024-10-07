@@ -1,12 +1,16 @@
 #root {
   margin: 0px;
   padding: 0px;
-  max-width: 400px;
-  height: 102vh;
+  height: 100vh;
   position: relative;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
 }
 
-body{
-  height: 102vh;
+body {
+  height: 100vh;
   margin: 0px;
+  overflow: hidden;
+  min-width: fit-content;
 }
