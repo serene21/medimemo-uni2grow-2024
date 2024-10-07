@@ -17,13 +17,8 @@ export function FabButton({ path }: IFabButton): JSX.Element {
 
   return (
     <>
-      <div className="fab">
-        <Fab
-          onClick={handleClick}
-          
-        >
-          <img src={fab} alt="add Button" />
-        </Fab>
+      <div className="fab" onClick={handleClick}>
+        <img src={fab} alt="add Button" />
       </div>
     </>
   );
