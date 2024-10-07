@@ -17,8 +17,6 @@ function Contacts() {
 
   const navigate = useNavigate();
 
-
-
   const location = useLocation();
 
   // Function to fetch contacts
@@ -37,8 +35,6 @@ function Contacts() {
       setError("Failed to load contacts");
     }
   };
-
-
 
   useEffect(() => {
     getContacts();
@@ -113,31 +109,37 @@ function Contacts() {
                   sx={{ p: "10px" }}
                   aria-label="stethoscope"
                 >
-                  <img src={stethoscope} alt="stethoscope icon" />
-                </IconButton>
-
-                <div className="contactName">
-                  <Typography
-                    sx={{ fontSize: 17, fontWeight: 700 }}
-                    className="typography1"
+                  <IconButton
+                    type="button"
+                    sx={{ p: "10px" }}
+                    aria-label="stethoscope"
                   >
-                    {contact.qualification}. {contact.name}
-                  </Typography>
+                    <img src={stethoscope} alt="stethoscope icon" />
+                  </IconButton>
 
-                  <Typography
-                    sx={{ fontSize: 10, fontWeight: 400 }}
-                    className="typography2"
+                  <div className="contactName">
+                    <Typography
+                      sx={{ fontSize: 17, fontWeight: 700 }}
+                      className="typography1"
+                    >
+                      {contact.qualification}. {contact.name}
+                    </Typography>
+
+                    <Typography
+                      sx={{ fontSize: 10, fontWeight: 400 }}
+                      className="typography2"
+                    >
+                      {contact.profession}
+                    </Typography>
+                  </div>
+
+                  <IconButton
+                    type="button"
+                    sx={{ p: "10px" }}
+                    aria-label="arrowBack"
                   >
-                    {contact.profession}
-                  </Typography>
-                </div>
-
-                <IconButton
-                  type="button"
-                  sx={{ p: "10px" }}
-                  aria-label="arrowBack"
-                >
-                  <img src={arrowBack} alt="arrowBack icon" />
+                    <img src={arrowBack} alt="arrowBack icon" />
+                  </IconButton>
                 </IconButton>
               </Paper>
             ))
@@ -145,8 +147,7 @@ function Contacts() {
         </div>
       </div>
 
-      <FabButton path= "/addEditContact" />
-
+      <FabButton path="/addEditContact" />
     </>
   );
 }

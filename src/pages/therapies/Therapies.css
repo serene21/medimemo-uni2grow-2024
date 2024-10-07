@@ -1,3 +1,8 @@
+.therapies-container {
+  flex: 1;
+  overflow-y: auto;
+}
+
 .title {
   color: var(--Primary-text, #444);
   text-align: center;
@@ -17,6 +22,7 @@
   border-radius: var(--Radius-xs, 4px);
   background: var(--Background-card, #f4f4f4);
 }
+
 .therapyName {
   color: var(--Primary-text, #444);
   font-family: "Open Sans";
@@ -25,17 +31,20 @@
   font-weight: 700;
   line-height: 140%;
 }
+
 .typography1 {
   color: var(--Primary-text, #444);
   font-family: "Open Sans";
 
   line-height: 140%;
 }
+
 .addicon {
   width: 60px;
   height: 60px;
   flex-shrink: 0;
 }
+
 .addContainer {
   display: flex;
   margin-top: 25px;

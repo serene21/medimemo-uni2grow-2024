@@ -72,7 +72,7 @@ function Medication() {
   }
 
   return (
-    <>
+    <div className="medications-container">
       <div className="head-container">
         <Avatar src={logo} alt="Avatar" sx={{ width: 75, height: 75 }} />
         <div className="title">
@@ -121,7 +121,7 @@ function Medication() {
             </List>)}
         </div>
       </div>
-    </ >
+    </div>
   );
 }
 
