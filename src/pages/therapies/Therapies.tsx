@@ -1,36 +1,36 @@
-import { IconButton, InputBase, Paper, Typography } from "@mui/material";
+import * as React from "react";
+import { useState, useEffect } from "react";
 import "./Therapies.css";
+import { Typography, IconButton, InputBase, Paper } from "@mui/material";
+import addIcon from "../../assets/images/therapie/add_circle.png";
+import SearchIcon from "../../assets/images/therapie/Icon.png";
+import forwardIcon from "../../assets/images/therapie/arrow_forward_ios.png";
+import { Therapie } from "../../models/Therapie";
 
-import { useEffect, useState } from "react";
-import search from "../../assets/images/therapy/Icon.svg";
-import add from "../../assets/images/therapy/add_circle.svg";
-import arrowBack from "../../assets/images/therapy/arrow_forward_ios.svg";
-import { ITherapy } from "../../models/Therapy";
-
-function Therapies() {
-  const [therapies, setTherapies] = useState<ITherapy[]>([]);
+export default function Therapies() {
+  const [therapies, setTherapies] = useState<Therapie[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-  const getTherapies = async (): Promise<void> => {
-    try {
-      const result = await fetch("http://localhost:3000/therapies");
-      const datas: ITherapy[] = await result.json();
-      setTherapies(datas);
-    } catch (error) {
-      setError("failed to load Therapies");
-    }
-  };
-
   useEffect(() => {
+    const getTherapies = async (): Promise<void> => {
+      try {
+        const response = await fetch("http://localhost:3000/therapies");
+        const data: Therapie[] = await response.json();
+        setTherapies(data);
+      } catch (error) {
+        setError("Erreur lors de la récupération des thérapies:");
+      }
+    };
+
     getTherapies();
   }, []);
 
-  const filteredTherapies = therapies?.filter((therapy: ITherapy) =>
-    therapy.name.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredTherapies = therapies?.filter((therapie: Therapie) =>
+    therapie.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  function emptyTherapies(therapies: ITherapy[]): boolean {
+  function emptyTherapies(therapies: Therapie[]): boolean {
     return therapies.length === 0;
   }
   function isNull(error: string): boolean {
@@ -39,7 +39,10 @@ function Therapies() {
 
   return (
     <>
-      <Typography className="typography">My Therapies</Typography>
+      <Typography className="title" style={{ fontWeight: 700, fontSize: 20 }}>
+        My Therapies
+      </Typography>
+
       <div className="searchContainer">
         <Paper
           component="div"
@@ -56,25 +59,25 @@ function Therapies() {
         >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
-            placeholder="Search therapy"
+            placeholder="Search theraphy"
             inputProps={{ "aria-label": "search therapy" }}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
           <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-            <img src={search} alt="search icon" />
+            <img src={SearchIcon} alt="search icon" />
           </IconButton>
         </Paper>
 
-        <div className="listTherapy">
+        <div className="listContact">
           {!isNull(error) ? (
             <Typography sx={{ color: "red" }}>{error}</Typography>
           ) : emptyTherapies(therapies) ? (
             <Typography>No therapy available</Typography>
           ) : (
-            filteredTherapies.map((therapy: ITherapy) => (
+            filteredTherapies.map((therapie: Therapie) => (
               <Paper
-                key={therapy.id}
+                key={therapie.id}
                 component="form"
                 sx={{
                   p: "2px 4px",
@@ -91,7 +94,7 @@ function Therapies() {
                     sx={{ fontSize: 17, fontWeight: 700 }}
                     className="typography1"
                   >
-                    {therapy.name}
+                    {therapie.name}
                   </Typography>
                 </div>
 
@@ -100,7 +103,7 @@ function Therapies() {
                   sx={{ p: "10px" }}
                   aria-label="arrowBack"
                 >
-                  <img src={arrowBack} alt="arrowBack icon" />
+                  <img src={forwardIcon} alt="arrowBack icon" />
                 </IconButton>
               </Paper>
             ))
@@ -109,10 +112,8 @@ function Therapies() {
       </div>
 
       <div className="addContainer">
-        <img src={add} alt="add icon" />
+        <img src={addIcon} alt="add icon" />
       </div>
     </>
   );
 }
-
-export default Therapies;

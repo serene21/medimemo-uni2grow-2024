@@ -6,15 +6,21 @@ import {
 import { Layout } from "./components/layout/Layout.tsx";
 import Contacts from "./pages/contacts/Contacts.tsx";
 import Login from "./pages/login/Login";
-import { Medications } from "./pages/medications/Medications.tsx";
 import Therapies from "./pages/therapies/Therapies.tsx";
 import AddEditTherapie from "./pages/addEditTherapie/AddEditTherapie.tsx";
+import Medication from "./pages/medications/Medication";
+import Dashboard from "./pages/Dashboard";
 
 const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
   },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
+
   {
     path: "/",
     loader: () => redirect("/login"),
@@ -24,20 +30,20 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/medications",
-        element: <Medications />,
-      },
-      {
         path: "/contacts",
         element: <Contacts />,
+      },
+      {
+        path: "/medications",
+        element: <Medication />,
       },
       {
         path: "/Therapies",
         element: <Therapies />,
       },
       {
-        path:  "/add",
-        element: <AddEditTherapie />
+        path: "/add",
+        element: <AddEditTherapie />,
       },
     ],
   },
