@@ -3,7 +3,7 @@ import "./Contacts.css";
 
 import { useEffect, useState } from "react";
 import search from "../../assets/images/contact/Icon.svg";
-import arrowBack from "../../assets/images/contact/arrow_forward_ios.svg";
+import arrowForward from "../../assets/images/contact/arrow_forward_ios.svg";
 import stethoscope from "../../assets/images/contact/stethoscope.svg";
 import { IContact } from "../../models/Contact";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -139,7 +139,7 @@ function Contacts() {
                     navigate(`/viewContact/${contact.id}`);
                   }}
                 >
-                  <img src={arrowBack} alt="arrowBack icon" />
+                  <img src={arrowForward} alt="arrowBack icon" />
                 </IconButton>
               </Paper>
             ))
