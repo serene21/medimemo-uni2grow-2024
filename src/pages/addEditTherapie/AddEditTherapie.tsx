@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import {
   TextField,
   IconButton,
@@ -12,20 +12,45 @@ import {
 } from "@mui/material";
 import WestIcon from "@mui/icons-material/West";
 import SaveIcon from "@mui/icons-material/Save";
-import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router-dom";
 import "./AddEditTherapie.css";
+import {
+  formError,
+  validationTherapy,
+  ITherapy
+} from "../../utils/Validation";
 
 function AddEditTherapie() {
-  const [therapyName, setTherapyName] = useState("");
+  const [therapy, setTherapy] = useState<ITherapy>({
+    name: "",
+  });
   const [medication, setMedication] = useState("");
   const navigate = useNavigate();
 
+  const [errors, setErrors] = useState<formError>({
+    name: "",
+  });
+
   const handleSave = () => {
-    console.log("Therapy saved:", therapyName, medication);
+    console.log("Therapy saved:", therapy, medication);
     // Logique pour enregistrer la thérapie
   };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const {name, value} = e.target;
+    const error = validationTherapy(name, value);
+    
+    setErrors((prevState) => ({
+        ...prevState,
+        [name]: error || "",
+    }));
+
+    setTherapy((prevState) => ({
+        ...prevState,
+        [name] : value,
+    }));
+  }
 
   const handleBack = () => {
     navigate(-1); // Retourne à la page précédente
@@ -34,8 +59,7 @@ function AddEditTherapie() {
   return (
     <>
       <div className="therapy-page">
-        <IconButton>
-          {" "}
+        <IconButton onClick={handleBack}>
           <WestIcon />
         </IconButton>
         <div className="therapyContent">
@@ -49,9 +73,13 @@ function AddEditTherapie() {
             </Box>
             <TextField
               label="New therapy"
+              name="name"
               className="therapieField"
               sx={{ width: "100%" }}
               margin="normal"
+              onChange={handleChange}
+              error={!!errors.name}
+              helperText={errors.name}
             />
           </Box>
           <Box className="element" sx={{ gap: "20" }}>
@@ -95,21 +123,7 @@ function AddEditTherapie() {
               </div>
             </div>
           </Box>
-          <Box
-            component="section"
-            sx={{
-              p: 2,
-              border: "1px dashed grey",
-              borderRadius: 2,
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "90%",
-              gap: 1,
-            }}
-          >
-            <ControlPointIcon /> ADD ANOTHER MEDICATION
-          </Box>
+
           <Box className="element" sx={{ gap: "20" }}>
             <Box
               sx={{

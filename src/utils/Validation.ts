@@ -14,7 +14,15 @@ export const validationSchema: Record<string, validationType> = {
   password: isNoEmpty,
 };
 
+export const therapySchema: Record<string, validationType> = {
+  name: isNoEmpty,
+}
+
 export interface formError{
+  [key: string]: string;
+}
+
+export interface ITherapy{
   [key: string]: string;
 }
 
@@ -36,6 +44,11 @@ export function validateForm(values: formValues): formError {
 
 export function validationField(fieldName: string, value: string): string {
   const error = validationSchema[fieldName](value);
+  return error;
+}
+
+export function validationTherapy(name: string, value: string): string {
+  const error = therapySchema[name](value);
   return error;
 }
 
