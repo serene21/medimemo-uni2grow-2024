@@ -1,4 +1,4 @@
-import Head from "../../../components/head/Head";
+import Head from "../../components/head/Head";
 
 import "./AddEditContact.css";
 
@@ -6,7 +6,7 @@ import {
   validateContactForm,
   formError,
   validationContactField
-} from "../../../utils/ValidateContact";
+} from "../../utils/ValidateContact";
 
 import { useState, useEffect } from "react";
 
@@ -18,15 +18,15 @@ import {
   Alert
 } from "@mui/material";
 
-import stetoscope from "../../../assets/images/contact/stethoscope.svg";
-import clinicalNote from "../../../assets/images/contact/editContact/clinical_notes.svg";
-import call from "../../../assets/images/contact/editContact/call.svg";
-import mail from "../../../assets/images/contact/editContact/mail.svg";
-import location from "../../../assets/images/contact/editContact/location_on.svg";
-import sticyNote from "../../../assets/images/contact/editContact/sticky_note_2.svg";
-import save from "../../../assets/images/contact/editContact/save.svg";
-import { IContact } from "../../../models/Contact";
-import { formValues } from "../../../utils/Validation";
+import stetoscope from "../../assets/images/contact/stethoscope.svg";
+import clinicalNote from "../../assets/images/contact/editContact/clinical_notes.svg";
+import call from "../../assets/images/contact/editContact/call.svg";
+import mail from "../../assets/images/contact/editContact/mail.svg";
+import location from "../../assets/images/contact/editContact/location_on.svg";
+import sticyNote from "../../assets/images/contact/editContact/sticky_note_2.svg";
+import save from "../../assets/images/contact/editContact/save.svg";
+import { IContact } from "../../models/Contact";
+import { formValues } from "../../utils/Validation";
 import { useNavigate, useParams } from "react-router-dom";
 
 function AddEditContact() {

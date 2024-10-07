@@ -9,7 +9,7 @@ import Dashboard from "./pages/Dashboard.tsx";
 import Login from "./pages/login/Login";
 import { Medications } from "./pages/medications/Medications.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
-import AddEditContact from "./pages/contacts/actions/AddEditContact.tsx";
+import AddEditContact from "./pages/addContact/AddEditContact.tsx";
 import { ViewContact } from "./pages/viewContacts/ViewContact.tsx";
 
 const router = createBrowserRouter([
