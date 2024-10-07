@@ -37,13 +37,7 @@
   overflow-y: auto;
 }
 
-.addContainer {
-  display: flex;
-  margin-top: 25px;
-  justify-content: flex-end;
-  margin-bottom: 15px;
-  flex-shrink: 0;
-}
+
 
 .contactName {
   display: flex;

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { FabButton } from "../../components/fabButton/FabButton";
 import { useState, useEffect } from "react";
 import "./Therapies.css";
 import { Typography, IconButton, InputBase, Paper } from "@mui/material";
@@ -111,9 +112,7 @@ export function Therapies() {
         </div>
       </div>
 
-      <div className="addContainer">
-        <img src={addIcon} alt="add icon" />
-      </div>
+     <FabButton />
     </>
   );
 }
