@@ -11,7 +11,7 @@ import mail from "../../assets/images/contact/editContact/mail.svg";
 import location from "../../assets/images/contact/editContact/location_on.svg";
 import notes from "../../assets/images/viewContact/demography.svg";
 
-import { Typography } from "@mui/material";
+// import { Typography,PopupState } from "@mui/material";
 import { IContact } from "../../models/Contact";
 
 export function ViewContact(): JSX.Element {
@@ -60,7 +60,7 @@ export function ViewContact(): JSX.Element {
     navigate("/contacts");
   };
 
-  const editContact = () => {
+  const handleOnClickMore = (): JSX.Element => {
     navigate(`/addEditContact/${id} `); // Pass the new contact
   };
 
@@ -71,7 +71,7 @@ export function ViewContact(): JSX.Element {
           backButton={true}
           showRightButton={true}
           handleBack={handleOnClickBackButton}
-          handleRightClick={editContact}
+          handleRightClick={handleOnClickMore}
         />
         <Typography
           height={22}
