@@ -1,4 +1,4 @@
-import { IconButton, InputBase, Paper, Typography, Fab } from "@mui/material";
+import { IconButton, InputBase, Paper, Typography } from "@mui/material";
 import "./Contacts.css";
 
 import { useEffect, useState } from "react";
@@ -7,7 +7,7 @@ import add from "../../assets/images/contact/add_circle.svg";
 import arrowBack from "../../assets/images/contact/arrow_forward_ios.svg";
 import stethoscope from "../../assets/images/contact/stethoscope.svg";
 import { IContact } from "../../models/Contact";
-import { useNavigate, useLocation } from "react-router-dom";
+import Header from "../../components/header/Header";
 import { FabButton } from "../../components/fabButton/FabButton";
 
 function Contacts() {
@@ -15,24 +15,13 @@ function Contacts() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-  const navigate = useNavigate();
-
-  const location = useLocation();
-
-  // Function to fetch contacts
   const getContacts = async (): Promise<void> => {
     try {
       const result = await fetch("http://localhost:3000/contacts");
       const datas: IContact[] = await result.json();
-
-      // Check if there's a new contact passed from the Add/Edit form
-      if (location.state?.newContact) {
-        setContacts([location.state.newContact, ...datas]); // Place the new contact at the top
-      } else {
-        setContacts(datas);
-      }
-    } catch (error) {
-      setError("Failed to load contacts");
+      setContacts(datas);
+    } catch {
+      setError("failed to load contacts");
     }
   };
 
@@ -53,61 +42,55 @@ function Contacts() {
     return error === "";
   }
 
+
   return (
     <>
-      <Typography fontWeight={700} fontSize={20} className="typography">
-        Contacts
-      </Typography>
-      <div className="searchContainer">
-        <Paper
-          component="div"
-          sx={{
-            p: "2px 4px",
-            display: "flex",
-            alignItems: "center",
-            width: "90%",
-            borderRadius: 20,
-            backgroundColor: "#FFEFEF",
-            maxHeight: 300,
-            overflowY: "auto"
-          }}
-        >
-          <InputBase
-            sx={{ ml: 1, flex: 1 }}
-            placeholder="Search doctor"
-            inputProps={{ "aria-label": "search doctor" }}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
-            <img src={search} alt="search icon" />
-          </IconButton>
-        </Paper>
+      <Header title="Contacts" />
+      <div className="contacts-container">
+        <div className="searchContainer">
+          <Paper
+            component="div"
+            sx={{
+              p: "2px 4px",
+              display: "flex",
+              alignItems: "center",
+              width: "90%",
+              borderRadius: 20,
+              backgroundColor: "#FFEFEF",
+              maxHeight: 300,
+            }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search doctor"
+              inputProps={{ "aria-label": "search doctor" }}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+              <img src={search} alt="search icon" />
+            </IconButton>
+          </Paper>
 
-        <div className="listContact">
-          {!isNull(error) ? (
-            <Typography sx={{ color: "red" }}>{error}</Typography>
-          ) : emptyContacts(contacts) ? (
-            <Typography>No contact available</Typography>
-          ) : (
-            filteredContacts.map((contact: IContact) => (
-              <Paper
-                key={contact.id}
-                component="form"
-                sx={{
-                  p: "2px 4px",
-                  display: "flex",
-                  width: "90%",
-                  justifyContent: "space-between",
-                  backgroundColor: "#F4F4F4",
-                  paddingTop: 1.5,
-                  paddingBottom: 1.5
-                }}
-              >
-                <IconButton
-                  type="button"
-                  sx={{ p: "10px" }}
-                  aria-label="stethoscope"
+          <div className="listContact">
+            {!isNull(error) ? (
+              <Typography sx={{ color: "red" }}>{error}</Typography>
+            ) : emptyContacts(contacts) ? (
+              <Typography>No contact available</Typography>
+            ) : (
+              filteredContacts.map((contact: IContact) => (
+                <Paper
+                  key={contact.id}
+                  component="form"
+                  sx={{
+                    p: "2px 4px",
+                    display: "flex",
+                    width: "90%",
+                    justifyContent: "space-between",
+                    backgroundColor: "#F4F4F4",
+                    paddingTop: 1.5,
+                    paddingBottom: 1.5,
+                  }}
                 >
                   <IconButton
                     type="button"
@@ -140,13 +123,15 @@ function Contacts() {
                   >
                     <img src={arrowBack} alt="arrowBack icon" />
                   </IconButton>
-                </IconButton>
-              </Paper>
-            ))
-          )}
+                </Paper>
+              ))
+            )}
+          </div>
         </div>
-      </div>
 
+
+        
+      </div>
       <FabButton path="/addEditContact" />
     </>
   );
