@@ -8,6 +8,7 @@ body {
 
 .login-container {
   background-color: #F8F4F4;
+  flex: 1;
 }
 
 .img {
