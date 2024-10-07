@@ -47,7 +47,7 @@ function Head(props: HeadProps): JSX.Element {
         onClick={props.handleRightClick}
         disabled={!props.showRightButton}
       >
-        {(props.showRightButton && props.RightButton) || (
+        {(props.showRightButton || props.RightButton) && (
           <img src={moreI} alt=" more" />
         )}
       </Button>
