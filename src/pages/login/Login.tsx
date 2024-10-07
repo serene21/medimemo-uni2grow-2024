@@ -115,7 +115,7 @@ function Login() {
                   variant="outlined"
                   color="error"
                   value={credentials.username}
-                  sx={{ width: "80%" }}
+                  sx={{ flex: 1 }}
                   onChange={handleChange}
                   name="username"
                   error={!!errors.username}
@@ -131,7 +131,7 @@ function Login() {
                   variant="outlined"
                   color="error"
                   value={credentials.password}
-                  sx={{ width: "80%" }}
+                  sx={{ flex: 1 }}
                   onChange={handleChange}
                   name="password"
                   error={!!errors.password}
@@ -151,7 +151,7 @@ function Login() {
                   backgroundColor: "red",
                   color: "white",
                   fontWeight: "bold",
-                  width: "80%",
+                  flex: 1
                 }}
                 type="submit"
               >
@@ -168,13 +168,9 @@ function Login() {
               </span>
             </div>
             <div className="divor">
-              <span>
-                <hr />
-              </span>
-              <span>or</span>
-              <span>
-                <hr />
-              </span>
+              <div className="divider"></div>
+              or
+              <div className="divider"></div>
             </div>
 
             <div className="divimage">

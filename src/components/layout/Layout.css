@@ -1,14 +1,13 @@
 .container {
-  width: 390px;
   height: 100vh;
   position: relative;
+  flex: 1;
 }
 
 .panel {
   display: flex;
   flex-direction: column;
-
-  width: 100%;
+  margin: 0px 10px;
   height: calc(100vh - 100px);
   position: relative;
 }

@@ -53,7 +53,7 @@ function Contacts() {
               p: "2px 4px",
               display: "flex",
               alignItems: "center",
-              width: "100%",
+              width: "90%",
               borderRadius: 20,
               backgroundColor: "#FFEFEF",
               maxHeight: 300,
