@@ -56,9 +56,9 @@ function ContactMoreComponent(props: IMoreContact): JSX.Element {
 
   return (
     <>
-      <Button sx={{ color: "black" }} onClick={handleClick}>
+      <div onClick={handleClick}>
         <MoreVert />
-      </Button>
+      </div>
       <Menu
         anchorEl={anchorEl}
         open={open}

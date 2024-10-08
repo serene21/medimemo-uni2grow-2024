@@ -21,14 +21,27 @@ function Contacts() {
   const getContacts = async (): Promise<void> => {
     try {
       const result = await fetch("http://localhost:3000/contacts");
-      const datas: IContact[] = await result.json();
-      if (location.state?.newContact) {
-        setContacts([location.state.newContact, ...datas]); // Place the new contact at the top
+      const fetchedContacts: IContact[] = await result.json();
+  
+      // Check if there's a new contact passed through location.state
+      if (location.state && location.state.newContact) {
+        const newContact = location.state.newContact;
+  
+        // Remove the new contact from the fetched list (if it exists)
+        const updatedContacts = fetchedContacts.filter(contact => contact.id !== newContact.id);
+  
+        // Add the new contact at the top of the list
+        updatedContacts.unshift(newContact);
+  
+        // Update the state with the updated list
+        setContacts(updatedContacts);
       } else {
-        setContacts(datas);
+        // If no new contact, just set the fetched contacts
+        setContacts(fetchedContacts);
       }
+  
     } catch {
-      setError("failed to load contacts");
+      setError("Failed to load contacts");
     }
   };
 
