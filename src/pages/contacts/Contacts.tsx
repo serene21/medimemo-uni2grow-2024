@@ -3,36 +3,32 @@ import "./Contacts.css";
 
 import { useEffect, useState } from "react";
 import search from "../../assets/images/contact/Icon.svg";
-import arrowForward from "../../assets/images/contact/arrow_forward_ios.svg";
+import arrowFoward from "../../assets/images/contact/arrow_forward_ios.svg";
 import stethoscope from "../../assets/images/contact/stethoscope.svg";
 import { IContact } from "../../models/Contact";
-import { useNavigate, useLocation } from "react-router-dom";
-import { FabButton } from "../../components/fabButton/FabButton";
 import Header from "../../components/header/Header";
+import { FabButton } from "../../components/fabButton/FabButton";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Contacts() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const [contacts, setContacts] = useState<IContact[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [error, setError] = useState<string>("");
 
-  const navigate = useNavigate();
-
-  const location = useLocation();
-
-  // Function to fetch contacts
   const getContacts = async (): Promise<void> => {
     try {
       const result = await fetch("http://localhost:3000/contacts");
       const datas: IContact[] = await result.json();
-
-      // Check if there's a new contact passed from the Add/Edit form
       if (location.state?.newContact) {
         setContacts([location.state.newContact, ...datas]); // Place the new contact at the top
       } else {
         setContacts(datas);
       }
-    } catch (error) {
-      setError("Failed to load contacts");
+    } catch {
+      setError("failed to load contacts");
     }
   };
 
@@ -134,7 +130,7 @@ function Contacts() {
                       navigate(`/viewContact/${contact.id}`);
                     }}
                   >
-                    <img src={arrowForward} alt="arrowBack icon" />
+                    <img src={arrowFoward} alt="arrowFoward icon" />
                   </IconButton>
                 </Paper>
               ))

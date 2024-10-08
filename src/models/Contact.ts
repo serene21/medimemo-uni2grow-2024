@@ -1,6 +1,6 @@
 
 export interface IContact {
-    id?: number;
+    id?: string;
     name: string;
     notes: string;
     qualification?: string;

@@ -6,6 +6,12 @@
   gap: 20px;
   width: 100%;
 }
+
+.addContact-Container{
+  flex: 1;
+  overflow-y: auto;
+}
+
 form {
   height: 100%;
 }
@@ -28,7 +34,8 @@ form {
 
 .button {
   display: flex;
-  align-items: flex-end;
-  width: 370px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   gap: 20px;
 }

@@ -27,14 +27,14 @@
   ],
   "therapies": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Therapy 1",
       "userId": 1,
       "contact": 2,
       "notes": "this is the notes"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Therapy 2",
       "userId": 1,
       "contact": 2,
@@ -43,30 +43,10 @@
   ],
   "contacts": [
     {
-      "id": "1",
-      "name": "Sarah Davis",
-      "qualification": "Dr",
-      "phone": "+237 656585542",
-      "email": "davis@gmail.com",
-      "address": "Dschang, Cameroun",
-      "profession": "Pediatrician",
-      "notes": ""
-    },
-    {
-      "id": "2",
-      "name": "Laura Thompson",
-      "qualification": "Dr",
-      "phone": "+237 674772917",
-      "email": "laura@gmail.com",
-      "address": "Douala, Cameroun",
-      "profession": "Ophthalmologist",
-      "notes": ""
-    },
-    {
       "id": "3",
       "name": "John Smith",
       "qualification": "Dr",
-      "phone": "+237 677345741",
+      "phone": " 677345741",
       "email": "john@gmail.com",
       "address": "Yaounde, Cameroun",
       "profession": "Cardiologist",
@@ -76,101 +56,11 @@
       "id": "4",
       "name": "John Smith",
       "qualification": "Dr",
-      "phone": "+237 677345741",
+      "phone": " 677345741",
       "email": "john@gmail.com",
       "address": "Yaounde, Cameroun",
       "profession": "Cardiologist",
       "notes": ""
-    },
-    {
-      "id": "5",
-      "name": "John Smith",
-      "qualification": "Dr",
-      "phone": "+237 677345741",
-      "email": "john@gmail.com",
-      "address": "Yaounde, Cameroun",
-      "profession": "Cardiologist",
-      "notes": ""
-    },
-    {
-      "id": "7839",
-      "name": "Nkemenyi hema ",
-      "notes": "_i_iikiuèuuè",
-      "qualification": "",
-      "profession": "pediatre",
-      "phone": "2094830",
-      "email": "hemaserenankemenyi@gmail.com",
-      "address": "kkkkjhiuehfiu",
-      "adress": "j"
-    },
-    {
-      "id": "497e",
-      "name": "Nkemenyi hema ",
-      "notes": "",
-      "qualification": "",
-      "profession": "pediatre",
-      "phone": "2094830",
-      "email": "hemaserenankemenyi@gmail.com",
-      "address": "kkkkjhiuehfiu",
-      "adress": "j"
-    },
-    {
-      "id": "9881",
-      "name": "hkhkhj",
-      "notes": "jhjkn",
-      "qualification": "",
-      "profession": "hjhhklj",
-      "phone": "123445566",
-      "email": "hjkkl@gmail.com",
-      "address": "ijjjo"
-    },
-    {
-      "id": "4da7",
-      "name": "Nkemenyi hema ",
-      "notes": "_i_iikiuèuuè",
-      "qualification": "",
-      "profession": "",
-      "phone": "",
-      "email": "hemaserenankemenyi@gmail.com",
-      "address": ""
-    },
-    {
-      "id": "8fc5",
-      "name": "Nkemenyi hema ",
-      "notes": "k,nlkijl",
-      "qualification": "",
-      "profession": "nbnhb,k",
-      "phone": "24344",
-      "email": "hemaserenankemenyi@gmail.com",
-      "address": "kopkpoj",
-      "adress": "v"
-    },
-    {
-      "id": "380c",
-      "name": "lkemf",
-      "notes": "klejgieo",
-      "qualification": "Dr",
-      "profession": "nk",
-      "phone": "1231",
-      "address": "ilosufj"
-    },
-    {
-      "id": "9b76",
-      "name": "hnjjkh",
-      "notes": "",
-      "qualification": "Dr",
-      "profession": "",
-      "phone": "",
-      "address": ""
-    },
-    {
-      "id": "fb97",
-      "name": "lmk,m",
-      "notes": "",
-      "qualification": "Dr",
-      "profession": ";,knkl",
-      "phone": "",
-      "address": ""
     },
     {
       "id": "4e90",
@@ -189,24 +79,6 @@
       "profession": "gynachologist",
       "phone": "6",
       "address": "Yaounde"
-    },
-    {
-      "id": "b179",
-      "name": "lk,x;kz",
-      "notes": "l^p^pô",
-      "qualification": "Dr",
-      "profession": "klsjc",
-      "phone": "218774231",
-      "address": "ldknv"
-    },
-    {
-      "id": "be5c",
-      "name": "jnhjk",
-      "notes": "k;ldcozkekfpe",
-      "qualification": "Dr",
-      "profession": "mxlc,km",
-      "phone": "11111",
-      "address": "lqmsdcjk"
     },
     {
       "id": "f77e",
@@ -229,14 +101,14 @@
       "address": "Amerique"
     },
     {
-      "id": "2453",
       "name": "Jordan Le Grand",
-      "notes": "je dsuis trop bon ne viens pas mal avec moi ohhh",
+      "notes": "je dsuis trop bon ne viens pas mal avec moi ohhh \n",
       "qualification": "Dr",
       "profession": "Neurologist",
       "phone": "3000009",
       "email": "jordan@gmail.com",
-      "address": "Canada"
+      "address": "Canada",
+      "id": "2453"
     },
     {
       "id": "5a5a",
@@ -247,16 +119,6 @@
       "phone": "213324245325",
       "email": "hemenyi@gmail.com",
       "address": "seoul"
-    },
-    {
-      "id": "cd03",
-      "name": "k,sqdjcm nnk,smjcok",
-      "notes": "dlsckoek ejol dl ikkdzôlkdz ldjkkzldzd lkkozepifz^z kihjzkdz zuuzd jdiuezdh duozidz uizydçoza uzydzaoajdpaoi iu)zodla àoapiddâpolkz aidup)^zodslazbaiuàaiozzkosv  duapikzasvziozaaps ozziuszo^spaasouaasausoiaezadjiozajdzjdzoiajdaijdoizjdzajdzajdzajdzajdzadijzajdzjidiizjdzjdzijadaojdajzidazdizoajdjzdjzadiaozduadjazdijazidozahodozhdzaoihdazduzaduadzaduzaduadazhdhuazhduhudhuzhudzuiadzadazdytgzahszdgaydtuzaudyazujzhuigy",
-      "qualification": "Dr",
-      "profession": ":kcjlsl",
-      "phone": "231",
-      "email": "hjkkl@gmail.com",
-      "address": "kd,zjaipojdz"
     },
     {
       "id": "d93b",
@@ -347,6 +209,26 @@
       "phone": "+237 656585542",
       "email": "davis@gmail.com",
       "address": "Dschang, Cameroun"
+    },
+    {
+      "id": "7a18",
+      "name": "Nkemenyi hema ",
+      "notes": "d;k,kmlgsml ddfmoe lmfc ,df sf^p cdsecf klj ,k, ;kjpkfs :lokxd fes;lmk,vs ",
+      "qualification": "Dr",
+      "profession": "pediatre",
+      "phone": "0458493",
+      "email": "lkdcnjd@gmail.com",
+      "address": "France"
+    },
+    {
+      "id": "62ad",
+      "name": "Laura Thompson",
+      "notes": "djkzaaopdi jdhzaaiu idzadop zodicpjkzaoodi nkzpddzk dzdiojzajd dlizod zakdz ddzdaz ndzadopzdn zaa",
+      "qualification": "Dr",
+      "profession": "Ophthalmologist",
+      "phone": "+237 674772917",
+      "email": "laura@gmail.com",
+      "address": "Douala, Cameroun"
     }
   ],
   "prescriptions": [
@@ -387,7 +269,7 @@
       "therapyName": "Therapy 1",
       "time": "12h30PM",
       "date": "2024-09-20",
-      "taken": false,
+      "taken": true,
       "therapy": 1,
       "prescriptionTime": 1
     },

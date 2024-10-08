@@ -1,4 +1,3 @@
-import Head from "../../components/head/Head";
 
 import "./AddEditContact.css";
 
@@ -28,6 +27,7 @@ import save from "../../assets/images/contact/editContact/save.svg";
 import { IContact } from "../../models/Contact";
 import { formValues } from "../../utils/Validation";
 import { useNavigate, useParams } from "react-router-dom";
+import Header from "../../components/header/Header";
 
 function AddEditContact() {
   const navigate = useNavigate();
@@ -137,15 +137,27 @@ function AddEditContact() {
         email: contact.email,
         address: contact.address
       };
+      let response;
 
-      // If validation passes, make the API call to submit the data
-      const response = await fetch("http://localhost:3000/contacts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(newContact)
-      });
+      // If editing make a PUT request
+      if (isEditing) {
+        response = await fetch(`http://localhost:3000/contacts/${id}`, {
+          method: "PUT", // Use PUT to update the existing contact
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(newContact)
+        });
+      } else {
+        // else, we're creating a new contact
+        response = await fetch("http://localhost:3000/contacts", {
+          method: "POST", // Use POST to create a new contact
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(newContact)
+        });
+      }
 
       if (response.ok) {
         // clear the form
@@ -168,16 +180,17 @@ function AddEditContact() {
     }
   };
 
-
   return (
     <>
-      <Head
-        backButton={true}
-        title="New Doctor"
-        handleBack={handleOnClickBackButton}
-        showRightButton={false}
-      />
-      <form onSubmit={handleSubmit}>
+    <Header
+          showBackButton={true}
+          title="New Doctor"
+          onBackButtonClick={handleOnClickBackButton}
+          showRightButton={false}
+        />
+     <div className="addContact-Container">
+     <form onSubmit={handleSubmit}>
+        
         <div className="containPanel">
           <div className="panelContact">
             <div className="addPanel">
@@ -341,6 +354,7 @@ function AddEditContact() {
           </Button>
         </div>
       </form>
+     </div>
     </>
   );
 }
