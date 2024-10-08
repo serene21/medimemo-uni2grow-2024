@@ -1,9 +1,0 @@
-.containHead {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 70px;
-  width: 390px;
-  max-height: 60px;
-}

@@ -1,4 +1,3 @@
-import Head from "../../../components/head/Head";
 
 import "./AddEditContact.css";
 
@@ -6,7 +5,7 @@ import {
   validateContactForm,
   formError,
   validationContactField
-} from "../../../utils/ValidateContact";
+} from "../../utils/ValidateContact";
 
 import { useState } from "react";
 
@@ -18,16 +17,17 @@ import {
   Alert
 } from "@mui/material";
 
-import stetoscope from "../../../assets/images/contact/stethoscope.svg";
-import clinicalNote from "../../../assets/images/contact/editContact/clinical_notes.svg";
-import call from "../../../assets/images/contact/editContact/call.svg";
-import mail from "../../../assets/images/contact/editContact/mail.svg";
-import location from "../../../assets/images/contact/editContact/location_on.svg";
-import sticyNote from "../../../assets/images/contact/editContact/sticky_note_2.svg";
-import save from "../../../assets/images/contact/editContact/save.svg";
-import { IContact } from "../../../models/Contact";
-import { formValues } from "../../../utils/Validation";
+import stetoscope from "../../assets/images/contact/stethoscope.svg";
+import clinicalNote from "../../assets/images/contact/editContact/clinical_notes.svg";
+import call from "../../assets/images/contact/editContact/call.svg";
+import mail from "../../assets/images/contact/editContact/mail.svg";
+import location from "../../assets/images/contact/editContact/location_on.svg";
+import sticyNote from "../../assets/images/contact/editContact/sticky_note_2.svg";
+import save from "../../assets/images/contact/editContact/save.svg";
+import { IContact } from "../../models/Contact";
+import { formValues } from "../../utils/Validation";
 import { useNavigate } from "react-router-dom";
+import Header from "../../components/header/Header";
 
 function AddEditContact() {
   const navigate = useNavigate();
@@ -98,7 +98,7 @@ function AddEditContact() {
     }
 
     try {
-      const titre : string = "Dr"
+      const titre: string = "Dr";
       const newContact: IContact = {
         name: contact.name,
         notes: contact.notes,
@@ -140,11 +140,15 @@ function AddEditContact() {
 
   const onClickBackArrow = () => {
     navigate("/contacts");
-  }
+  };
 
   return (
     <>
-      <Head backButton={true} title="New Doctor"  handleBack={onClickBackArrow}  />
+      <Header
+        showBackButton={true}
+        title="New Doctor"
+        onBackButtonClick={onClickBackArrow}
+      />
       <form onSubmit={handleSubmit}>
         <div className="containPanel">
           <div className="panelContact">
@@ -293,22 +297,20 @@ function AddEditContact() {
               />
             </div>
           </div>
-
-          
         </div>
         <div className="button">
-            <Button
-              type="submit"
-              fullWidth
-              sx={{ background: "#f00" }}
-              variant="contained"
-            >
-              <img src={save} />
-              <Typography paddingLeft={1} paddingTop={0.5}>
-                Save
-              </Typography>
-            </Button>
-          </div>
+          <Button
+            type="submit"
+            fullWidth
+            sx={{ background: "#f00" }}
+            variant="contained"
+          >
+            <img src={save} />
+            <Typography paddingLeft={1} paddingTop={0.5}>
+              Save
+            </Typography>
+          </Button>
+        </div>
       </form>
     </>
   );

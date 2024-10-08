@@ -5,13 +5,11 @@ import {
 } from "react-router-dom";
 import { Layout } from "./components/layout/Layout.tsx";
 import Contacts from "./pages/contacts/Contacts.tsx";
-import AddEditContact from "./pages/contacts/actions/AddEditContact.tsx";
+import AddEditContact from "./pages/addContact/AddEditContact.tsx";
 import Dashboard from "./pages/Dashboard.tsx";
 import Login from "./pages/login/Login";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
 import Medication from "./pages/medications/Medication";
-
-
 
 const router = createBrowserRouter([
   {
@@ -20,7 +18,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <Dashboard />
   },
 
   {
@@ -35,7 +33,7 @@ const router = createBrowserRouter([
         path: "/contacts",
         element: <Contacts />
       },
-      
+
       {
         path: "/dashboard",
         element: <Dashboard />
@@ -46,7 +44,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/medications",
-        element: <Medication />,
+        element: <Medication />
       },
       {
         path: "/Therapies",
