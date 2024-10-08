@@ -2,15 +2,15 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./ViewContact.css";
 
-import ContactMoreComponent from "../../components/contactMorecOPtion/ContactMoreComponent";
+import ContactMoreComponent from "../../components/contactMoreOption/ContactMoreComponent";
 
-import wPhone from "../../assets/images/viewContact/wcall.svg";
-import wMail from "../../assets/images/viewContact/wmail.svg";
-import wLocation from "../../assets/images/viewContact/wlocation_on.svg";
-import phone from "../../assets/images/contact/editContact/call.svg";
-import mail from "../../assets/images/contact/editContact/mail.svg";
-import location from "../../assets/images/contact/editContact/location_on.svg";
-import notes from "../../assets/images/viewContact/demography.svg";
+import wPhone from "../../assets/images/viewContact/white_call.svg";
+import wMail from "../../assets/images/viewContact/white_mail.svg";
+import wLocation from "../../assets/images/viewContact/white_location_on.svg";
+import phone from "../../assets/images/contact/call.svg";
+import mail from "../../assets/images/contact/mail.svg";
+import location from "../../assets/images/contact/location_on.svg";
+import notes from "../../assets/images/contact/demography.svg";
 
 import { Typography } from "@mui/material";
 import { IContact } from "../../models/Contact";

@@ -71,25 +71,13 @@
   ],
   "contacts": [
     {
-      "id": "1",
-      "name": "Sarah Davis",
-      "qualification": "Dr",
-      "profession" : "ophtalmologe",
-      "phone": "+237 656585542",
-      "email": "davis@gmail.com",
-      "address": "Dschang, Cameroun",
-      "profession": "Pediatrician",
-      "notes": ""
-    },
-    {
       "id": "2",
       "name": "Laura Thompson",
       "qualification": "Dr",
-      "profession" : "ophtalmologe",
+      "profession": "Ophthalmologist",
       "phone": "+237 674772917",
       "email": "laura@gmail.com",
       "address": "Douala, Cameroun",
-      "profession": "Ophthalmologist",
       "notes": ""
     },
     {

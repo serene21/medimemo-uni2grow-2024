@@ -8,8 +8,11 @@ import arrowBack from "../../assets/images/contact/arrow_forward_ios.svg";
 import stethoscope from "../../assets/images/contact/stethoscope.svg";
 import { IContact } from "../../models/Contact";
 import Header from "../../components/header/Header";
+import { useNavigate } from "react-router-dom";
 
 function Contacts() {
+
+  const navigate = useNavigate();
   const [contacts, setContacts] = useState<IContact[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -119,6 +122,7 @@ function Contacts() {
                     type="button"
                     sx={{ p: "10px" }}
                     aria-label="arrowBack"
+                    onClick={() => navigate(`/viewContact/${contact.id}`)}
                   >
                     <img src={arrowBack} alt="arrowBack icon" />
                   </IconButton>
