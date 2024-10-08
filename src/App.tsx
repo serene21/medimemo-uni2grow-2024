@@ -4,10 +4,11 @@ import {
   RouterProvider
 } from "react-router-dom";
 import { Layout } from "./components/layout/Layout.tsx";
-import {Contact} from "./pages/contact/Contact.tsx";
+import Contacts from "./pages/contacts/Contacts.tsx";
 import Login from "./pages/login/Login";
-import { Medications } from "./pages/medications/Medications.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
+import Medication from "./pages/medications/Medication";
+import Dashboard from "./pages/Dashboard";
 import { ViewContact } from "./pages/viewContact/ViewContact.tsx";
 
 const router = createBrowserRouter([
@@ -16,23 +17,29 @@ const router = createBrowserRouter([
     element: <Login />
   },
   {
+    path: "/dashboard",
+    element: <Dashboard />,
+  },
+
+  {
     path: "/",
     loader: () => redirect("/login")
   },
   {
     element: <Layout />,
     children: [
+      
       {
-        path: "/medications",
-        element: <Medications />
-      },
-      {
-        path: "/contact",
-        element: <Contact />
+        path: "/contacts",
+        element: <Contacts />
       },
       {
         path: "/viewContact/:id",
         element: <ViewContact />
+      },
+      {
+        path: "/medications",
+        element: <Medication />,
       },
       {
         path: "/Therapies",

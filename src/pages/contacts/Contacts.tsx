@@ -7,6 +7,7 @@ import add from "../../assets/images/contact/add_circle.svg";
 import arrowBack from "../../assets/images/contact/arrow_forward_ios.svg";
 import stethoscope from "../../assets/images/contact/stethoscope.svg";
 import { IContact } from "../../models/Contact";
+import Header from "../../components/header/Header";
 
 function Contacts() {
   const [contacts, setContacts] = useState<IContact[]>([]);
@@ -18,7 +19,7 @@ function Contacts() {
       const result = await fetch("http://localhost:3000/contacts");
       const datas: IContact[] = await result.json();
       setContacts(datas);
-    } catch (error) {
+    } catch {
       setError("failed to load contacts");
     }
   };
@@ -43,8 +44,8 @@ function Contacts() {
 
   return (
     <>
-      
-        <Typography className="typography">Contacts</Typography>
+      <Header title="Contacts" />
+      <div className="contacts-container">
         <div className="searchContainer">
           <Paper
             component="div"
@@ -56,7 +57,6 @@ function Contacts() {
               borderRadius: 20,
               backgroundColor: "#FFEFEF",
               maxHeight: 300,
-              overflowY: "auto",
             }}
           >
             <InputBase
@@ -127,10 +127,11 @@ function Contacts() {
             )}
           </div>
         </div>
-      
 
-      <div className="addContainer">
-        <img src={add} alt="add icon" />
+
+        <div className="addContainer">
+          <img src={add} alt="add icon" />
+        </div>
       </div>
     </>
   );
