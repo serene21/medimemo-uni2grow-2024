@@ -1,14 +1,13 @@
 import React, { ChangeEvent, useState, useEffect, FormEvent } from "react";
 import {
   TextField,
-  IconButton,
   Button,
+  Alert,
   Box,
   MenuItem,
   Select,
   InputLabel,
   FormControl,
-  Typography,
   SelectChangeEvent,
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
@@ -21,7 +20,6 @@ import {
   ITherapy,
   therapyForm,
   formValues,
-  isNoEmpty,
 } from "../../utils/Validation";
 import Header from "../../components/header/Header";
 import { IMedecine } from "../../models/Medecine";
@@ -33,13 +31,23 @@ import InputAdornment from "@mui/material/InputAdornment";
 function AddEditTherapie() {
   const [therapies, setTherapies] = useState<formValues>({
     name: "",
+    notes: "",
   });
   const [medicationError, setMedicationError] = useState<string>("");
   const [medicineSelected, setMedicineSelected] = useState<string[]>([]);
   const [medicines, setMedicines] = useState<IMedecine[]>([]);
   const [contacts, setContacts] = useState<IContact[]>([]);
   const [doctorError, setDoctorError] = useState<string>("");
-  const [doctors, setDoctors] = useState<string>("");
+  const [doctors, setDoctors] = useState<IContact>({
+    id: 0,
+    name: "",
+    notes: "",
+    qualification: "",
+    profession: "",
+    phone: "",
+    email: "",
+    address: "",
+  });
   const [addError, setAddError] = useState<string>("");
 
   const navigate = useNavigate();
@@ -100,11 +108,16 @@ function AddEditTherapie() {
   };
 
   const handleDoctor = (e: SelectChangeEvent<string>): void => {
-    setDoctors(e.target.value);
+    const doc = contacts.find((contact) => contact.id === parseInt(e.target.value))
+    console.log(doc);
+    if(doc){
+      setDoctors(doc);
+    }
     setErrors((prevState) => ({
       ...prevState,
       doctor: "",
     }));
+    console.log(doctors);
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -113,15 +126,16 @@ function AddEditTherapie() {
   
     if (Object.keys(validationErrors).length === 0) {
       
-      if (medicineSelected.length !== 0 && doctors) {
+      if (medicineSelected.length !== 0 && doctors && doctors.id !== 0) {
         try{
           const newTherapy:ITherapy = {
-            id:2,
+            id:3,
             name: therapies.name,
             userId: 1,
-            contact: 2,
-            notes : "this is the notes"
+            contact: doctors.id,
+            notes : therapies.notes
           };
+
           const result = await fetch("http://localhost:80/therapies",{
             method: 'POST',
             headers: {
@@ -139,7 +153,6 @@ function AddEditTherapie() {
         } 
         
       } else {
-        console.log("l'erreur");
         setErrors((prevState) => ({
           ...prevState,
           doctor: "This field is required",
@@ -153,6 +166,9 @@ function AddEditTherapie() {
   return (
     <>
       <form className="therapy-page" onSubmit={handleSubmit}>
+
+        {addError && (<Alert severity="error">{addError}</Alert>)}
+
         <Header title="" showBackButton onBackButtonClick={handleBack} />
 
         <div className="therapyContent">
@@ -271,16 +287,18 @@ function AddEditTherapie() {
                 <FormControl fullWidth margin="normal">
                   <InputLabel>Select a doctor</InputLabel>
                   <Select
-                    value={doctors}
+                    value={String(doctors.id)}
                     name="doctor"
                     label="Select a doctor"
                     onChange={handleDoctor}
                     error={!!errors.doctor}
                   >
+                    <MenuItem key={0} value={0}>
+                    </MenuItem>
                     {contacts.length !== 0 ? (
                       contacts.map((item) => {
                         return (
-                          <MenuItem key={item.id} value={item.name}>
+                          <MenuItem key={item.id} value={item.id}>
                             {item.name}
                           </MenuItem>
                         );
@@ -309,7 +327,9 @@ function AddEditTherapie() {
                   className="therapieField"
                   sx={{ width: "100%", height: "83px" }}
                   margin="normal"
+                  name = "notes"
                   label="Write your notes here"
+                  onChange = {handleChange}
                 />
               </Box>
             </>
