@@ -30,21 +30,27 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       {
-        path: "/contacts",
+        path: "contacts",
         element: <Contacts />,
       },
       {
-        path: "/medications",
+        path: "medications",
         element: <Medication />,
       },
       {
-        path: "/Therapies",
-        element: <Therapies />,
+        path: "Therapies",
+        children:[
+          {
+            path: "",
+            element: <Therapies />,
+          },
+          {
+            path: "add",
+            element: <AddEditTherapie />,
+          }
+        ],
       },
-      {
-        path: "/add",
-        element: <AddEditTherapie />,
-      },
+      
     ],
   },
 ]);

@@ -96,10 +96,12 @@ function AddEditTherapie() {
     }));
   };
 
-  const handleSelect = (e:SelectChangeEvent<string>): void =>{
-    const existMedicine = medicineSelected.filter((item)=> item === e.target.value);
-    if(existMedicine.length === 0){
-      setMedicineSelected([...medicineSelected, e.target.value])
+  const handleSelect = (e: SelectChangeEvent<string>): void => {
+    const existMedicine = medicineSelected.filter(
+      (item) => item === e.target.value
+    );
+    if (existMedicine.length === 0) {
+      setMedicineSelected([...medicineSelected, e.target.value]);
     }
   };
 
@@ -108,9 +110,11 @@ function AddEditTherapie() {
   };
 
   const handleDoctor = (e: SelectChangeEvent<string>): void => {
-    const doc = contacts.find((contact) => contact.id === parseInt(e.target.value))
+    const doc = contacts.find(
+      (contact) => contact.id === parseInt(e.target.value)
+    );
     console.log(doc);
-    if(doc){
+    if (doc) {
       setDoctors(doc);
     }
     setErrors((prevState) => ({
@@ -123,35 +127,33 @@ function AddEditTherapie() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     const validationErrors = therapyForm(therapies);
-  
+
     if (Object.keys(validationErrors).length === 0) {
-      
       if (medicineSelected.length !== 0 && doctors && doctors.id !== 0) {
-        try{
-          const newTherapy:ITherapy = {
-            id:3,
+        try {
+          const newTherapy: ITherapy = {
+            id: 3,
             name: therapies.name,
             userId: 1,
             contact: doctors.id,
-            notes : therapies.notes
+            notes: therapies.notes,
           };
 
-          const result = await fetch("http://localhost:80/therapies",{
-            method: 'POST',
+          const result = await fetch("http://localhost:80/therapies", {
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
-  
+
             body: JSON.stringify(newTherapy),
           });
-          if(!result.ok){
+          if (!result.ok) {
             setAddError("Add therapy failed");
           }
           handleBack();
         } catch {
           setAddError("Add  therapy failed");
-        } 
-        
+        }
       } else {
         setErrors((prevState) => ({
           ...prevState,
@@ -166,8 +168,7 @@ function AddEditTherapie() {
   return (
     <>
       <form className="therapy-page" onSubmit={handleSubmit}>
-
-        {addError && (<Alert severity="error">{addError}</Alert>)}
+        {addError && <Alert severity="error">{addError}</Alert>}
 
         <Header title="" showBackButton onBackButtonClick={handleBack} />
 
@@ -257,8 +258,7 @@ function AddEditTherapie() {
                   <InputLabel>Search here your medecine</InputLabel>
                   <Select
                     value=""
-                    onChange={handleSelect
-                    }
+                    onChange={handleSelect}
                     label="Select one or more medicines"
                   >
                     {!medicationError ? (
@@ -293,8 +293,7 @@ function AddEditTherapie() {
                     onChange={handleDoctor}
                     error={!!errors.doctor}
                   >
-                    <MenuItem key={0} value={0}>
-                    </MenuItem>
+                    <MenuItem key={0} value={0}></MenuItem>
                     {contacts.length !== 0 ? (
                       contacts.map((item) => {
                         return (
@@ -327,9 +326,9 @@ function AddEditTherapie() {
                   className="therapieField"
                   sx={{ width: "100%", height: "83px" }}
                   margin="normal"
-                  name = "notes"
+                  name="notes"
                   label="Write your notes here"
-                  onChange = {handleChange}
+                  onChange={handleChange}
                 />
               </Box>
             </>
@@ -352,13 +351,17 @@ function AddEditTherapie() {
                   }
                   label="Select one or more medicines"
                 >
-                  {medicines.map((item) => {
-                    return (
-                      <MenuItem key={item.id} value={item.name}>
-                        {item.name}
-                      </MenuItem>
-                    );
-                  })}
+                  {!medicationError ? (
+                    medicines.map((item) => {
+                      return (
+                        <MenuItem key={item.id} value={item.name}>
+                          {item.name}
+                        </MenuItem>
+                      );
+                    })
+                  ) : (
+                    <MenuItem>{medicationError}</MenuItem>
+                  )}
                 </Select>
               </FormControl>
             </Box>
