@@ -6,8 +6,10 @@ import SearchIcon from "../../assets/images/therapie/Icon.png";
 import forwardIcon from "../../assets/images/therapie/arrow_forward_ios.png";
 import { Therapie } from "../../models/Therapie";
 import Header from "../../components/header/Header";
+import { useNavigate } from "react-router-dom";
 
 export default function Therapies() {
+  const navigate = useNavigate();
   const [therapies, setTherapies] = useState<Therapie[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [error, setError] = useState<string>("");
@@ -35,6 +37,10 @@ export default function Therapies() {
   }
   function isNull(error: string): boolean {
     return error === "";
+  }
+
+  const handleClick = () => {
+    navigate("add");
   }
 
   return (
@@ -108,7 +114,7 @@ export default function Therapies() {
           </div>
         </div>
 
-        <div className="addContainer">
+        <div className="addContainer" onClick={handleClick}>
           <img src={addIcon} alt="add icon" />
         </div>
       </div>
