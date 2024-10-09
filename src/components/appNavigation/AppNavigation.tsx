@@ -1,8 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./AppNavigation.css";
-import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { IconButton, Link, Typography } from "@mui/material";
+import { IconButton, Typography, Button } from "@mui/material";
 import { ItemNavigation, dataItem } from "../../utils/navigationData";
 
 export function AppNavigation() {
@@ -16,30 +15,40 @@ export function AppNavigation() {
 
   return (
     <div className="menuBot">
-      {dataItem.map((item: ItemNavigation) => {
-        const isActive = activepage.startsWith(item.path);
-        return (
-          <div
-            key={item.path}
-            className="menuBottomItem"
-            onClick={() => setActivePage(item.path)}
-          >
-            <div className={isActive ? "iconClickMiddle" : "iconClick"}>
-              <IconButton component={Link} href={item.path}>
-                <img
-                  src={isActive ? item.activeIcon : item.icon}
-                  alt="Home Health"
-                />
-              </IconButton>
-            </div>
-            <Typography
-              className={isActive ? "menuBotIconName-over" : "menuBotIconName"}
+      <div className="sub-menuBot">
+        {dataItem.map((item: ItemNavigation) => (
+          <Button variant="text" color="inherit" sx={{ textTransform: "capitalize" }} href={item.path} key={item.path} >
+            <div
+              key={item.path}
+              className="menuBottomItem"
+              onClick={() => setActivePage(item.path)}
             >
-              {item.name}
-            </Typography>
-          </div>
-        );
-      })}
+              <div
+                className={
+                  activepage === item.path ? "iconClickMiddle" : "iconClick"
+                }
+              >
+                <IconButton>
+                  <img
+                    src={activepage === item.path ? item.activeIcon : item.icon}
+                    alt="Home Health"
+                  />
+                </IconButton>
+              </div>
+              <Typography
+                className={
+                  activepage === item.path
+                    ? "menuBotIconName-over"
+                    : "menuBotIconName"
+                }
+              >
+                {item.name}
+              </Typography>
+            </div>
+
+          </Button>
+        ))}
+      </div>
     </div>
   );
 }
