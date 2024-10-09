@@ -121,7 +121,7 @@ export function ViewContact(): JSX.Element {
 
             <div className="doctorProfile">
               <div className="doctorProps">
-                <img src={phone} alt="contact" />
+                <img src={phone} alt="contact" className="doctorPropsImg" />
                 <Typography
                   sx={{
                     paddingTop: 0.1,
@@ -135,7 +135,7 @@ export function ViewContact(): JSX.Element {
                 </Typography>
               </div>
               <div className="doctorProps">
-                <img src={mail} alt="mail" />
+                <img src={mail} alt="mail" className="doctorPropsImg"/>
                 <Typography
                   sx={{
                     paddingTop: 0.1,
@@ -150,7 +150,7 @@ export function ViewContact(): JSX.Element {
                 </Typography>
               </div>
               <div className="doctorProps">
-                <img src={location} alt="location" />
+                <img src={location} alt="location" className="doctorPropsImg" />
                 <Typography
                   sx={{
                     paddingTop: 0.1,
@@ -165,7 +165,7 @@ export function ViewContact(): JSX.Element {
                 </Typography>
               </div>
               <div className="doctorProps">
-                <img src={notes} alt="notes" />
+                <img src={notes} alt="notes" className="doctorPropsImg" />
                 <Typography
                   sx={{
                     paddingTop: 0.1,

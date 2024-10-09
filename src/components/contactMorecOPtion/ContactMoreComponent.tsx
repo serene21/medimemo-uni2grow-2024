@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { MoreVert } from "@mui/icons-material";
-import { Menu, MenuItem, Button } from "@mui/material";
+import { Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { IMoreContact } from "../../models/MoreContact";
+import ModalDialog from "../ModalDialog";
 
 import edit from "../../assets/images/edit.svg";
 import ClearIcon from "@mui/icons-material/Clear";
 
 function ContactMoreComponent(props: IMoreContact): JSX.Element {
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState<boolean>(false); // For modal visibility control
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // For menu control
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -27,21 +29,13 @@ function ContactMoreComponent(props: IMoreContact): JSX.Element {
     handleClose();
   };
 
-  const handleDelete = async () => {
-    // Confirm with the user before deleting
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this contact?"
-    );
-
-    if (!confirmDelete) return;
-
+  const handleAgree = async () => {
     try {
       const response = await fetch(`${props.delete}`, {
         method: "DELETE"
       });
 
       if (response.ok) {
-        console.log("Contact deleted successfully");
         // Navigate back to contacts list after deletion
         navigate("/contacts");
       } else {
@@ -50,15 +44,25 @@ function ContactMoreComponent(props: IMoreContact): JSX.Element {
     } catch (error) {
       console.error("Error deleting contact:", error);
     }
+  };
 
-    handleClose();
+  const handleDelete = () => {
+    setOpenModal(true); // Open the modal when delete is clicked
+    handleClose(); // Close the menu
+  };
+
+  const handleModalClose = () => {
+    setOpenModal(false); // Close the modal when canceled
   };
 
   return (
     <>
+      {/* More options button */}
       <div onClick={handleClick}>
         <MoreVert />
       </div>
+
+      {/* Menu with Edit and Delete options */}
       <Menu
         anchorEl={anchorEl}
         open={open}
@@ -82,6 +86,17 @@ function ContactMoreComponent(props: IMoreContact): JSX.Element {
           Delete
         </MenuItem>
       </Menu>
+
+      {/* ModalDialog component for delete confirmation */}
+      {openModal && (
+        <ModalDialog
+          open={openModal}
+          title="Delete Contact"
+          content="Are you sure you want to delete this contact?"
+          onAgree={handleAgree}
+          onDisagree={handleModalClose}
+        />
+      )}
     </>
   );
 }

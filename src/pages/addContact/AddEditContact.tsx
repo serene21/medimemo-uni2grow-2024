@@ -1,20 +1,10 @@
 import "./AddEditContact.css";
 
-import {
-  validateContactForm,
-  formError,
-  validationContactField
-} from "../../utils/ValidateContact";
-
 import { useState, useEffect } from "react";
 
-import {
-  TextField,
-  Typography,
-  InputAdornment,
-  Button,
-  Alert
-} from "@mui/material";
+import { TextField, Typography, InputAdornment, Button } from "@mui/material";
+
+import { useFormik } from "formik";
 
 import stetoscope from "../../assets/images/contact/stethoscope.svg";
 import clinicalNote from "../../assets/images/contact/editContact/clinical_notes.svg";
@@ -24,9 +14,20 @@ import location from "../../assets/images/contact/editContact/location_on.svg";
 import sticyNote from "../../assets/images/contact/editContact/sticky_note_2.svg";
 import save from "../../assets/images/contact/editContact/save.svg";
 import { IContact } from "../../models/Contact";
-import { formValues } from "../../utils/Validation";
 import { useNavigate, useParams } from "react-router-dom";
 import Header from "../../components/header/Header";
+import * as Yup from "yup";
+
+const validationSchema = Yup.object({
+  name: Yup.string().required("Name is required"),
+  profession: Yup.string().required("Specialty is required"),
+  phone: Yup.string()
+    .required("Phone number is required")
+    .matches(/^\d+$/, "Phone number must be numeric"),
+  email: Yup.string().email("Invalid email format"),
+  address: Yup.string(),
+  notes: Yup.string()
+});
 
 function AddEditContact() {
   const navigate = useNavigate();
@@ -37,31 +38,53 @@ function AddEditContact() {
     navigate("/contacts");
   };
 
-  const [contact, setContact] = useState<formValues>({
-    name: "",
-    notes: "",
-    profession: "",
-    phone: "",
-    email: "",
-    address: ""
-  });
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      profession: "",
+      phone: "",
+      email: "",
+      address: "",
+      notes: ""
+    },
+    validationSchema,
+    onSubmit: async (values) => {
+      try {
+        const titre = "Dr";
+        const newContact = {
+          name: values.name,
+          notes: values.notes,
+          qualification: titre,
+          profession: values.profession,
+          phone: values.phone,
+          email: values.email,
+          address: values.address
+        };
 
-  const [errors, setErrors] = useState<formError>({
-    name: "",
-    notes: "",
-    profession: "",
-    phone: "",
-    email: "",
-    address: ""
-  });
+        let response;
+        if (isEditing) {
+          response = await fetch(`http://localhost:3000/contacts/${id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newContact)
+          });
+        } else {
+          response = await fetch("http://localhost:3000/contacts", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newContact)
+          });
+        }
 
-  const [labelsEnable, setLabelsEnable] = useState({
-    name: false,
-    notes: false,
-    profession: false,
-    phone: false,
-    email: false,
-    address: false
+        if (response.ok) {
+          formik.resetForm();
+          const savedContact = await response.json();
+          navigate("/contacts", { state: { newContact: savedContact } });
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
   });
 
   useEffect(() => {
@@ -72,111 +95,36 @@ function AddEditContact() {
             `http://localhost:3000/contacts/${contactId}`
           );
           const data: IContact = await response.json();
-          setContact({
-            name: data.name,
+          formik.setValues({
+            name: data.name || "",
             notes: data.notes || "",
             profession: data.profession || "",
             phone: data.phone || "",
             email: data.email || "",
             address: data.address || ""
           });
-        } catch (error) {}
+        } catch (error) {
+          console.error("Failed to fetch contact", error);
+        }
       };
-      fetchContactById(id);
+      fetchContactById(id!);
     }
   }, [id, isEditing]);
 
-  // Handle input change for each field
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    const error = validationContactField(name, value);
-
-    setErrors((prevState) => ({
-      ...prevState,
-      [name]: error || ""
-    }));
-
-    setContact({
-      ...contact,
-      [name]: value
-    });
-  };
-
-  let alertError: boolean = false;
+  const [labelsEnable, setLabelsEnable] = useState({
+    name: false,
+    notes: false,
+    profession: false,
+    phone: false,
+    email: false,
+    address: false
+  });
 
   const handleFocus = (field: keyof IContact) => {
     setLabelsEnable((prev) => ({
       ...prev,
       [field]: true
     }));
-  };
-
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
-    e.preventDefault();
-
-    // Validate the entire form before proceeding
-    const validationErrors = validateContactForm(contact);
-
-    // If there are validation errors, update the errors state and stop submission
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors); // Set the validation errors to the state
-      return; // Stop submission if validation fails
-    }
-
-    try {
-      const titre: string = "Dr";
-      const newContact: IContact = {
-        name: contact.name,
-        notes: contact.notes,
-        qualification: titre,
-        profession: contact.profession,
-        phone: contact.phone,
-        email: contact.email,
-        address: contact.address
-      };
-      let response;
-
-      // If editing make a PUT request
-      if (isEditing) {
-        response = await fetch(`http://localhost:3000/contacts/${id}`, {
-          method: "PUT", // Use PUT to update the existing contact
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(newContact)
-        });
-      } else {
-        // else, we're creating a new contact
-        response = await fetch("http://localhost:3000/contacts", {
-          method: "POST", // Use POST to create a new contact
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(newContact)
-        });
-      }
-
-      if (response.ok) {
-        // clear the form
-        setContact({
-          name: "",
-          notes: "",
-          profession: "",
-          phone: "",
-          email: "",
-          address: ""
-        });
-
-        const savedContact = await response.json(); // Get the saved contact with the ID
-        navigate("/contacts", { state: { newContact: savedContact } }); // Pass the new contact
-      } else {
-        alertError = true;
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
   };
 
   function HeadTitle() {
@@ -198,27 +146,23 @@ function AddEditContact() {
         showRightButton={false}
       />
       <div className="addContact-Container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={formik.handleSubmit}>
           <div className="containPanel">
             <div className="panelContact">
               <div className="addPanel">
-                {alertError ? (
-                  <Alert severity="error">Contact was not added</Alert>
-                ) : (
-                  ""
-                )}
                 <TextField
                   fullWidth
                   type="text"
                   name="name"
                   style={{ color: "#B3B3B3" }}
-                  value={contact.name}
-                  onChange={handleInputChange}
-                  error={!!errors.name}
-                  helperText={errors.name}
-                  onFocus={() => handleFocus("name")}
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.name && Boolean(formik.errors.name)}
+                  helperText={formik.touched.name && formik.errors.name}
                   label={labelsEnable.name ? "Name" : ""}
-                  placeholder=" "
+                  onFocus={() => handleFocus("name")}
+                  placeholder=""
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -242,14 +186,20 @@ function AddEditContact() {
                 <TextField
                   fullWidth
                   type="text"
-                  name="profession"
                   style={{ color: "#B3B3B3" }}
-                  value={contact.profession}
-                  onChange={handleInputChange}
-                  error={!!errors.profession}
-                  helperText={errors.profession}
+                  name="profession"
+                  value={formik.values.profession}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.profession &&
+                    Boolean(formik.errors.profession)
+                  }
+                  helperText={
+                    formik.touched.profession && formik.errors.profession
+                  }
+                  label={labelsEnable.profession ? "Specialty" : ""}
                   onFocus={() => handleFocus("profession")}
-                  label={labelsEnable.profession ? "Profession" : ""}
                   placeholder="Specialty"
                   InputProps={{
                     startAdornment: (
@@ -262,15 +212,16 @@ function AddEditContact() {
 
                 <TextField
                   fullWidth
-                  type="number"
+                  type="text"
                   name="phone"
                   style={{ color: "#B3B3B3" }}
-                  value={contact.phone}
-                  onChange={handleInputChange}
-                  error={!!errors.phone}
-                  helperText={errors.phone}
+                  value={formik.values.phone}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.phone && Boolean(formik.errors.phone)}
+                  helperText={formik.touched.phone && formik.errors.phone}
+                  label={labelsEnable.phone ? "Phone number" : ""}
                   onFocus={() => handleFocus("phone")}
-                  label={labelsEnable.phone ? "Phone Number" : ""}
                   placeholder="Phone Number"
                   InputProps={{
                     startAdornment: (
@@ -285,13 +236,14 @@ function AddEditContact() {
                   fullWidth
                   type="email"
                   name="email"
-                  value={contact.email}
-                  style={{ color: "#B3B3B3" }}
-                  onChange={handleInputChange}
-                  error={!!errors.email}
-                  helperText={errors.email}
+                  value={formik.values.email}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.email && Boolean(formik.errors.email)}
+                  helperText={formik.touched.email && formik.errors.email}
+                  label={labelsEnable.email ? "E-mail" : ""}
                   onFocus={() => handleFocus("email")}
-                  label={labelsEnable.name ? "E-mail" : ""}
+                  style={{ color: "#B3B3B3" }}
                   placeholder="E-mail"
                   InputProps={{
                     startAdornment: (
@@ -306,13 +258,16 @@ function AddEditContact() {
                   fullWidth
                   type="text"
                   name="address"
-                  style={{ color: "#B3B3B3" }}
-                  value={contact.address}
-                  onChange={handleInputChange}
-                  error={!!errors.address}
-                  helperText={errors.address}
-                  onFocus={() => handleFocus("address")}
+                  value={formik.values.address}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={
+                    formik.touched.address && Boolean(formik.errors.address)
+                  }
+                  helperText={formik.touched.address && formik.errors.address}
                   label={labelsEnable.address ? "Address" : ""}
+                  onFocus={() => handleFocus("address")}
+                  style={{ color: "#B3B3B3" }}
                   placeholder="Address"
                   InputProps={{
                     startAdornment: (
@@ -322,25 +277,35 @@ function AddEditContact() {
                     )
                   }}
                 />
-
                 <TextField
                   fullWidth
                   multiline
                   maxRows={5}
                   type="text"
                   name="notes"
-                  value={contact.notes}
-                  sx={{ color: "#B3B3B3" }}
-                  onChange={handleInputChange}
-                  error={!!errors.notes}
-                  helperText={errors.notes}
-                  onFocus={() => handleFocus("notes")}
+                  value={formik.values.notes}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  error={formik.touched.notes && Boolean(formik.errors.notes)}
+                  helperText={formik.touched.notes && formik.errors.notes}
+                  sx={{ color: "#B3B3B3", position: "relative" }} // Ensure relative positioning of the input
                   label={labelsEnable.notes ? "Notes" : ""}
+                  onFocus={() => handleFocus("notes")}
                   placeholder="Notes"
                   InputProps={{
                     startAdornment: (
-                      <InputAdornment position="start">
-                        <img src={sticyNote} alt="notes" />
+                      <InputAdornment
+                        position="start"
+                        sx={{
+                          display: "flex",
+                          alignItems: "flex-start"
+                        }}
+                      >
+                        <img
+                          src={sticyNote}
+                          alt="notes"
+                          style={{ width: "20px", height: "20px" }}
+                        />
                       </InputAdornment>
                     )
                   }}

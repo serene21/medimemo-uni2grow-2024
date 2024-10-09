@@ -181,7 +181,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
-                  cursor: "pointer",
+                  cursor: "pointer"
                 }}
               >
                 <img width={30} height={30} alt="apple" src={a} />
@@ -194,7 +194,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
-                  cursor: "pointer",
+                  cursor: "pointer"
                 }}
               >
                 <img width={30} height={30} alt="google" src={g} />
@@ -206,7 +206,7 @@ function Login() {
                   justifyContent: "center",
                   alignItems: "center",
                   display: "flex",
-                  cursor: "pointer",
+                  cursor: "pointer"
                 }}
               >
                 <img width={30} height={30} alt="facebook" src={f} />
