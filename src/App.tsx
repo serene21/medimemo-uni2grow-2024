@@ -9,6 +9,7 @@ import Login from "./pages/login/Login";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
 import Medication from "./pages/medications/Medication";
 import Dashboard from "./pages/Dashboard";
+import TherapyDetails from "./pages/therapyDetails/TherapyDetails.tsx"
 
 const router = createBrowserRouter([
   {
@@ -38,7 +39,16 @@ const router = createBrowserRouter([
       },
       {
         path: "/Therapies",
-        element: <Therapies />,
+        children: [
+          {
+            path: "",
+            element: <Therapies />,
+          },
+          {
+            path: "details",
+            element: <TherapyDetails />
+          }
+        ]
       },
     ],
   },
