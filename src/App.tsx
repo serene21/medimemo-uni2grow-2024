@@ -10,6 +10,7 @@ import { Therapies } from "./pages/therapies/Therapies.tsx";
 import Medication from "./pages/medications/Medication";
 import Dashboard from "./pages/Dashboard";
 import TherapyDetails from "./pages/therapyDetails/TherapyDetails.tsx"
+import AddEditTherapie from "./pages/addEditTherapy/AddEditTherapy.tsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,14 @@ const router = createBrowserRouter([
           {
             path: "details",
             element: <TherapyDetails />
+          },
+          {
+            path: "edit",
+            element: <AddEditTherapie />
+          },
+          {
+            path: "add",
+            element: <AddEditTherapie />
           }
         ]
       },

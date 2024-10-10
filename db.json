@@ -53,20 +53,6 @@
       "userId": 1,
       "contact": 2,
       "notes": "this is the notes"
-    },
-    {
-      "id": "5",
-      "name": "Stomach pain",
-      "userId": 1,
-      "contact": 2,
-      "notes": "this is the notes"
-    },
-    {
-      "id": "6",
-      "name": "Backs pains",
-      "userId": 1,
-      "contact": 2,
-      "notes": "this is the notes"
     }
   ],
   "contacts": [
