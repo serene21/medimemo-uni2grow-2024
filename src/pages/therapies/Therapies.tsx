@@ -18,7 +18,7 @@ export function Therapies() {
   useEffect(() => {
     const getTherapies = async (): Promise<void> => {
       try {
-        const response = await fetch("http://localhost3000/therapies");
+        const response = await fetch("http://localhost:3000/therapies");
         const data: ITherapy[] = await response.json();
         setTherapies(data);
       } catch {
@@ -42,6 +42,10 @@ export function Therapies() {
 
   const handleDetails = (id: number ) => {
     navigate('details', {state: {value: id}})
+  }
+
+  const handleAdd = () => {
+    navigate("add");
   }
 
   return (
@@ -107,7 +111,6 @@ export function Therapies() {
                     type="button"
                     sx={{ p: "10px" }}
                     aria-label="arrowBack"
-                    
                   >
                     <img src={forwardIcon} alt="arrowBack icon" />
                   </IconButton>
@@ -117,7 +120,7 @@ export function Therapies() {
           </div>
         </div>
 
-        <div className="addContainer">
+        <div className="addContainer" onClick={handleAdd}>
           <img src={addIcon} alt="add icon" />
         </div>
       </div>
