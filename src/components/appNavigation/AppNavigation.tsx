@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import "./AppNavigation.css";
-import { useLocation } from "react-router-dom";
-import { IconButton, Typography, Button } from "@mui/material";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Typography, Button } from "@mui/material";
 import { ItemNavigation, dataItem } from "../../utils/navigationData";
 
 export function AppNavigation() {
+  const navigate = useNavigate();
   const location = useLocation();
 
   const [activepage, setActivePage] = useState<string>(location.pathname);
@@ -17,7 +18,13 @@ export function AppNavigation() {
     <div className="menuBot">
       <div className="sub-menuBot">
         {dataItem.map((item: ItemNavigation) => (
-          <Button variant="text" color="inherit" sx={{ textTransform: "capitalize" }} href={item.path} key={item.path} >
+          <Button
+            variant="text"
+            color="inherit"
+            sx={{ textTransform: "capitalize" }}
+            onClick={() => navigate(item.path)}
+            key={item.path}
+          >
             <div
               key={item.path}
               className="menuBottomItem"
@@ -25,19 +32,21 @@ export function AppNavigation() {
             >
               <div
                 className={
-                  activepage === item.path ? "iconClickMiddle" : "iconClick"
+                  activepage.includes(item.path)
+                    ? "iconClickMiddle"
+                    : "iconClick"
                 }
               >
-                <IconButton>
-                  <img
-                    src={activepage === item.path ? item.activeIcon : item.icon}
-                    alt="Home Health"
-                  />
-                </IconButton>
+                <img
+                  src={
+                    activepage.includes(item.path) ? item.activeIcon : item.icon
+                  }
+                  alt="Home Health"
+                />
               </div>
               <Typography
                 className={
-                  activepage === item.path
+                  activepage.includes(item.path)
                     ? "menuBotIconName-over"
                     : "menuBotIconName"
                 }
@@ -45,7 +54,6 @@ export function AppNavigation() {
                 {item.name}
               </Typography>
             </div>
-
           </Button>
         ))}
       </div>

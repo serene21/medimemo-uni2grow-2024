@@ -3,13 +3,12 @@ import { Layout } from "./components/layout/Layout.tsx";
 import Login from "./pages/login/Login";
 
 import Medications from "./pages/medications/Medications.tsx"
-import MedicationDetails from "./pages/medicationDetails/MedicationDetails.tsx";
 import AddEditTherapie from "./pages/addEditTherapie/AddEditTherapie.tsx";
 import TherapieDetails from "./pages/therapieDetails/TherapieDetails.tsx";
 import Contacts from "./pages/contacts/Contacts.tsx";
 import AddEditContact from "./pages/addEditContact/AddEditContact.tsx";
 import DoctorDetails from "./pages/doctorDetails/DoctorDetails.tsx";
-import Profil from "./pages/profil/Profil.tsx";
+import Profile from "./pages/profile/Profile";
 import Program from "./pages/program/Program.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
 import DrugSpecifications from "./pages/medications/drugSpecifications/DrugSpecifications.tsx";
@@ -41,8 +40,8 @@ const router = createBrowserRouter([
             element: <Medications />,
           },
           {
-            path: "details",
-            element: <MedicationDetails />,
+            path: "details/:id",
+            element: <DrugSpecifications />,
           },
         ],
       },
@@ -107,8 +106,8 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "profil",
-        element: <Profil />,
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },
