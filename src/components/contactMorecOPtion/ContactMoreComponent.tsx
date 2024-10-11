@@ -102,7 +102,7 @@ function ContactMoreComponent(props: IMoreContact) : JSX.Element {
           open={openModal}
           icon={<ReportGmailerrorredIcon  />}
           title="Deletion Confirmation"
-          content="Do you really want to delete this contact? Allentered data wil be lost and cannot be recovered."
+          content="Do you really want to delete this contact? All entered data wilL be lost and cannot be recovered."
           agreeIcon={<ClearIcon sx={{width: 15, height: 15}} />}
           disagreeIcon={<ArrowBackIosNewIcon sx={{width: 15, height: 15 }} />}
           onAgree={handleAgree}
