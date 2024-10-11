@@ -32,9 +32,7 @@ export function AppNavigation() {
             >
               <div
                 className={
-                  activepage.includes(item.path)
-                    ? "iconClickMiddle"
-                    : "iconClick"
+                  activepage.includes(item.path) ? "iconClickMiddle" : "iconClick"
                 }
               >
                 <img
