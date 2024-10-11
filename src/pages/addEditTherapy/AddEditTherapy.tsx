@@ -13,7 +13,7 @@ import {
 import SaveIcon from "@mui/icons-material/Save";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useNavigate } from "react-router-dom";
-import "./AddEditTherapie.css";
+import "./AddEditTherapy.css";
 import {
   formError,
   validationTherapy,
@@ -28,7 +28,7 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import InputAdornment from "@mui/material/InputAdornment";
 
-function AddEditTherapie() {
+function AddEditTherapy() {
   const [therapies, setTherapies] = useState<formValues>({
     name: "",
     notes: "",
@@ -398,4 +398,4 @@ function AddEditTherapie() {
   );
 }
 
-export default AddEditTherapie;
+export default AddEditTherapy;

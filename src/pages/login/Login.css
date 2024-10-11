@@ -1,5 +1,5 @@
 body {
-  background-color: #F8F4F4;
+  background-color: #f8f4f4;
   margin: 20px;
   display: flex;
   align-items: center;
@@ -41,7 +41,6 @@ body {
   justify-content: center;
 
   margin-top: 20px;
-
 }
 
 .divforgot {

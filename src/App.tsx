@@ -1,54 +1,107 @@
-import {
-  createBrowserRouter,
-  redirect,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
 import { Layout } from "./components/layout/Layout.tsx";
-import Contacts from "./pages/contacts/Contacts.tsx";
 import Login from "./pages/login/Login";
 import Therapies from "./pages/therapies/Therapies.tsx";
 import AddEditTherapy from "./pages/addEditTherapy/AddEditTherapy.tsx";
-import Medication from "./pages/medications/Medication";
-import Dashboard from "./pages/Dashboard";
+import Medications from "./pages/medications/Medications.tsx"
+import MedicationDetails from "./pages/medicationDetails/MedicationDetails.tsx";
+import TherapyDetails from "./pages/therapyDetails/TherapyDetails.tsx";
+import Contacts from "./pages/contacts/Contacts.tsx";
+import AddEditContact from "./pages/addEditContact/AddEditContact.tsx";
+import DoctorDetails from "./pages/doctorDetails/DoctorDetails.tsx";
+import Profil from "./pages/profil/Profil.tsx";
+import Program from "./pages/program/Program.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "/login",
-    element: <Login />,
+      path: "",
+      loader: ()=> redirect("/login"),
   },
   {
-    path: "/dashboard",
-    element: <Dashboard />,
+      path: "/login",
+      element: <Login />,
+    
   },
-
   {
     path: "/",
-    loader: () => redirect("/login"),
-  },
-
-  {
     element: <Layout />,
     children: [
       {
-        path: "contacts",
-        element: <Contacts />,
-      },
-      {
         path: "medications",
-        element: <Medication />,
+        children: [
+          {
+            path: "",
+            element: <Medications />,
+          },
+          {
+            path: "details",
+            element: <MedicationDetails />,
+          },
+        ],
       },
       {
-        path: "Therapies",
-        children:[
+        path: "therapies",
+        children: [
           {
             path: "",
             element: <Therapies />,
           },
           {
+            path: "edit",
+            children: [
+              {
+                path: "",
+                element: <AddEditTherapy />,
+              },
+              {
+                path: "program",
+                element: <Program />
+              }
+            ],
+          },
+          {
             path: "add",
-            element: <AddEditTherapy />,
-          }
+            children: [
+              {
+                path: "",
+                element: <AddEditTherapy />,
+              },
+              {
+                path: "program",
+                element: <Program />
+              }
+            ],
+          },
+          {
+            path: "details",
+            element: <TherapyDetails />,
+          },
         ],
+      },
+      {
+        path: "contacts",
+        children: [
+          {
+            path: "",
+            element: <Contacts />,
+          },
+          {
+            path: "edit",
+            element: <AddEditContact />,
+          },
+          {
+            path: "add",
+            element: <AddEditContact />,
+          },
+          {
+            path: "details",
+            element: <DoctorDetails />,
+          },
+        ],
+      },
+      {
+        path: "profil",
+        element: <Profil />,
       },
       
     ],
@@ -56,7 +109,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
