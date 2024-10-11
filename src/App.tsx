@@ -1,33 +1,30 @@
-import {
-  createBrowserRouter,
-  redirect,
-  RouterProvider
-} from "react-router-dom";
+import { createBrowserRouter, redirect, RouterProvider } from "react-router-dom";
 import { Layout } from "./components/layout/Layout.tsx";
-import Contacts from "./pages/contacts/Contacts.tsx";
-import Dashboard from "./pages/Dashboard.tsx";
 import Login from "./pages/login/Login";
+
+import Medications from "./pages/medications/Medications.tsx"
+import MedicationDetails from "./pages/medicationDetails/MedicationDetails.tsx";
+import AddEditTherapie from "./pages/addEditTherapie/AddEditTherapie.tsx";
+import TherapieDetails from "./pages/therapieDetails/TherapieDetails.tsx";
+import Contacts from "./pages/contacts/Contacts.tsx";
+import AddEditContact from "./pages/addEditContact/AddEditContact.tsx";
+import DoctorDetails from "./pages/doctorDetails/DoctorDetails.tsx";
+import Profil from "./pages/profil/Profil.tsx";
+import Program from "./pages/program/Program.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
-import AddEditContact from "./pages/addContact/AddEditContact.tsx";
-import { ViewContact } from "./pages/viewContacts/ViewContact.tsx";
-import Medication from "./pages/medications/Medication.tsx";
 
 const router = createBrowserRouter([
   {
-    path: "/login",
-    element: <Login />
+      path: "",
+      loader: ()=> redirect("/login"),
   },
   {
-    path: "/dashboard",
-    element: <Dashboard />
+      path: "/login",
+      element: <Login />,
+    
   },
-
   {
     path: "/",
-    loader: () => redirect("/login")
-  },
-
-  {
     element: <Layout />,
     children: [
       {
@@ -35,39 +32,88 @@ const router = createBrowserRouter([
         element: <Medication />
       },
       {
-        path: "/contacts",
-        element: <Contacts />
+        path: "medications",
+        children: [
+          {
+            path: "",
+            element: <Medications />,
+          },
+          {
+            path: "details",
+            element: <MedicationDetails />,
+          },
+        ],
       },
       {
-        path: "/addEditContact",
-        element: <AddEditContact />
+        path: "therapies",
+        children: [
+          {
+            path: "",
+            element: <Therapies />,
+          },
+          {
+            path: "edit",
+            children: [
+              {
+                path: "",
+                element: <AddEditTherapie />,
+              },
+              {
+                path: "program",
+                element: <Program />
+              }
+            ],
+          },
+          {
+            path: "add",
+            children: [
+              {
+                path: "",
+                element: <AddEditTherapie />,
+              },
+              {
+                path: "program",
+                element: <Program />
+              }
+            ],
+          },
+          {
+            path: "details",
+            element: <TherapieDetails />,
+          },
+        ],
       },
       {
-        path: "/addEditContact/:id",
-        element: <AddEditContact />
+        path: "contacts",
+        children: [
+          {
+            path: "",
+            element: <Contacts />,
+          },
+          {
+            path: "edit",
+            element: <AddEditContact />,
+          },
+          {
+            path: "add",
+            element: <AddEditContact />,
+          },
+          {
+            path: "details",
+            element: <DoctorDetails />,
+          },
+        ],
       },
       {
-        path: "/viewContact/:id",
-        element: <ViewContact />
+        path: "profil",
+        element: <Profil />,
       },
-      {
-        path: "/dashboard",
-        element: <Dashboard />
-      },
-      {
-        path: "/medications",
-        element: <Medication />
-      },
-      {
-        path: "/Therapies",
-        element: <Therapies />
-      }
-    ]
-  }
+    ],
+  },
 ]);
 
 function App() {
-  return <RouterProvider router={router}></RouterProvider>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
