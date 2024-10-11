@@ -2,6 +2,7 @@ import { CheckCircle, CircleOutlined } from "@mui/icons-material"
 import { alpha, Avatar, Checkbox, ListItem, ListItemAvatar, ListItemButton, ListItemText, Typography } from "@mui/material"
 import { IDose } from "../../models/Dose"
 import pill from "../../assets/images/medications/pill.svg";
+import { useNavigate } from "react-router-dom";
 
 interface DoseProps {
     item: IDose
@@ -11,6 +12,7 @@ interface DoseProps {
 
 
 function ShowDose(props: DoseProps) {
+    const navigate = useNavigate();
     const labelId = `checkbox-list-primary-label-${props.item.id}`;
 
     return (
@@ -25,7 +27,7 @@ function ShowDose(props: DoseProps) {
                     backgroundColor: props.item.taken ? alpha("#4DD8A7", 0.1) : "transparent",
                 }}
                 role={undefined}
-                onClick={() => props.handleClick(props.item)}
+                onClick={() => navigate(`/drug/${props.item.id}`)}
                 dense
             >
                 <ListItemAvatar>
