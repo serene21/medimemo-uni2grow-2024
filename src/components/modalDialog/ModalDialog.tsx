@@ -60,7 +60,7 @@ function ModalDialog(props: IModalDialog) {
             alignItems: "end",
             width: "100%"!,
             margin: 0,
-            padding: 0,
+            paddingRight : 15,
             paddingBottom: 2
           }}
         >
