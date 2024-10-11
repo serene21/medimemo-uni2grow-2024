@@ -4,12 +4,14 @@ import { Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 import { IMoreContact } from "../../models/MoreContact";
-import ModalDialog from "../ModalDialog";
+import ModalDialog from "../modalDialog/ModalDialog";
 
 import edit from "../../assets/images/edit.svg";
 import ClearIcon from "@mui/icons-material/Clear";
+import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
-function ContactMoreComponent(props: IMoreContact): JSX.Element {
+function ContactMoreComponent(props: IMoreContact) : JSX.Element {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState<boolean>(false); // For modal visibility control
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // For menu control
@@ -46,9 +48,13 @@ function ContactMoreComponent(props: IMoreContact): JSX.Element {
     }
   };
 
-  const handleDelete = () => {
+  const handleDelete = (event: React.MouseEvent<HTMLElement>) => 
+  { 
+    event.stopPropagation(); // Prevent the menu from closing
     setOpenModal(true); // Open the modal when delete is clicked
-    handleClose(); // Close the menu
+    // if (openModal === false){
+    //   handleClose();
+    // }
   };
 
   const handleModalClose = () => {
@@ -69,9 +75,12 @@ function ContactMoreComponent(props: IMoreContact): JSX.Element {
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "right"
+          horizontal: "right",
+          
         }}
-        sx={{ width: 2000 }}
+        sx={{ width: 2000,
+          // margin:20
+         }}
         transformOrigin={{
           vertical: "top",
           horizontal: "right"
@@ -91,14 +100,19 @@ function ContactMoreComponent(props: IMoreContact): JSX.Element {
       {openModal && (
         <ModalDialog
           open={openModal}
-          title="Delete Contact"
-          content="Are you sure you want to delete this contact?"
+          icon={<ReportGmailerrorredIcon  />}
+          title="Deletion Confirmation"
+          content="Do you really want to delete this contact? Allentered data wil be lost and cannot be recovered."
+          agreeIcon={<ClearIcon sx={{width: 15, height: 15}} />}
+          disagreeIcon={<ArrowBackIosNewIcon sx={{width: 15, height: 15 }} />}
           onAgree={handleAgree}
           onDisagree={handleModalClose}
+          agreeMessage="Delete"
+          disagreeMessage="Back"
         />
       )}
     </>
   );
 }
-
+ 
 export default ContactMoreComponent;

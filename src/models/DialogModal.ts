@@ -1,8 +1,13 @@
 export interface IModalDialog {
+    icon ?: React.ReactNode;
     open: boolean;
-    title?: string;
+    title ?: string;
     content?: string;
-    onAgree: () => void; // Renamed to follow camelCase convention
+    agreeMessage?: string;
+    disagreeMessage: string;
+    agreeIcon?:React.ReactNode;
+    disagreeIcon?: React.ReactNode;
+    onAgree?: () => void; 
     onDisagree: () => void;
   }
   

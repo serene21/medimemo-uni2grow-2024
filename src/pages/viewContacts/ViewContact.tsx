@@ -85,101 +85,115 @@ export function ViewContact(): JSX.Element {
           <ContactMoreComponent edit={editRoute} delete={deleteRoute} />
         }
       />
+
+      <div className="headTitle">
+        <Typography
+          height={22}
+          sx={{
+            fontSize: 14,
+            fontWeight: 400,
+            textAlign: "center",
+            // paddingTop: 20px,
+            paddingBottom: 2,
+            color: "#444"
+          }}
+        >
+          {contact.profession}
+        </Typography>
+      </div>
+
       <div className="viewContact-Container">
-        <div className="contaierView">
-          <div className="headTitle">
-            <Typography
-              height={22}
-              sx={{
-                fontSize: 14,
-                fontWeight: 400,
-                textAlign: "center",
-                // paddingTop: 20px,
-                paddingBottom: 2,
-                color: "#444"
-              }}
-            >
-              {contact.profession}
-            </Typography>
+        <div className="viewContactPanel">
+          <div className="boxDiv">
+            <div className="boxInfos">
+              <img color="white" src={wPhone} alt="contact" />
+              <Typography sx={{ color: "white" }}>Ring</Typography>
+            </div>
+            <div className="boxInfos">
+              <img color="white" src={wMail} alt="contact" />
+              <Typography sx={{ color: "white" }}>E-mail</Typography>
+            </div>
+            <div className="boxInfos">
+              <img color="white" src={wLocation} alt="contact" />
+              <Typography sx={{ color: "white" }}>View</Typography>
+            </div>
           </div>
 
-          <div className="viewContactPanel">
-            <div className="boxDiv">
-              <div className="boxInfos">
-                <img color="white" src={wPhone} alt="contact" />
-                <Typography sx={{ color: "white" }}>Ring</Typography>
-              </div>
-              <div className="boxInfos">
-                <img color="white" src={wMail} alt="contact" />
-                <Typography sx={{ color: "white" }}>E-mail</Typography>
-              </div>
-              <div className="boxInfos">
-                <img color="white" src={wLocation} alt="contact" />
-                <Typography sx={{ color: "white" }}>View</Typography>
-              </div>
+          <div className="doctorProfile">
+            <div className="doctorProps">
+              <img src={phone} alt="contact" className="doctorPropsImg" />
+              <Typography
+                sx={{
+                  paddingTop: 0.1,
+                  // fontFamily: "Open Sans",
+                  fontSize: 14,
+                  fontWeight: 400,
+                  lineHeight: 2,
+                  wordWrap: "break-word", // Ensure words break inside the container
+                  overflowWrap: "break-word",
+                  whiteSpace: "normal"
+                }}
+              >
+                {contact.phone}
+              </Typography>
             </div>
+            <div className="doctorProps">
+              <img src={mail} alt="mail" className="doctorPropsImg" />
+              <Typography
+                sx={{
+                  paddingTop: 0.1,
+                  color: "#444444",
+                  fontSize: 14,
+                  fontWeight: 400,
+                  lineHeight: 2,
+                  wordWrap: "break-word",
+                  overflowWrap: "break-word",
+                  whiteSpace: "normal"
+                }}
+              >
+                {" "}
+                {contact.email}{" "}
+              </Typography>
+            </div>
+            <div className="doctorProps">
+              <img src={location} alt="location" className="doctorPropsImg" />
+              <Typography
+                sx={{
+                  paddingTop: 0.1,
+                  color: "#444444",
+                  fontSize: 14,
+                  fontWeight: 400,
+                  lineHeight: 2,
+                  wordWrap: "break-word",
+                  overflowWrap: "break-word",
+                  whiteSpace: "normal"
+                }}
+              >
+                {" "}
+                {contact.address}{" "}
+              </Typography>
+            </div>
+            <div className="doctorProps">
+              <img src={notes} alt="notes" className="doctorPropsImg" />
 
-            <div className="doctorProfile">
-              <div className="doctorProps">
-                <img src={phone} alt="contact" className="doctorPropsImg" />
-                <Typography
-                  sx={{
-                    paddingTop: 0.1,
-                    // fontFamily: "Open Sans",
-                    fontSize: 14,
-                    fontWeight: 400,
-                    lineHeight: 2
-                  }}
-                >
-                  {contact.phone}
-                </Typography>
-              </div>
-              <div className="doctorProps">
-                <img src={mail} alt="mail" className="doctorPropsImg"/>
-                <Typography
-                  sx={{
-                    paddingTop: 0.1,
-                    color: "#444444",
-                    fontSize: 14,
-                    fontWeight: 400,
-                    lineHeight: 2
-                  }}
-                >
-                  {" "}
-                  {contact.email}{" "}
-                </Typography>
-              </div>
-              <div className="doctorProps">
-                <img src={location} alt="location" className="doctorPropsImg" />
-                <Typography
-                  sx={{
-                    paddingTop: 0.1,
-                    color: "#444444",
-                    fontSize: 14,
-                    fontWeight: 400,
-                    lineHeight: 2
-                  }}
-                >
-                  {" "}
-                  {contact.address}{" "}
-                </Typography>
-              </div>
-              <div className="doctorProps">
-                <img src={notes} alt="notes" className="doctorPropsImg" />
-                <Typography
-                  sx={{
-                    paddingTop: 0.1,
-                    color: "#444444",
-                    fontSize: 14,
-                    fontWeight: 400,
-                    lineHeight: 2
-                  }}
-                  width={240}
-                  height="auto"
-                >
-                  {contact.notes}
-                </Typography>
-              </div>
+              <Typography
+                sx={{
+                  paddingTop: 0.1,
+                  color: "#444444",
+                  fontSize: 14,
+                  fontWeight: 400,
+                  lineHeight: 2,
+                  wordWrap: "break-word",
+                  overflowWrap: "break-word",
+                  whiteSpace: "normal",
+                  flex: 1
+                }}
+                height="auto"
+                width={240}
+                
+              >
+                {contact.notes}
+              </Typography>
             </div>
           </div>
         </div>

@@ -35,7 +35,11 @@ function AddEditContact() {
   const isEditing = !!id;
 
   const handleOnClickBackButton = () => {
-    navigate("/contacts");
+    if (isEditing) {
+      navigate(`/viewContact/${id}`);
+    } else {
+      navigate("/contacts");
+    }
   };
 
   const formik = useFormik({
@@ -288,19 +292,18 @@ function AddEditContact() {
                   onBlur={formik.handleBlur}
                   error={formik.touched.notes && Boolean(formik.errors.notes)}
                   helperText={formik.touched.notes && formik.errors.notes}
-                  sx={{ color: "#B3B3B3", position: "relative" }} // Ensure relative positioning of the input
+                  sx={{ color: "#B3B3B3" }}
                   label={labelsEnable.notes ? "Notes" : ""}
                   onFocus={() => handleFocus("notes")}
                   placeholder="Notes"
                   InputProps={{
+                    sx: {
+                      display: "flex",
+                      alignItems: "start",
+                      padding:2.4
+                    },
                     startAdornment: (
-                      <InputAdornment
-                        position="start"
-                        sx={{
-                          display: "flex",
-                          alignItems: "flex-start"
-                        }}
-                      >
+                      <InputAdornment position="start">
                         <img
                           src={sticyNote}
                           alt="notes"
