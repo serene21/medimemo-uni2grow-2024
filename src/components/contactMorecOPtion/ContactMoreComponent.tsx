@@ -27,7 +27,7 @@ function ContactMoreComponent(props: IMoreContact) : JSX.Element {
   };
 
   const handleEdit = () => {
-    navigate(`${props.edit}`);
+    navigate(`${props.edit}`, {state : {id : props.id}});
     handleClose();
   };
 
@@ -86,10 +86,10 @@ function ContactMoreComponent(props: IMoreContact) : JSX.Element {
           horizontal: "right"
         }}
       >
-        <MenuItem onClick={handleEdit} sx={{ gap: 3 }}>
+        {props.edit && <MenuItem onClick={handleEdit} sx={{ gap: 3 }}>
           <img src={edit} alt="edit" />
           Edit
-        </MenuItem>
+        </MenuItem>}
         <MenuItem onClick={handleDelete} sx={{ gap: 3 }}>
           <ClearIcon />
           Delete
