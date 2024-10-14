@@ -23,17 +23,7 @@ export function AppNavigation() {
     <div className="menuBot">
       <div className="sub-menuBot">
         {dataItem.map((item: ItemNavigation) => (
-<<<<<<< HEAD
           <div color="inherit" onClick={() => handleNavigate(item.path)} key={item.path} >
-=======
-          <Button
-            variant="text"
-            color="inherit"
-            sx={{ textTransform: "capitalize" }}
-            href={item.path}
-            key={item.path}
-          >
->>>>>>> master
             <div
               key={item.path}
               className="menuBottomItem"
@@ -60,12 +50,7 @@ export function AppNavigation() {
                 {item.name}
               </Typography>
             </div>
-<<<<<<< HEAD
-
           </div>
-=======
-          </Button>
->>>>>>> master
         ))}
       </div>
     </div>

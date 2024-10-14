@@ -1,10 +1,6 @@
 
 export interface IContact {
-<<<<<<< HEAD
     id: string;
-=======
-    id?: string;
->>>>>>> master
     name: string;
     notes: string;
     qualification?: string;
