@@ -48,6 +48,10 @@ function ShowDose(props: DoseProps) {
                         }}
                     >{props.item.time}</Typography>
                     <Checkbox
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            props.handleToggle(props.item);
+                          }}
                         icon={<CircleOutlined sx={{ color: "#4DD8A7" }} />}
                         checkedIcon={<CheckCircle sx={{ color: "#4DD8A7" }} />}
                         edge="end"
