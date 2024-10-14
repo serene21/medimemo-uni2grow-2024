@@ -11,6 +11,9 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions,
+  Snackbar,
+  Alert,
+  SnackbarCloseReason,
 } from "@mui/material";
 import UserAvatar from "../../assets/images/avatar.svg";
 import UniversalCur from "../../assets/images/profile/universal_currency.svg";
@@ -21,7 +24,7 @@ import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import SaveOutlinedIcon from "@mui/icons-material/SaveOutlined";
 import Header from "../../components/header/Header";
 import { useNavigate } from "react-router-dom";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import {
   ArrowBackIos,
   Cancel,
@@ -31,20 +34,47 @@ import {
   ReportOutlined,
 } from "@mui/icons-material";
 
-const data = {
-  name: "Francesca Greco",
-  medicalID: "GRCFNCXXXXXXXXXX",
-  allergies: "No Allergies",
-  phone: "(555) 123-4567",
-  email: "francesca.greco@example.com",
-  address: "123 Vision Lane, Suite 200, Cityville, ST 12345",
-};
+interface User {
+  name: string;
+  lastName: string;
+  medicalID: string;
+  allergies: string;
+  phone: string;
+  email: string;
+  address: string;
+}
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [formValues, setFormValues] = useState(data);
   const [editable, setEditable] = useState(false);
   const [openAlert, setOpenAlert] = useState(false);
+  const [user, setUser] = useState<User>({
+    name: "",
+    lastName: "",
+    medicalID: "",
+    allergies: "",
+    phone: "",
+    email: "",
+    address: "",
+  });
+  const [error, setError] = useState("");
+  const [openSnack, setOpenSnack] = useState(false);
+
+  const getUserProfile = async () => {
+    try {
+      setError("");
+      const response = await fetch("http://localhost:3000/me");
+      const data: User = await response.json();
+      setUser(data);
+      setUser(data);
+    } catch {
+      setError("Error fetching user profile");
+    }
+  };
+
+  useEffect(() => {
+    getUserProfile();
+  }, []);
 
   const handleEdit = () => {
     setEditable(!editable);
@@ -57,8 +87,36 @@ const Profile = () => {
     setEditable(false);
   };
 
-  const handleSave = () => {
-    console.log("You data has been saved !!!");
+  const handleSave = async () => {
+    const requestOptions = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(user),
+    };
+
+    try {
+      setError("");
+      const response = await fetch("http://localhost:3000/me", requestOptions);
+      if (response.ok) {
+        getUserProfile();
+        setOpenSnack(true);
+      } else {
+        setError("Error saving user profile");
+      }
+    } catch {
+      setError("Error saving user profile");
+    }
+  };
+
+  const handleCloseSnack = (
+    _event: React.SyntheticEvent | Event,
+    reason?: SnackbarCloseReason
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpenSnack(false);
   };
 
   const handleOpenAlert = () => {
@@ -75,12 +133,11 @@ const Profile = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormValues((prevState) => ({ ...prevState, [name]: value }));
+    setUser((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleClean = (name: string) => {
-    // const { name } = e.name;
-    setFormValues((prevForm) => ({ ...prevForm, [name]: "" }));
+    setUser((prevForm) => ({ ...prevForm, [name]: "" }));
   };
 
   return (
@@ -101,6 +158,11 @@ const Profile = () => {
         aria-describedby="alert-dialog-description"
         sx={{
           color: "#F00",
+        }}
+        PaperProps={{
+          sx: {
+            borderRadius: "25px",
+          },
         }}
       >
         <DialogTitle
@@ -146,7 +208,7 @@ const Profile = () => {
             autoFocus
           >
             <Logout />
-            Log-out
+            &nbsp;Log-out
           </Button>
         </DialogActions>
       </Dialog>
@@ -181,12 +243,24 @@ const Profile = () => {
           </div>
           <div className="credentials">
             <Typography variant="h6" color="initial">
-              {formValues.name}
+              {`${user.lastName} ${user.name}`}
             </Typography>
             <div className="informations">
+              <Typography
+                variant="body1"
+                color="error"
+                sx={{
+                  widh: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  fontWeight: "bold",
+                }}
+              >
+                {error}
+              </Typography>
               <TextField
                 name="medicalID"
-                value={formValues.medicalID}
+                value={user.medicalID}
                 onChange={handleChange}
                 disabled={!editable}
                 label={editable ? "Medical ID" : null}
@@ -206,7 +280,7 @@ const Profile = () => {
                       <>
                         {editable && (
                           <>
-                            {formValues.medicalID != "" && (
+                            {user.medicalID != "" && (
                               <IconButton
                                 sx={{ color: "#F00", p: "0px" }}
                                 onClick={() => handleClean("medicalID")}
@@ -225,7 +299,7 @@ const Profile = () => {
                 name="allergies"
                 disabled={!editable}
                 label={editable ? "Allergies" : null}
-                value={formValues.allergies}
+                value={user.allergies}
                 onChange={handleChange}
                 sx={{ width: "100%" }}
                 slotProps={{
@@ -243,7 +317,7 @@ const Profile = () => {
                       <>
                         {editable && (
                           <>
-                            {formValues.allergies != "" && (
+                            {user.allergies != "" && (
                               <IconButton
                                 sx={{ color: "#F00", p: "0px" }}
                                 onClick={() => handleClean("allergies")}
@@ -260,7 +334,7 @@ const Profile = () => {
               />
               <TextField
                 name="phone"
-                value={formValues.phone}
+                value={user.phone}
                 onChange={handleChange}
                 disabled={!editable}
                 label={editable ? "Phone Number" : null}
@@ -276,7 +350,7 @@ const Profile = () => {
                       <>
                         {editable && (
                           <>
-                            {formValues.phone != "" && (
+                            {user.phone != "" && (
                               <IconButton
                                 sx={{ color: "#F00", p: "0px" }}
                                 onClick={() => handleClean("phone")}
@@ -293,7 +367,7 @@ const Profile = () => {
               />
               <TextField
                 name="email"
-                value={formValues.email}
+                value={user.email}
                 onChange={handleChange}
                 disabled={!editable}
                 label={editable ? "Email" : null}
@@ -310,7 +384,7 @@ const Profile = () => {
                       <>
                         {editable && (
                           <>
-                            {formValues.email != "" && (
+                            {user.email != "" && (
                               <IconButton
                                 sx={{ color: "#F00", p: "0px" }}
                                 onClick={() => handleClean("email")}
@@ -326,8 +400,9 @@ const Profile = () => {
                 }}
               />
               <TextField
+                multiline
                 name="address"
-                value={formValues.address}
+                value={user.address}
                 onChange={handleChange}
                 disabled={!editable}
                 label={editable ? "Address" : null}
@@ -347,7 +422,7 @@ const Profile = () => {
                       <>
                         {editable && (
                           <>
-                            {formValues.address != "" && (
+                            {user.address != "" && (
                               <IconButton
                                 sx={{ color: "#F00", p: "0px" }}
                                 onClick={() => handleClean("address")}
@@ -365,6 +440,20 @@ const Profile = () => {
             </div>
           </div>
         </div>
+        <Snackbar
+          open={openSnack}
+          autoHideDuration={4000}
+          onClose={handleCloseSnack}
+        >
+          <Alert
+            onClose={handleCloseSnack}
+            severity="success"
+            variant="filled"
+            sx={{ width: "100%" }}
+          >
+            User Profile edited successfully.!
+          </Alert>
+        </Snackbar>
         <Button
           type="submit"
           variant="contained"
