@@ -45,8 +45,6 @@ export interface ITherapy {
 
 export const therapySchema: Record<string, validationType> = {
   name: isNoEmpty,
-  notes: isNoEmpty,
-  
 };
 
 export function validationTherapy(name: string, value: string): string {

@@ -1,4 +1,9 @@
-import React, { ChangeEvent, useState, useEffect, FormEvent } from "react";
+import {
+  ChangeEvent,
+  useState,
+  useEffect,
+  FormEvent,
+} from "react";
 import {
   TextField,
   Button,
@@ -37,9 +42,9 @@ function AddEditTherapy() {
   const [medicineSelected, setMedicineSelected] = useState<string[]>([]);
   const [medicines, setMedicines] = useState<IMedecine[]>([]);
   const [contacts, setContacts] = useState<IContact[]>([]);
-  const [doctorError, setDoctorError] = useState<string>("");
+  const [contactError, setContactError] = useState<string>("");
   const [doctors, setDoctors] = useState<IContact>({
-    id: 0,
+    id: "",
     name: "",
     notes: "",
     qualification: "",
@@ -55,6 +60,8 @@ function AddEditTherapy() {
   const [errors, setErrors] = useState<formError>({
     name: "",
   });
+
+  const [errorDoctor, setErrorDoctor] = useState<string>();
 
   const getMedication = async (): Promise<void> => {
     try {
@@ -73,7 +80,7 @@ function AddEditTherapy() {
       const data = await response.json();
       setContacts(data);
     } catch {
-      setDoctorError("Failed to load medecines");
+      setContactError("Failed to load medecines");
     }
   };
 
@@ -110,26 +117,20 @@ function AddEditTherapy() {
   };
 
   const handleDoctor = (e: SelectChangeEvent<string>): void => {
-    const doc = contacts.find(
-      (contact) => contact.id === parseInt(e.target.value)
-    );
+    const doc = contacts.find((contact) => contact.id === e.target.value);
     console.log(doc);
     if (doc) {
       setDoctors(doc);
-    }
-    setErrors((prevState) => ({
-      ...prevState,
-      doctor: "",
-    }));
-    console.log(doctors);
+      setErrorDoctor("");
+    } 
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     const validationErrors = therapyForm(therapies);
-
+   
     if (Object.keys(validationErrors).length === 0) {
-      if (medicineSelected.length !== 0 && doctors && doctors.id !== 0) {
+      if (doctors.id !== "") {
         try {
           const newTherapy: ITherapy = {
             id: 3,
@@ -152,13 +153,46 @@ function AddEditTherapy() {
           }
           handleBack();
         } catch {
-          setAddError("Add  therapy failed");
+          setAddError("Add therapy failed");
         }
       } else {
-        setErrors((prevState) => ({
-          ...prevState,
-          doctor: "This field is required",
-        }));
+        setErrorDoctor("This field is required");
+      }
+    } else {
+      setErrors(validationErrors);
+    }
+  };
+
+  const handleAddPrescription = async (): Promise<void> => {
+    const validationErrors = therapyForm(therapies);
+    if (Object.keys(validationErrors).length === 0) {
+      if (doctors.id !== "") {
+        try {
+          const newTherapy: ITherapy = {
+            id: 4,
+            name: therapies.name,
+            userId: 2,
+            contact: doctors.id,
+            notes: therapies.notes,
+          };
+
+          const result = await fetch("http://localhost:80/therapies", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify(newTherapy),
+          });
+          if (!result.ok) {
+            setAddError("Add therapy failed");
+          }
+          navigate("program");
+        } catch {
+          setAddError("Add therapy failed");
+        }
+      } else {
+        setErrorDoctor("This field is required");
       }
     } else {
       setErrors(validationErrors);
@@ -236,6 +270,7 @@ function AddEditTherapy() {
                         <Button
                           sx={{ color: "white" }}
                           className="medecine-button"
+                          onClick={handleAddPrescription}
                         >
                           ADD PROGRAM
                         </Button>
@@ -291,9 +326,8 @@ function AddEditTherapy() {
                     name="doctor"
                     label="Select a doctor"
                     onChange={handleDoctor}
-                    error={!!errors.doctor}
+                    error={!!errorDoctor}
                   >
-                    <MenuItem key={0} value={0}></MenuItem>
                     {contacts.length !== 0 ? (
                       contacts.map((item) => {
                         return (
@@ -303,12 +337,10 @@ function AddEditTherapy() {
                         );
                       })
                     ) : (
-                      <MenuItem>{doctorError}</MenuItem>
+                      <MenuItem>{contactError}</MenuItem>
                     )}
                   </Select>
-                  {errors.doctor && (
-                    <p className="decoration">{errors.doctor}</p>
-                  )}
+                  {errorDoctor && <p className="decoration">{errorDoctor}</p>}
                 </FormControl>
               </Box>
               <Box className="element" sx={{ gap: "20" }}>

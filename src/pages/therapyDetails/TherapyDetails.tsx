@@ -46,9 +46,8 @@ function TherapyDetails() {
     contact: 0,
   });
   const [error, setError] = useState<string>("");
-  const [prescriptions, setPrescriptions] = useState<IPrescription[]>([]);
   const [doctor, setDoctor] = useState<IContact>({
-    id: 0,
+    id: "",
     name: "",
     notes: "",
     qualification: "",
@@ -65,7 +64,7 @@ function TherapyDetails() {
 
   const getTherapy = async (id: number) => {
     try {
-      const result = await fetch(`http://localhost:3000/therapies?id=${id}`);
+      const result = await fetch(`http://localhost:80/therapies?id=${id}`);
       const data = await result.json();
       setTherapy(data[0]);
       getDoctor(data[0].contact);
@@ -77,10 +76,9 @@ function TherapyDetails() {
   const getPrescriptionsWithTherapyId = async (id: number) => {
     try {
       const prescriptions = await fetch(
-        `http://localhost:3000/prescriptions?therapy=${id}`
+        `http://localhost:80/prescriptions?therapy=${id}`
       );
       const data = await prescriptions.json();
-      setPrescriptions(data);
       getMedicines(data);
     } catch {
       setError("Something are wrong when prescriptions are found,try againt");
@@ -90,7 +88,7 @@ function TherapyDetails() {
   const getMedicines = async (prescript: IPrescription[]) => {
     let med: IMedicine[] = [];
     try {
-      const medicines = await fetch(`http://localhost:3000/medicines`);
+      const medicines = await fetch(`http://localhost:80/medicines`);
       const data = await medicines.json();
       prescript.forEach((item) => {
         const filtered = data.filter(
@@ -107,7 +105,7 @@ function TherapyDetails() {
 
   const getDoctor = async (id: number) => {
     try {
-      const doctor = await fetch(`http://localhost:3000/contacts?id=${id}`);
+      const doctor = await fetch(`http://localhost:80/contacts?id=${id}`);
       const data = await doctor.json();
       setDoctor(data[0]);
     } catch {
@@ -133,7 +131,7 @@ function TherapyDetails() {
 
   const handleDelete = async () => {
     try {
-        const response = await fetch(`http://localhost:3000/therapies/${therapy.id}`, {
+        const response = await fetch(`http://localhost:80/therapies/${therapy.id}`, {
           method: 'DELETE', // méthode HTTP DELETE
           headers: {
             'Content-Type': 'application/json', // Spécifiez le type de contenu si nécessaire
