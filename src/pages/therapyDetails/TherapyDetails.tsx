@@ -48,7 +48,7 @@ function TherapyDetails() {
   const [error, setError] = useState<string>("");
   const [prescriptions, setPrescriptions] = useState<IPrescription[]>([]);
   const [doctor, setDoctor] = useState<IContact>({
-    id: 0,
+    id: "0",
     name: "",
     notes: "",
     qualification: "",
