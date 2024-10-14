@@ -1,4 +1,16 @@
 {
+  "me": {
+    "id": "1",
+    "name": "Greco",
+    "username": "Francesca",
+    "lastName": "Francesca",
+    "image": "",
+    "allergies": "No Allergies",
+    "phone": "(555) 1234-5678",
+    "email": "francesca.greco@example.com",
+    "address": "123 Vision Lane, Suite 200, City Ville, ST 1234567",
+    "medicalID": "GRCFNCXXXXXXXXYY"
+  },
   "users": [
     {
       "id": "1",
