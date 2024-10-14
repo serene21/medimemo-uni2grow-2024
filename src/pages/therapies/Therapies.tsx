@@ -4,13 +4,13 @@ import { Typography, IconButton, InputBase, Paper } from "@mui/material";
 import addIcon from "../../assets/images/therapie/add_circle.png";
 import SearchIcon from "../../assets/images/therapie/Icon.png";
 import forwardIcon from "../../assets/images/therapie/arrow_forward_ios.png";
-import { Therapie } from "../../models/Therapie";
+import { ITherapy } from "../../models/Therapy";
 import Header from "../../components/header/Header";
 import { useNavigate } from "react-router-dom";
 
 export default function Therapies() {
   const navigate = useNavigate();
-  const [therapies, setTherapies] = useState<Therapie[]>([]);
+  const [therapies, setTherapies] = useState<ITherapy[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [error, setError] = useState<string>("");
 
@@ -18,7 +18,7 @@ export default function Therapies() {
     const getTherapies = async (): Promise<void> => {
       try {
         const response = await fetch("http://localhost:3000/therapies");
-        const data: Therapie[] = await response.json();
+        const data: ITherapy[] = await response.json();
         setTherapies(data);
       } catch {
         setError("Erreur lors de la récupération des thérapies:");
@@ -28,18 +28,22 @@ export default function Therapies() {
     getTherapies();
   }, []);
 
-  const filteredTherapies = therapies?.filter((therapie: Therapie) =>
+  const filteredTherapies = therapies?.filter((therapie: ITherapy) =>
     therapie.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  function emptyTherapies(therapies: Therapie[]): boolean {
+  function emptyTherapies(therapies: ITherapy[]): boolean {
     return therapies.length === 0;
   }
   function isNull(error: string): boolean {
     return error === "";
   }
 
-  const handleClick = () => {
+  const handleDetails = (id: number ) => {
+    navigate('details', {state: {value: id}})
+  }
+
+  const handleAdd = () => {
     navigate("add");
   }
 
@@ -78,7 +82,7 @@ export default function Therapies() {
             ) : emptyTherapies(therapies) ? (
               <Typography>No therapy available</Typography>
             ) : (
-              filteredTherapies.map((therapie: Therapie) => (
+              filteredTherapies.map((therapie: ITherapy) => (
                 <Paper
                   key={therapie.id}
                   component="form"
@@ -91,6 +95,7 @@ export default function Therapies() {
                     paddingTop: 1.5,
                     paddingBottom: 1.5,
                   }}
+                  onClick={()=>handleDetails(therapie.id)}
                 >
                   <div className="therapyName">
                     <Typography
@@ -113,8 +118,7 @@ export default function Therapies() {
             )}
           </div>
         </div>
-
-        <div className="addContainer" onClick={handleClick}>
+        <div className="addContainer" onClick={handleAdd}>
           <img src={addIcon} alt="add icon" />
         </div>
       </div>
