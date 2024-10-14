@@ -6,10 +6,10 @@ import AddEditTherapy from "./pages/addEditTherapy/AddEditTherapy.tsx";
 import Medications from "./pages/medications/Medications.tsx"
 import MedicationDetails from "./pages/medicationDetails/MedicationDetails.tsx";
 import TherapyDetails from "./pages/therapyDetails/TherapyDetails.tsx";
+import Profile from "./pages/profile/Profile";
 import Contacts from "./pages/contacts/Contacts.tsx";
 import AddEditContact from "./pages/addEditContact/AddEditContact.tsx";
 import DoctorDetails from "./pages/doctorDetails/DoctorDetails.tsx";
-import Profil from "./pages/profil/Profil.tsx";
 import Program from "./pages/program/Program.tsx";
 
 const router = createBrowserRouter([
@@ -24,6 +24,14 @@ const router = createBrowserRouter([
   },
   {
     path: "/",
+    loader: () => redirect("/login"),
+  },
+  {
+    path: "/profile",
+    element: <Profile />,
+  },
+
+  {
     element: <Layout />,
     children: [
       {
@@ -99,11 +107,6 @@ const router = createBrowserRouter([
           },
         ],
       },
-      {
-        path: "profil",
-        element: <Profil />,
-      },
-      
     ],
   },
 ]);

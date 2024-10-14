@@ -66,7 +66,7 @@ function AddEditTherapy() {
   const getMedication = async (): Promise<void> => {
     try {
       setMedicationError("");
-      const response = await fetch("http://localhost:80/medicines");
+      const response = await fetch("http://localhost:3000/medicines");
       const data = await response.json();
       setMedicines(data);
     } catch {
@@ -76,7 +76,7 @@ function AddEditTherapy() {
 
   const getDoctor = async (): Promise<void> => {
     try {
-      const response = await fetch("http://localhost:80/contacts");
+      const response = await fetch("http://localhost:3000/contacts");
       const data = await response.json();
       setContacts(data);
     } catch {
@@ -140,7 +140,7 @@ function AddEditTherapy() {
             notes: therapies.notes,
           };
 
-          const result = await fetch("http://localhost:80/therapies", {
+          const result = await fetch("http://localhost:3000/therapies", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -176,7 +176,7 @@ function AddEditTherapy() {
             notes: therapies.notes,
           };
 
-          const result = await fetch("http://localhost:80/therapies", {
+          const result = await fetch("http://localhost:3000/therapies", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
