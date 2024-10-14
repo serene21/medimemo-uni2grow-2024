@@ -1,4 +1,16 @@
 {
+  "me": {
+    "id": "1",
+    "name": "Greco",
+    "username": "Francesca",
+    "lastName": "Francesca",
+    "image": "",
+    "allergies": "No Allergies",
+    "phone": "(555) 1234-5678",
+    "email": "francesca.greco@example.com",
+    "address": "123 Vision Lane, Suite 200, City Ville, ST 1234567",
+    "medicalID": "GRCFNCXXXXXXXXYY"
+  },
   "users": [
     {
       "id": "1",
@@ -57,26 +69,6 @@
   ],
   "contacts": [
     {
-      "name": "Lena Daina",
-      "notes": "htdgfgffghffghfhfgffhjfjhhffjfhhffyfyufufyfyfufyfyffytftfffuyffuyfufffyftfyuffytfyfyfyfytftyfftyfyfffyfyftyfyfyftyftufffiuyrtfgyftddrdeshfjgbvycdsrestdyfvbvughjbjbbbbbhbhjyfvhcghfhv\n\n",
-      "qualification": "Dr",
-      "profession": "Neurologist",
-      "phone": "9034812344903242",
-      "email": "lkdcnjd@gmail.com",
-      "address": "",
-      "id": "fdc8"
-    },
-    {
-      "name": "James  Morion",
-      "notes": "c ds;,cd:c,dscq;cq;,:ncdcqs,;:kcjnlsdncfsdlkjncdsj;lcnsdl;cnds;nc dsfv,sfdnvbfds;vsnfvnsnv;n;dnw;vdsnvsdvcssdbnbvds;ncv;dsnc,dsnckjdsnvldsnvsjdbvldnvdsklvndbkjnvckdjckndknc kdbckdsncskdbckdsncdsncfkdsncfkscfkjdncksdncdskcndksnckndscnsdknckndsckjsdncfkdsnckjndsckdjsbcnjkdsncksncksncfkfsncknsdnckdsjnckscksnckscnksncksncksncskcksncksncksnkcsnkcksnck\n",
-      "qualification": "Dr",
-      "profession": "pediatre",
-      "phone": "342343254",
-      "email": "",
-      "address": "",
-      "id": "e144"
-    },
-    {
       "id": "4f3b",
       "name": "bill jordan",
       "notes": "",
@@ -84,16 +76,6 @@
       "profession": "Neurologist",
       "phone": "432142432423",
       "email": "",
-      "address": ""
-    },
-    {
-      "id": "7155",
-      "name": "Jneifer Lowry",
-      "notes": "",
-      "qualification": "Dr",
-      "profession": "teacher",
-      "phone": "1446547654",
-      "email": "lkdcnjd@gmail.com",
       "address": ""
     },
     {
@@ -105,6 +87,16 @@
       "email": "richi@gmail.com",
       "address": "",
       "id": "7982"
+    },
+    {
+      "id": "e50c",
+      "name": "DJI fact",
+      "notes": "",
+      "qualification": "Dr",
+      "profession": "Neurologist",
+      "phone": "2387219",
+      "email": "",
+      "address": ""
     }
   ],
   "prescriptions": [

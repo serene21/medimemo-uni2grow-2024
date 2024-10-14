@@ -40,7 +40,7 @@ function AddEditContact() {
     if (isEditing) {
       navigate(`/contacts/details`, { state: { id: id } });
     } else {
-      navigate("details");
+      navigate("/contacts");
     }
   };
 

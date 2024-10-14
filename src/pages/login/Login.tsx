@@ -73,7 +73,7 @@ function Login() {
         );
         if (isValidUser) {
           setCredentials({ username: "", password: "" });
-          navigate("/dashboard");
+          navigate("/medications");
         } else {
           setSnackbarMessage("Email or password incorrect");
           setOpenSnackbar(true);

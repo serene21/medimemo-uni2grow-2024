@@ -24,10 +24,6 @@ function ModalDialog(props: IModalDialog) {
           sx: {
             borderRadius: "25px",
             bgcolor: "#f8f4f4",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center"
           }
         }}
       >
@@ -58,9 +54,9 @@ function ModalDialog(props: IModalDialog) {
             display: "flex",
             justifyContent: "end",
             alignItems: "end",
-            width: "100%"!,
+    
             margin: 0,
-            paddingRight : 15,
+            paddingRight : 5,
             paddingBottom: 2
           }}
         >
