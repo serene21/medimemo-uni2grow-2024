@@ -1,15 +1,13 @@
-import "./Medication.css";
+import "./Medications.css";
 import List from "@mui/material/List";
-import Picture from "../../assets/images/avatar.svg";
+import logo from "../../assets/images/avatar.svg";
 import Avatar from "@mui/material/Avatar";
-import { IconButton, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { IDose } from "../../models/Dose";
 import ShowDose from "../../components/dose/ShowDose";
-import { useNavigate } from "react-router-dom";
 
-function Medication() {
-  const navigate = useNavigate();
+function Medications() {
   const [medications, setMedications] = useState<IDose[]>([]);
   const [checked, setChecked] = useState<IDose[]>(medications);
   const [error, setError] = useState<string>("");
@@ -73,16 +71,10 @@ function Medication() {
     return dateObj.toLocaleDateString("en-UK", { dateStyle: "full" });
   }
 
-  const onProfileClick = () => {
-    navigate("/profile");
-  }
-
   return (
     <div className="medications-container">
       <div className="head-container">
-        <IconButton onClick={onProfileClick}>
-          <Avatar src={Picture} alt="Avatar" sx={{ width: 75, height: 75 }} />
-        </IconButton>
+        <Avatar src={logo} alt="Avatar" sx={{ width: 75, height: 75 }} />
         <div className="title">
           <Typography variant="h6">Hi, Francesca</Typography>
           <Typography variant="subtitle1">Your Medicines Reminders for today!</Typography>
@@ -133,4 +125,4 @@ function Medication() {
   );
 }
 
-export default Medication;
+export default Medications;
