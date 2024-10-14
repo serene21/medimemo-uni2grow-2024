@@ -8,7 +8,7 @@ import {
   DialogContent,
   Typography
 } from "@mui/material";
-// import { styled } from "@mui/styles";
+
 
 import { IModalDialog } from "../../models/DialogModal";
 import "../../components/modalDialog/ModalDialog.css";
@@ -27,10 +27,9 @@ function ModalDialog(props: IModalDialog) {
           }
         }}
       >
-        {/* Only render title if it's provided */}
+       
         {props.icon && <div className="modalIcon"> {props.icon} </div>}
 
-        {/* Only render title if it's provided */}
 
         {props.title && (
           <DialogTitle id="responsive-dialog-title">
@@ -42,7 +41,7 @@ function ModalDialog(props: IModalDialog) {
         )}
 
         <DialogContent>
-          {/* Only render content if it's provided */}
+          
           {props.content && (
             <DialogContentText id="alert-dialog-description">
               {props.content}

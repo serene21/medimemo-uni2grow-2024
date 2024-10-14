@@ -1,8 +1,14 @@
 import "./AddEditContact.css";
+import { SnackBarComponent } from "../../components/snackBarComponent/SnackBarComponent";
 
 import { useState, useEffect } from "react";
 
-import { TextField, Typography, InputAdornment, Button } from "@mui/material";
+import {
+  TextField,
+  Typography,
+  InputAdornment,
+  Button,
+} from "@mui/material";
 
 import { useFormik } from "formik";
 
@@ -35,7 +41,8 @@ function AddEditContact() {
 
   const { id } = locationID.state || "";
   const isEditing = !!id;
-
+  const [snackBarError, setSnackBarError] = useState<boolean>(false);
+  const [submitError, setSubmitError] = useState<boolean>(false);
   const handleOnClickBackButton = () => {
     if (isEditing) {
       navigate(`/contacts/details`, { state: { id: id } });
@@ -88,7 +95,7 @@ function AddEditContact() {
           navigate("/contacts", { state: { newContact: savedContact } });
         }
       } catch (error) {
-        console.error("Error:", error);
+        setSubmitError(true);
       }
     }
   });
@@ -110,7 +117,7 @@ function AddEditContact() {
             address: data.address || ""
           });
         } catch (error) {
-          console.error("Failed to fetch contact", error);
+          setSnackBarError(true);
         }
       };
       fetchContactById(id!);
@@ -142,9 +149,34 @@ function AddEditContact() {
   }
 
   const title = HeadTitle();
+  const handleSnackbarClose = () => {
+    setSnackBarError(false);
+  };
+
+  const closeSubmitSnackBar = () => {
+    setSnackBarError(false);
+  };
 
   return (
     <>
+      {snackBarError && (
+        <SnackBarComponent
+          open={snackBarError}
+          close={handleSnackbarClose}
+          severity="error"
+          message="failled to fetch contact"
+        />
+      )}
+
+      {submitError && (
+        <SnackBarComponent
+          open={snackBarError}
+          close={closeSubmitSnackBar}
+          severity="error"
+          message="failled to submit data"
+        />
+      )}
+
       <Header
         showBackButton={true}
         title={title}

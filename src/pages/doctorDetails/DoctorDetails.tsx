@@ -127,7 +127,6 @@ export function DoctorDetails(): JSX.Element {
               <Typography
                 sx={{
                   paddingTop: 0.1,
-                  // fontFamily: "Open Sans",
                   fontSize: 14,
                   fontWeight: 400,
                   lineHeight: 2,

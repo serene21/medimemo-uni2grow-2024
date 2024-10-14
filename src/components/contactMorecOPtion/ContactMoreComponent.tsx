@@ -11,11 +11,10 @@ import ClearIcon from "@mui/icons-material/Clear";
 import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
-function ContactMoreComponent(props: IMoreContact) : JSX.Element {
+function ContactMoreComponent(props: IMoreContact): JSX.Element {
   const navigate = useNavigate();
-  const [openModal, setOpenModal] = useState<boolean>(false); // For modal visibility control
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // For menu control
-
+  const [openModal, setOpenModal] = useState<boolean>(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -27,7 +26,7 @@ function ContactMoreComponent(props: IMoreContact) : JSX.Element {
   };
 
   const handleEdit = () => {
-    navigate(`${props.edit}`, {state : {id : props.id}});
+    navigate(`${props.edit}`, { state: { id: props.id } });
     handleClose();
   };
 
@@ -38,7 +37,6 @@ function ContactMoreComponent(props: IMoreContact) : JSX.Element {
       });
 
       if (response.ok) {
-        // Navigate back to contacts list after deletion
         navigate("/contacts");
       } else {
         console.error("Failed to delete the contact");
@@ -48,63 +46,55 @@ function ContactMoreComponent(props: IMoreContact) : JSX.Element {
     }
   };
 
-  const handleDelete = (event: React.MouseEvent<HTMLElement>) => 
-  { 
-    event.stopPropagation(); // Prevent the menu from closing
-    setOpenModal(true); // Open the modal when delete is clicked
-    // if (openModal === false){
-    //   handleClose();
-    // }
+  const handleDelete = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    setOpenModal(true);
   };
 
   const handleModalClose = () => {
-    setOpenModal(false); // Close the modal when canceled
+    setOpenModal(false);
   };
 
   return (
     <>
-      {/* More options button */}
       <div onClick={handleClick}>
         <MoreVert />
       </div>
 
-      {/* Menu with Edit and Delete options */}
       <Menu
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "right",
-          
+          horizontal: "right"
         }}
-        sx={{ width: 2000,
-          // margin:20
-         }}
+        sx={{ width: 2000 }}
         transformOrigin={{
           vertical: "top",
           horizontal: "right"
         }}
       >
-        {props.edit && <MenuItem onClick={handleEdit} sx={{ gap: 3 }}>
-          <img src={edit} alt="edit" />
-          Edit
-        </MenuItem>}
+        {props.edit && (
+          <MenuItem onClick={handleEdit} sx={{ gap: 3 }}>
+            <img src={edit} alt="edit" />
+            Edit
+          </MenuItem>
+        )}
         <MenuItem onClick={handleDelete} sx={{ gap: 3 }}>
           <ClearIcon />
           Delete
         </MenuItem>
       </Menu>
 
-      {/* ModalDialog component for delete confirmation */}
       {openModal && (
         <ModalDialog
           open={openModal}
-          icon={<ReportGmailerrorredIcon  />}
+          icon={<ReportGmailerrorredIcon />}
           title="Deletion Confirmation"
           content="Do you really want to delete this contact? All entered data wilL be lost and cannot be recovered."
-          agreeIcon={<ClearIcon sx={{width: 15, height: 15}} />}
-          disagreeIcon={<ArrowBackIosNewIcon sx={{width: 15, height: 15 }} />}
+          agreeIcon={<ClearIcon sx={{ width: 15, height: 15 }} />}
+          disagreeIcon={<ArrowBackIosNewIcon sx={{ width: 15, height: 15 }} />}
           onAgree={handleAgree}
           onDisagree={handleModalClose}
           agreeMessage="Delete"
@@ -114,5 +104,5 @@ function ContactMoreComponent(props: IMoreContact) : JSX.Element {
     </>
   );
 }
- 
+
 export default ContactMoreComponent;

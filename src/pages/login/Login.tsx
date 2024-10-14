@@ -20,10 +20,13 @@ import {
   validateForm,
   validationField
 } from "../../utils/Validation";
+
+import { SnackBarComponent } from "../../components/snackBarComponent/SnackBarComponent";
 import "./Login.css";
 
 function Login() {
   const navigate = useNavigate();
+  const [loginError, setLoginError] = useState<boolean>(false);
 
   const [credentials, setCredentials] = useState<formValues>({
     username: "",
@@ -82,7 +85,7 @@ function Login() {
         setErrors(validationErrors);
       }
     } catch (error) {
-      console.error(error);
+      setLoginError(true)
     }
   };
 
@@ -92,6 +95,16 @@ function Login() {
 
   return (
     <>
+
+{loginError && (
+        <SnackBarComponent
+          open={loginError}
+          close={handleSnackbarClose}
+          severity="error"
+          message="failled submit data"
+        />
+      )}
+
       <div className="login-container">
         <div className="img">
           <img alt="title" src={oh} />
