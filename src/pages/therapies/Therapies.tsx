@@ -1,7 +1,9 @@
+
+import { FabButton } from "../../components/fabButton/FabButton";
 import { useState, useEffect } from "react";
 import "./Therapies.css";
 import { Typography, IconButton, InputBase, Paper } from "@mui/material";
-import addIcon from "../../assets/images/therapie/add_circle.png";
+
 import SearchIcon from "../../assets/images/therapie/Icon.png";
 import forwardIcon from "../../assets/images/therapie/arrow_forward_ios.png";
 import { ITherapy } from "../../models/Therapy";
@@ -43,9 +45,7 @@ export default function Therapies() {
     navigate('details', {state: {value: id}})
   }
 
-  const handleAdd = () => {
-    navigate("add");
-  }
+ 
 
   return (
     <>
@@ -118,9 +118,7 @@ export default function Therapies() {
             )}
           </div>
         </div>
-        <div className="addContainer" onClick={handleAdd}>
-          <img src={addIcon} alt="add icon" />
-        </div>
+        <FabButton path="add" />
       </div>
     </>
   );
