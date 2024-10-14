@@ -39,36 +39,36 @@
   ],
   "therapies": [
     {
-      "id": "1",
-      "name": "Therapy 1",
+      "name": "Therapy 11",
       "userId": 1,
-      "contact": 2,
-      "notes": "this is the notes"
+      "contact": "1",
+      "notes": "this is the notes of the new test validation therapy ",
+      "id": "1"
     },
     {
-      "id": "2",
       "name": "Therapy 2",
       "userId": 1,
-      "contact": 2,
-      "notes": "this is the notes"
+      "contact": "2",
+      "notes": "this is the notes",
+      "id": "2"
     },
     {
       "id": "3",
       "name": "Mal de ventre",
       "userId": 1,
-      "contact": 3,
+      "contact": "3",
       "notes": "A prendre deux matin et deux soir"
     },
     {
-      "id": "3",
+      "id": "5",
       "name": "Mal de ventre",
       "userId": 1,
-      "contact": 2,
+      "contact": "2",
       "notes": "this is the notes"
     },
     {
-      "id": 4,
-      "name": "mal  de dos",
+      "id": "6",
+      "name": "mal de dos",
       "userId": 2,
       "contact": "3",
       "notes": ""
@@ -128,30 +128,9 @@
   ],
   "prescriptions": [
     {
-      "id": "1",
-      "therapy": 1,
-      "medicine": 2,
-      "dateFrom": "2024-09-19",
-      "dateTo": "2024-10-30"
-    },
-    {
       "id": "2",
       "therapy": 1,
       "medicine": 1,
-      "dateFrom": "2024-09-19",
-      "dateTo": "2024-10-30"
-    },
-    {
-      "id": "3",
-      "therapy": 2,
-      "medicine": 2,
-      "dateFrom": "2024-09-19",
-      "dateTo": "2024-10-30"
-    },
-    {
-      "id": "4",
-      "therapy": 2,
-      "medicine": 3,
       "dateFrom": "2024-09-19",
       "dateTo": "2024-10-30"
     }

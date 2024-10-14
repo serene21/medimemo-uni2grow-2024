@@ -1,9 +1,4 @@
-import {
-  ChangeEvent,
-  useState,
-  useEffect,
-  FormEvent,
-} from "react";
+import { ChangeEvent, useState, useEffect, FormEvent } from "react";
 import {
   TextField,
   Button,
@@ -14,10 +9,11 @@ import {
   InputLabel,
   FormControl,
   SelectChangeEvent,
+  Snackbar,
 } from "@mui/material";
 import SaveIcon from "@mui/icons-material/Save";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./AddEditTherapy.css";
 import {
   formError,
@@ -32,6 +28,7 @@ import { IContact } from "../../models/Contact";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 
 import InputAdornment from "@mui/material/InputAdornment";
+import { IPrescription } from "../../models/Prescription";
 
 function AddEditTherapy() {
   const [therapies, setTherapies] = useState<formValues>({
@@ -39,7 +36,7 @@ function AddEditTherapy() {
     notes: "",
   });
   const [medicationError, setMedicationError] = useState<string>("");
-  const [medicineSelected, setMedicineSelected] = useState<string[]>([]);
+  const [medicineSelected, setMedicineSelected] = useState<IMedecine[]>([]);
   const [medicines, setMedicines] = useState<IMedecine[]>([]);
   const [contacts, setContacts] = useState<IContact[]>([]);
   const [contactError, setContactError] = useState<string>("");
@@ -54,14 +51,22 @@ function AddEditTherapy() {
     address: "",
   });
   const [addError, setAddError] = useState<string>("");
-
-  const navigate = useNavigate();
-
   const [errors, setErrors] = useState<formError>({
     name: "",
   });
-
   const [errorDoctor, setErrorDoctor] = useState<string>();
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const [errorDelete, setErrorDelete] = useState<string>("");
+  const [fetchError, setFetchError] = useState<string>("");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { therapy, doctor, meds } = location.state || {
+    therapy: null,
+    doctor: null,
+    meds: null,
+  };
 
   const getMedication = async (): Promise<void> => {
     try {
@@ -87,6 +92,12 @@ function AddEditTherapy() {
   useEffect(() => {
     getMedication();
     getDoctor();
+    if (therapy && doctor && meds) {
+      setTherapies(therapy);
+      setDoctors(doctor);
+      setMedicineSelected(meds);
+      setIsEdit(true);
+    }
   }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -105,10 +116,13 @@ function AddEditTherapy() {
 
   const handleSelect = (e: SelectChangeEvent<string>): void => {
     const existMedicine = medicineSelected.filter(
-      (item) => item === e.target.value
+      (item) => item.id == parseInt(e.target.value)
     );
     if (existMedicine.length === 0) {
-      setMedicineSelected([...medicineSelected, e.target.value]);
+      const [selected] = medicines.filter(
+        (item) => item.id == parseInt(e.target.value)
+      );
+      setMedicineSelected([...medicineSelected, selected]);
     }
   };
 
@@ -118,40 +132,70 @@ function AddEditTherapy() {
 
   const handleDoctor = (e: SelectChangeEvent<string>): void => {
     const doc = contacts.find((contact) => contact.id === e.target.value);
-    console.log(doc);
     if (doc) {
       setDoctors(doc);
       setErrorDoctor("");
-    } 
+    }
+  };
+
+  const handleNotes = (e: ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target;
+    setTherapies((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     const validationErrors = therapyForm(therapies);
-   
+
     if (Object.keys(validationErrors).length === 0) {
       if (doctors.id !== "") {
         try {
-          const newTherapy: ITherapy = {
-            id: 3,
-            name: therapies.name,
-            userId: 1,
-            contact: doctors.id,
-            notes: therapies.notes,
-          };
+          let result: Response | null = null;
+          if (isEdit) {
+            const updatedTherapy: ITherapy = {
+              name: therapies.name,
+              userId: therapies.userId,
+              contact: doctors.id,
+              notes: therapies.notes,
+            };
 
-          const result = await fetch("http://localhost:3000/therapies", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
+            result = await fetch(
+              `http://localhost:3000/therapies/${therapies.id}`,
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(updatedTherapy),
+              }
+            );
+          } else {
+            const newTherapy: ITherapy = {
+              id: "7",
+              name: therapies.name,
+              userId: 1,
+              contact: doctors.id,
+              notes: therapies.notes,
+            };
 
-            body: JSON.stringify(newTherapy),
-          });
+            result = await fetch("http://localhost:3000/therapies", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+
+              body: JSON.stringify(newTherapy),
+            });
+          }
+
           if (!result.ok) {
             setAddError("Add therapy failed");
+          } else {
+            handleBack();
           }
-          handleBack();
         } catch {
           setAddError("Add therapy failed");
         }
@@ -169,7 +213,7 @@ function AddEditTherapy() {
       if (doctors.id !== "") {
         try {
           const newTherapy: ITherapy = {
-            id: 4,
+            id: "4",
             name: therapies.name,
             userId: 2,
             contact: doctors.id,
@@ -199,6 +243,49 @@ function AddEditTherapy() {
     }
   };
 
+  const handleRemove = async (element: IMedecine): Promise<void> => {
+    if (isEdit) {
+      try {
+        const result = await fetch(
+          `http://localhost:3000/prescriptions?therapy=${therapies.id}`
+        );
+
+        const prescriptions = await result.json();
+        const [remove] = prescriptions.filter(
+          (item: IPrescription) => item.medicine == element.id
+        );
+
+        try {
+          const request = await fetch(
+            `http://localhost:3000/prescriptions/${remove.id}`,
+            {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            }
+          );
+
+          if (!request.ok) {
+            throw new Error(
+              `Erreur lors de la suppression : ${request.status}`
+            );
+          }
+        } catch (e) {
+          setErrorDelete(`Erreur: ${e}`);
+        }
+      } catch (error) {
+        setFetchError(`Erreur: ${error}`);
+      }
+    }
+    setMedicineSelected(medicineSelected.filter((med) => element !== med));
+  };
+
+  const handleClose = () => {
+    setFetchError("");
+    setErrorDelete("");
+  };
+
   return (
     <>
       <form className="therapy-page" onSubmit={handleSubmit}>
@@ -213,11 +300,12 @@ function AddEditTherapy() {
                 width: "100%",
               }}
             >
-              New therapy
+              {isEdit ? "Edit" : "New"} therapy
             </Box>
             <TextField
               label="New therapy"
               name="name"
+              value={isEdit ? therapies.name : ""}
               className="therapieField"
               sx={{ width: "100%" }}
               margin="normal"
@@ -239,12 +327,12 @@ function AddEditTherapy() {
           </Box>
           {medicineSelected.length !== 0 ? (
             <>
-              {medicineSelected.map((item, index) => (
-                <Box className="element" key={index} sx={{ gap: "20" }}>
+              {medicineSelected.map((item) => (
+                <Box className="element" key={item.id} sx={{ gap: "20" }}>
                   <div className="panel-element">
                     <div className="medecine-name">
                       <div className="medecine-name-title">
-                        <Box className="medecine-title">{item}</Box>
+                        <Box className="medecine-title">{item.name}</Box>
                       </div>
                       <div className="medecine-title-button">
                         <ArrowForwardIosIcon />
@@ -252,11 +340,7 @@ function AddEditTherapy() {
                     </div>
                     <div className="aline-button">
                       <div
-                        onClick={() =>
-                          setMedicineSelected(
-                            medicineSelected.filter((value) => value !== item)
-                          )
-                        }
+                        onClick={() => handleRemove(item)}
                         className="medecine-name-button"
                       >
                         <Button
@@ -299,7 +383,7 @@ function AddEditTherapy() {
                     {!medicationError ? (
                       medicines.map((item) => {
                         return (
-                          <MenuItem key={item.id} value={item.name}>
+                          <MenuItem key={item.id} value={item.id}>
                             {item.name}
                           </MenuItem>
                         );
@@ -322,7 +406,7 @@ function AddEditTherapy() {
                 <FormControl fullWidth margin="normal">
                   <InputLabel>Select a doctor</InputLabel>
                   <Select
-                    value={String(doctors.id)}
+                    value={doctors.id}
                     name="doctor"
                     label="Select a doctor"
                     onChange={handleDoctor}
@@ -359,8 +443,9 @@ function AddEditTherapy() {
                   sx={{ width: "100%", height: "83px" }}
                   margin="normal"
                   name="notes"
+                  value={therapies.notes}
                   label="Write your notes here"
-                  onChange={handleChange}
+                  onChange={handleNotes}
                 />
               </Box>
             </>
@@ -378,15 +463,13 @@ function AddEditTherapy() {
                 <InputLabel>Select one or more medicines</InputLabel>
                 <Select
                   value=""
-                  onChange={(e) =>
-                    setMedicineSelected([...medicineSelected, e.target.value])
-                  }
+                  onChange={handleSelect}
                   label="Select one or more medicines"
                 >
                   {!medicationError ? (
                     medicines.map((item) => {
                       return (
-                        <MenuItem key={item.id} value={item.name}>
+                        <MenuItem key={item.id} value={item.id}>
                           {item.name}
                         </MenuItem>
                       );
@@ -426,6 +509,18 @@ function AddEditTherapy() {
           )}
         </div>
       </form>
+      <Snackbar
+        open={!!fetchError}
+        autoHideDuration={10000}
+        onClose={handleClose}
+        message={fetchError}
+      />
+      <Snackbar
+        open={!!errorDelete}
+        autoHideDuration={10000}
+        onClose={handleClose}
+        message={errorDelete}
+      />
     </>
   );
 }
