@@ -8,7 +8,7 @@ import AddEditTherapie from "./pages/addEditTherapie/AddEditTherapie.tsx";
 import Profile from "./pages/profile/Profile";
 import Contacts from "./pages/contacts/Contacts.tsx";
 import AddEditContact from "./pages/addEditContact/AddEditContact.tsx";
-import DoctorDetails from "./pages/doctorDetails/DoctorDetails.tsx";
+import {DoctorDetails} from "./pages/doctorDetails/DoctorDetails.tsx";
 import Program from "./pages/program/Program.tsx";
 import { Therapies } from "./pages/therapies/Therapies.tsx";
 import TherapyDetails from "./pages/therapyDetails/TherapyDetails.tsx"
@@ -35,6 +35,10 @@ const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
+      {
+        path: "/medications",
+        element: <Medications />
+      },
       {
         path: "medications",
         children: [

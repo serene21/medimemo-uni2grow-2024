@@ -69,54 +69,34 @@
   ],
   "contacts": [
     {
-      "id": "1",
-      "name": "Sarah Davis",
+      "id": "4f3b",
+      "name": "bill jordan",
+      "notes": "",
       "qualification": "Dr",
-      "phone": "+237 656585542",
-      "email": "davis@gmail.com",
-      "address": "Dschang, Cameroun",
-      "profession": "Pediatrician",
-      "notes": ""
+      "profession": "Neurologist",
+      "phone": "432142432423",
+      "email": "",
+      "address": ""
     },
     {
-      "id": "2",
-      "name": "Laura Thompson",
+      "name": "Richi le rich",
+      "notes": "",
       "qualification": "Dr",
-      "phone": "+237 674772917",
-      "email": "laura@gmail.com",
-      "address": "Douala, Cameroun",
-      "profession": "Ophthalmologist",
-      "notes": ""
+      "profession": "pharmacian",
+      "phone": "143894935",
+      "email": "richi@gmail.com",
+      "address": "",
+      "id": "7982"
     },
     {
-      "id": "3",
-      "name": "John Smith",
+      "name": "Merveil Sandra",
+      "notes": "lkeijrioezjrd ezrio\"d azadiozpa ",
       "qualification": "Dr",
-      "phone": "+237 677345741",
-      "email": "john@gmail.com",
-      "address": "Yaounde, Cameroun",
-      "profession": "Cardiologist",
-      "notes": ""
-    },
-    {
-      "id": "4",
-      "name": "John Smith",
-      "qualification": "Dr",
-      "phone": "+237 677345741",
-      "email": "john@gmail.com",
-      "address": "Yaounde, Cameroun",
-      "profession": "Cardiologist",
-      "notes": ""
-    },
-    {
-      "id": "5",
-      "name": "John Smith",
-      "qualification": "Dr",
-      "phone": "+237 677345741",
-      "email": "john@gmail.com",
-      "address": "Yaounde, Cameroun",
-      "profession": "Cardiologist",
-      "notes": ""
+      "profession": "Dentist",
+      "phone": "432142432423",
+      "email": "Jeremy@gmail.com",
+      "address": "France",
+      "id": "a70e"
     }
   ],
   "prescriptions": [
