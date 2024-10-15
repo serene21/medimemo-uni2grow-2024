@@ -27,7 +27,7 @@ function ShowDose(props: DoseProps) {
                     backgroundColor: props.item.taken ? alpha("#4DD8A7", 0.1) : "transparent",
                 }}
                 role={undefined}
-                onClick={() => navigate(`/medications/details/${props.item.prescriptionTime}`)}
+                onClick={() => navigate(`/medications/${props.item.prescriptionTime}`)}
                 dense
             >
                 <ListItemAvatar>
