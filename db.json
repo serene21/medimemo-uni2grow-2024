@@ -39,39 +39,11 @@
   ],
   "therapies": [
     {
-      "name": "Therapy 11",
+      "name": "Arythmie",
       "userId": 1,
       "contact": "a70e",
-      "notes": "this is the notes of the new test validation therapy ",
-      "id": "1"
-    },
-    {
-      "name": "Therapy 2",
-      "userId": 1,
-      "contact": "a70e",
-      "notes": "this is the notes",
-      "id": "2"
-    },
-    {
-      "id": "3",
-      "name": "Mal de ventre",
-      "userId": 1,
-      "contact": "7982",
-      "notes": "A prendre deux matin et deux soir"
-    },
-    {
-      "id": "5",
-      "name": "Mal de ventre",
-      "userId": 1,
-      "contact": "a70e",
-      "notes": "this is the notes"
-    },
-    {
-      "id": "6",
-      "name": "mal de dos",
-      "userId": 2,
-      "contact": "4f3b",
-      "notes": ""
+      "notes": "Le coeur est important",
+      "id": "584d"
     }
   ],
   "contacts": [
@@ -108,8 +80,8 @@
   ],
   "prescriptions": [
     {
-      "id": "2",
-      "therapy": 1,
+      "id": "1",
+      "therapy": "584d",
       "medicine": 1,
       "dateFrom": "2024-09-19",
       "dateTo": "2024-10-30"
