@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./AppNavigation.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Typography, Button } from "@mui/material";
+import { Typography } from "@mui/material";
 import { ItemNavigation, dataItem } from "../../utils/navigationData";
 
 export function AppNavigation() {
@@ -14,21 +14,19 @@ export function AppNavigation() {
     setActivePage(location.pathname);
   }, [location.pathname]);
 
+  const handleNavigate = (path: string ) => {
+    setActivePage(path);
+    navigate(path);
+  }
+
   return (
     <div className="menuBot">
       <div className="sub-menuBot">
         {dataItem.map((item: ItemNavigation) => (
-          <Button
-            variant="text"
-            color="inherit"
-            sx={{ textTransform: "capitalize" }}
-            onClick={() => navigate(item.path)}
-            key={item.path}
-          >
+          <div color="inherit" onClick={() => handleNavigate(item.path)} key={item.path} >
             <div
               key={item.path}
               className="menuBottomItem"
-              onClick={() => setActivePage(item.path)}
             >
               <div
                 className={
@@ -52,7 +50,7 @@ export function AppNavigation() {
                 {item.name}
               </Typography>
             </div>
-          </Button>
+          </div>
         ))}
       </div>
     </div>
