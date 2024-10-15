@@ -123,14 +123,14 @@
     {
       "id": "1",
       "therapy": 1,
-      "medicine": 2,
+      "medicine": 1,
       "dateFrom": "2024-09-19",
       "dateTo": "2024-10-30"
     },
     {
       "id": "2",
       "therapy": 1,
-      "medicine": 1,
+      "medicine": 2,
       "dateFrom": "2024-09-19",
       "dateTo": "2024-10-30"
     },
@@ -169,7 +169,15 @@
     {
       "id": "1",
       "name": "Arthrose",
-      "leaflet": ""
+      "leaflet": "",
+      "description": "Ophthalmic solution with anti-inflammatory activity suitable for cases of eye burning and conjunctivitis.",
+      "dosage": "30 mg/tablet, 1 tablet daily",
+      "methodOfAdministraion": "- For ophtalmic use only - Shake the bottle well defore use - Tilt head back, pull down the lowed eyelid, and apply drops - Avoid touching the dropper tip to any surface, including the eye",
+      "contraindications": "none",
+      "warning": "none",
+      "sideEffects": "none",
+      "interactions": "none",
+      "storage": "room temperature"
     }
   ],
   "doses": [

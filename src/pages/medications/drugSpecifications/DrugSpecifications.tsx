@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import FileSave from "../../../assets/images/medications/drug/file_save.svg";
 import Header from "../../../components/header/Header";
 import "./drug.css";
@@ -10,36 +10,56 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-
-interface Drug {
-  dosage: string;
-  methodOfAdministraion: string;
-  contraindications: string;
-  warning: string;
-  sideEffects: string;
-  interactions: string;
-  storage: string;
-}
-
-const data: Drug = {
-  dosage: "30 mg/tablet, 1 tablet daily",
-  methodOfAdministraion: `- For ophtalmic use only
-   - Shake the bottle well defore use
-   - Tilt head back, pull down the lowed eyelid, and apply drops
-   - Avoid touching the dropper tip to any surface, including the eye`,
-  contraindications: "none",
-  warning: "none",
-  sideEffects: "none",
-  interactions: "none",
-  storage: "room temperature",
-};
+import { IDrug } from "../../../models/Drug";
+import { IPrescription } from "../../../models/Prescription";
+import { IMedicine } from "../../../models/Medicine";
 
 function DrugSpecifications() {
   const navigate = useNavigate();
-  const drug: Drug = data;
+  const {id} = useParams();
+  const [drug, setDrug] = useState<IDrug>({
+    dosage: "",
+    methodOfAdministraion: "",
+    contraindications: "",
+    warning: "",
+    sideEffects: "",
+    interactions: "",
+    storage: ""
+  });
+  const [medication, setMedication] = useState<IMedicine>({
+    name: ""
+  });
   const [openItems, setOpenItems] = useState<{ [key: string]: boolean }>({});
+  const [error, setError] = useState<string>("");
+
+  const getDrugSpecifications = async (): Promise<void> => {
+    try {
+      setError("");
+      const result = await fetch(`http://localhost:3000/prescriptions/${id}`)
+      const prescription: IPrescription = await result.json();
+      const response = await fetch(`http://localhost:3000/medicines/${prescription.id}`);
+      const medicine: IMedicine = await response.json();
+      setMedication(medicine);
+      const specif: IDrug = {
+        dosage: medicine.dosage ?? "",
+        methodOfAdministraion: medicine.methodOfAdministraion ?? "",
+        contraindications: medicine.contraindications ?? "",
+        warning: medicine.warning ?? "",
+        sideEffects: medicine.sideEffects ?? "",
+        interactions: medicine.interactions ?? "",
+        storage: medicine.storage ?? "",
+      }
+      setDrug(specif);
+    } catch {
+      setError("Error fetching drug specifications:");
+    }
+  }
+
+  useEffect(() => {
+    getDrugSpecifications();
+  }, []);
 
   const handleClick = (key: string) => {
     setOpenItems((prevOpenItems) => ({
@@ -83,8 +103,7 @@ function DrugSpecifications() {
               lineHeight: "25px",
             }}
           >
-            Ophthalmic solution with anti-inflammatory activity suitable for
-            cases of eye burning and conjunctivitis.
+            {medication.description}
           </Typography>
         </div>
         <List
