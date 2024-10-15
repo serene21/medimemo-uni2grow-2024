@@ -41,14 +41,14 @@
     {
       "name": "Therapy 11",
       "userId": 1,
-      "contact": "1",
+      "contact": "a70e",
       "notes": "this is the notes of the new test validation therapy ",
       "id": "1"
     },
     {
       "name": "Therapy 2",
       "userId": 1,
-      "contact": "2",
+      "contact": "a70e",
       "notes": "this is the notes",
       "id": "2"
     },
@@ -56,21 +56,21 @@
       "id": "3",
       "name": "Mal de ventre",
       "userId": 1,
-      "contact": "3",
+      "contact": "7982",
       "notes": "A prendre deux matin et deux soir"
     },
     {
       "id": "5",
       "name": "Mal de ventre",
       "userId": 1,
-      "contact": "2",
+      "contact": "a70e",
       "notes": "this is the notes"
     },
     {
       "id": "6",
       "name": "mal de dos",
       "userId": 2,
-      "contact": "3",
+      "contact": "4f3b",
       "notes": ""
     }
   ],
