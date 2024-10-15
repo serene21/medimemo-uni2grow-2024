@@ -51,7 +51,7 @@ const router = createBrowserRouter([
             element: <Medications />,
           },
           {
-            path: "details/:id",
+            path: ":id",
             element: <DrugSpecifications />,
           },
         ],
