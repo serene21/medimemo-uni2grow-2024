@@ -1,6 +1,8 @@
 .contacts-container {
   flex: 1;
-  overflow-y: auto;
+ 
+  margin-bottom: 3px;
+  height: 90%;
 }
 
 
@@ -29,6 +31,9 @@
 
   border-radius: var(--Radius-sm, 8px);
   background: var(--Colours-White, #fff);
+  height: 80%;
+
+
 }
 
 .listContact {
@@ -37,7 +42,8 @@
   align-items: center;
   gap: 15px;
   align-self: stretch;
-  height: 100%;
+  height: 90%;
+  overflow-y: auto;
 }
 
 

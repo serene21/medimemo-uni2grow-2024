@@ -87,7 +87,12 @@ function AddEditContact() {
         if (response.ok) {
           formik.resetForm();
           const savedContact = await response.json();
-          navigate("/contacts", { state: { newContact: savedContact } });
+          if (isEditing){
+            navigate("/contacts/details", { state: { id: savedContact.id } });
+          }else {
+            navigate("/contacts", { state: { newContact: savedContact } });
+          }
+          
         }
       } catch (error) {
         setSubmitError(true);
