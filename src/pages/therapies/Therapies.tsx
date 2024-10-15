@@ -10,12 +10,11 @@ import { ITherapy } from "../../models/Therapy";
 import Header from "../../components/header/Header";
 import { useNavigate } from "react-router-dom";
 
-export function Therapies() {
+export default function Therapies() {
+  const navigate = useNavigate();
   const [therapies, setTherapies] = useState<ITherapy[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [error, setError] = useState<string>("");
-
-  const navigate = useNavigate(); 
 
   useEffect(() => {
     const getTherapies = async (): Promise<void> => {
@@ -119,7 +118,6 @@ export function Therapies() {
             )}
           </div>
         </div>
-
         <FabButton path="add" />
       </div>
     </>
