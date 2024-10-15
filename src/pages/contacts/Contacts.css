@@ -1,13 +1,7 @@
 .contacts-container {
   flex: 1;
- 
-  margin-bottom: 3px;
-  height: 90%;
+  overflow-y: auto;
 }
-
-
-
-
 
 .typography {
   color: var(--Primary-text, #444);
@@ -28,12 +22,8 @@
   justify-content: center;
   align-items: center;
   gap: 40px;
-
   border-radius: var(--Radius-sm, 8px);
   background: var(--Colours-White, #fff);
-  height: 80%;
-
-
 }
 
 .listContact {
@@ -42,11 +32,8 @@
   align-items: center;
   gap: 15px;
   align-self: stretch;
-  height: 90%;
-  overflow-y: auto;
+  margin-bottom: 50px;
 }
-
-
 
 .contactName {
   display: flex;
