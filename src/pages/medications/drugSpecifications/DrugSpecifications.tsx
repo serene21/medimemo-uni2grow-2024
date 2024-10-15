@@ -15,10 +15,11 @@ import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { IDrug } from "../../../models/Drug";
 import { IPrescription } from "../../../models/Prescription";
 import { IMedicine } from "../../../models/Medicine";
+import { SnackBarComponent } from "../../../components/snackBarComponent/SnackBarComponent";
 
 function DrugSpecifications() {
   const navigate = useNavigate();
-  const {id} = useParams();
+  const { id } = useParams();
   const [drug, setDrug] = useState<IDrug>({
     dosage: "",
     methodOfAdministraion: "",
@@ -26,20 +27,21 @@ function DrugSpecifications() {
     warning: "",
     sideEffects: "",
     interactions: "",
-    storage: ""
+    storage: "",
   });
-  const [medication, setMedication] = useState<IMedicine>({
-    name: ""
-  });
+  const [medication, setMedication] = useState<IMedicine>();
   const [openItems, setOpenItems] = useState<{ [key: string]: boolean }>({});
   const [error, setError] = useState<string>("");
+  const openSnack: boolean = error != "";
 
   const getDrugSpecifications = async (): Promise<void> => {
     try {
       setError("");
-      const result = await fetch(`http://localhost:3000/prescriptions/${id}`)
+      const result = await fetch(`http://localhost:3000/prescriptions/${id}`);
       const prescription: IPrescription = await result.json();
-      const response = await fetch(`http://localhost:3000/medicines/${prescription.id}`);
+      const response = await fetch(
+        `http://localhost:3000/medicines/${prescription.id}`
+      );
       const medicine: IMedicine = await response.json();
       setMedication(medicine);
       const specif: IDrug = {
@@ -50,12 +52,12 @@ function DrugSpecifications() {
         sideEffects: medicine.sideEffects ?? "",
         interactions: medicine.interactions ?? "",
         storage: medicine.storage ?? "",
-      }
+      };
       setDrug(specif);
     } catch {
-      setError("Error fetching drug specifications:");
+      setError("Error fetching drug specifications!!!");
     }
-  }
+  };
 
   useEffect(() => {
     getDrugSpecifications();
@@ -75,6 +77,15 @@ function DrugSpecifications() {
         onBackButtonClick={() => navigate(-1)}
       />
       <div className="drug-secondary">
+        {error && (
+          <SnackBarComponent
+            message={error}
+            severity="error"
+            key={error}
+            open={openSnack}
+            close={() => {setError("")}}
+          />
+        )}
         <div className="drug-title">
           <Button
             variant="text"
@@ -103,7 +114,7 @@ function DrugSpecifications() {
               lineHeight: "25px",
             }}
           >
-            {medication.description}
+            {medication?.description}
           </Typography>
         </div>
         <List
@@ -117,7 +128,7 @@ function DrugSpecifications() {
             <div key={key} className="drug-element">
               <ListItemButton onClick={() => handleClick(key)}>
                 <ListItemText
-                disableTypography
+                  disableTypography
                   primary={key}
                   sx={{
                     fontFamily: "sans-serif",
